@@ -40,6 +40,7 @@ const ProjectCard = ({ project }: { project: Project }) => (
             target="_blank"
             rel="noreferrer"
             className="text-azure hover:text-white transition-colors"
+            aria-label="visit the project's github page"
           >
             <Github />
           </a>
@@ -50,6 +51,7 @@ const ProjectCard = ({ project }: { project: Project }) => (
             target="_blank"
             rel="noreferrer"
             className="text-azure hover:text-white transition-colors"
+            aria-label="see the project live"
           >
             <ExternalLink />
           </a>
@@ -61,9 +63,9 @@ const ProjectCard = ({ project }: { project: Project }) => (
       <span className="text-[10px] text-azure uppercase tracking-widest font-bold">
         {project.category}
       </span>
-      <h3 className="text-lg font-bold text-azure tracking-tight  transition-colors">
+      <h1 className="text-lg font-bold text-azure tracking-tight  transition-colors">
         {project.title}
-      </h3>
+      </h1>
     </div>
 
     <p className="text-sm text-azure leading-relaxed mb-6 flex-grow">
