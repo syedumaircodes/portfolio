@@ -1,9 +1,11 @@
+import { Github, ExternalLink } from "lucide-react";
+
 // --- TYPES ---
 export type ProjectCategory =
-  | "Computational Pathology"
-  | "Medical AI"
-  | "Distributed Systems"
-  | "Infrastructure";
+  | "Web Development"
+  | "Backend API"
+  | "Data Systems"
+  | "Other";
 
 export interface Project {
   title: string;
@@ -17,45 +19,19 @@ export interface Project {
 // --- DATA ---
 const PROJECTS: Project[] = [
   {
-    title: "PathoScan AI",
+    title: "Blockforge",
     description:
-      "Deep learning pipeline for high-resolution whole-slide imaging analysis. Optimizing inference across heterogeneous clusters.",
-    tech: ["Python", "PyTorch", "Kubernetes"],
-    category: "Computational Pathology",
-    github: "https://github.com/syedumaircodes",
-  },
-  {
-    title: "BioStack Mesh",
-    description:
-      "A service mesh architecture designed for low-latency medical device data synchronization and HIPAA-compliant telemetry.",
-    tech: ["Go", "Rust", "Envoy"],
-    category: "Distributed Systems",
-    github: "https://github.com/syedumaircodes",
-  },
-  {
-    title: "NeuroCore Engine",
-    description:
-      "Real-time EEG signal processing library with automated spike detection and visualization for clinical researchers.",
-    tech: ["C++", "WebAssembly", "D3.js"],
-    category: "Medical AI",
-    github: "https://github.com/syedumaircodes",
-    demo: "#",
-  },
-  {
-    title: "HealthNode DB",
-    description:
-      "Distributed ledger specifically architected for immutable medical record audit trails across multiple hospital providers.",
-    tech: ["PostgreSQL", "gRPC", "Docker"],
-    category: "Infrastructure",
-    github: "https://github.com/syedumaircodes",
+      "Marketing website and blog for blockchain service provider to Web3 startups.",
+    tech: ["Astro", "React", "TailwindCSS"],
+    category: "Web Development",
+    github: "https://github.com/syedumaircodes/blockforge",
+    demo: "https://blockchainforge.netlify.app",
   },
 ];
 
 // --- SUB-COMPONENTS ---
 const ProjectCard = ({ project }: { project: Project }) => (
-  <div className="group relative bg-[#0d1a1a] border border-emerald-900/30 rounded-lg p-6 transition-all duration-300 hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.1)] flex flex-col h-full">
-    <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-emerald-500/20 group-hover:border-emerald-500/60 transition-colors" />
-
+  <div className="group relative bg-accent rounded-lg p-6 transition-all duration-300 hover:border-azure hover:border-inline flex flex-col h-full">
     <div className="flex items-start justify-between mb-4">
       <div className="flex gap-3">
         {project.github && (
@@ -63,38 +39,42 @@ const ProjectCard = ({ project }: { project: Project }) => (
             href={project.github}
             target="_blank"
             rel="noreferrer"
-            className="text-slate-500 hover:text-white transition-colors"
-          ></a>
+            className="text-azure hover:text-white transition-colors"
+          >
+            <Github />
+          </a>
         )}
         {project.demo && (
           <a
             href={project.demo}
             target="_blank"
             rel="noreferrer"
-            className="text-slate-500 hover:text-white transition-colors"
-          ></a>
+            className="text-azure hover:text-white transition-colors"
+          >
+            <ExternalLink />
+          </a>
         )}
       </div>
     </div>
 
     <div className="mb-2">
-      <span className="text-[10px] text-emerald-500/60 uppercase tracking-widest font-bold">
+      <span className="text-[10px] text-azure uppercase tracking-widest font-bold">
         {project.category}
       </span>
-      <h3 className="text-lg font-bold text-white font-mono tracking-tight group-hover:text-emerald-400 transition-colors">
+      <h3 className="text-lg font-bold text-azure tracking-tight  transition-colors">
         {project.title}
       </h3>
     </div>
 
-    <p className="text-sm text-slate-400 leading-relaxed mb-6 flex-grow">
+    <p className="text-sm text-azure leading-relaxed mb-6 flex-grow">
       {project.description}
     </p>
 
-    <div className="flex flex-wrap gap-2 pt-4 border-t border-emerald-900/20">
+    <div className="flex flex-wrap gap-2 pt-4">
       {project.tech.map((tag) => (
         <span
           key={tag}
-          className="text-[10px] uppercase tracking-widest px-2 py-0.5 bg-emerald-950/40 text-emerald-400/80 border border-emerald-500/20 rounded"
+          className="text-[10px] uppercase tracking-widest px-2 py-0.5 bg-azure text-white border border-emerald-500/20 rounded"
         >
           {tag}
         </span>
