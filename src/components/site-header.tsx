@@ -34,7 +34,7 @@ const Header = () => {
             className="group flex items-center gap-2 transition-colors hover:text-white"
           >
             <span className=" flex items-center gap-1.5">
-              <Github size={16} /> github:
+              <Github size={16} /> GitHub:
             </span>
             <span>@syedumaircodes</span>
           </a>
@@ -54,7 +54,7 @@ const Header = () => {
           {/* Email Link */}
           <div className="flex items-center gap-2">
             <span className=" flex items-center gap-1.5">
-              <Mail size={16} /> email:
+              <Mail size={16} /> Email:
             </span>
             <a
               href="mailto:syedumairali.617@gmail.com"
@@ -63,6 +63,14 @@ const Header = () => {
               syedumairali.617@gmail.com
             </a>
           </div>
+          <a
+            href="https://docs.google.com/document/d/1OVvzftFMGC8erOxmHZBn3rTuVHZV4CGMgglPFt22OBA/edit?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-2 transition-colors hover:text-white"
+          >
+            <span>View Resume</span>
+          </a>
         </div>
       </div>
     </header>
