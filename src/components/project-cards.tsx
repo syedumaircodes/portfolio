@@ -35,6 +35,14 @@ const PROJECTS: Project[] = [
     category: "Other",
     demo: "https://syedumaircodes.notion.site/Digital-Garden-2fdb62b2d15f809d8f24f0c5db339a5c",
   },
+  {
+    title: "Self Taught Developer Resources",
+    description:
+      "Free, high-quality resources to learn programming for everyone.",
+    tech: ["GitHub", "Resources"],
+    category: "Other",
+    demo: "https://github.com/syedumaircodes/self-taught-developer",
+  },
 ];
 
 // --- SUB-COMPONENTS ---
