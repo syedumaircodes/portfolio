@@ -27,6 +27,14 @@ const PROJECTS: Project[] = [
     github: "https://github.com/syedumaircodes/blockforge",
     demo: "https://blockchainforge.netlify.app",
   },
+  {
+    title: "Digital Garden",
+    description:
+      "My notes on everything I've learned so far. Updated frequently.",
+    tech: ["Notion", "Markdown"],
+    category: "Other",
+    demo: "https://syedumaircodes.notion.site/Digital-Garden-2fdb62b2d15f809d8f24f0c5db339a5c",
+  },
 ];
 
 // --- SUB-COMPONENTS ---
