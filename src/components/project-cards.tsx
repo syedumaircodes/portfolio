@@ -28,12 +28,12 @@ const PROJECTS: Project[] = [
     demo: "https://blockchainforge.netlify.app",
   },
   {
-    title: "Digital Garden",
+    title: "Second Brain",
     description:
       "My notes on everything I've learned so far. Updated frequently.",
-    tech: ["Notion", "Markdown"],
+    tech: ["Obsidian", "Markdown"],
     category: "Other",
-    demo: "https://syedumaircodes.notion.site/Digital-Garden-2fdb62b2d15f809d8f24f0c5db339a5c",
+    github: "https://github.com/syedumaircodes/second-brain",
   },
   {
     title: "Self Taught Developer Resources",
@@ -41,7 +41,7 @@ const PROJECTS: Project[] = [
       "Free, high-quality resources to learn programming for everyone.",
     tech: ["GitHub", "Resources"],
     category: "Other",
-    demo: "https://github.com/syedumaircodes/self-taught-developer",
+    github: "https://github.com/syedumaircodes/self-taught-developer",
   },
 ];
 
@@ -84,7 +84,7 @@ const ProjectCard = ({ project }: { project: Project }) => (
       </h1>
     </div>
 
-    <p className="text-sm text-azure leading-relaxed mb-6 flex-grow">
+    <p className="text-sm text-azure leading-relaxed mb-6 grow">
       {project.description}
     </p>
 
