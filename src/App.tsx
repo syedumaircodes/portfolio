@@ -1,11 +1,15 @@
-import Projects from "./components/project-cards";
-import Header from "./components/site-header";
+import Footer from "./components/Footer";
+import Hero from "./components/Hero";
+import Projects from "./components/Projects";
+import Resources from "./components/Resources";
 
 const App = () => {
   return (
     <main>
-      <Header />
+      <Hero />
+      <Resources />
       <Projects />
+      <Footer />
     </main>
   );
 };
