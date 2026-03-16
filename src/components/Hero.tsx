@@ -24,8 +24,8 @@ const Hero: React.FC<HeroProps> = ({
             <img
               src={imageUrl}
               alt={`${name} profile picture`}
-              className="rounded-full object-cover w-full h-full grayscale"
-              loading="eager"
+              className="rounded-full object-cover w-full h-full"
+              fetchPriority="high"
             />
           </div>
           <div className="flex flex-col">

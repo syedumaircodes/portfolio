@@ -32,6 +32,7 @@ const Projects: React.FC = () => {
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover opacity-40 group-hover:scale-105 group-hover:opacity-50 transition-all duration-500"
+                  fetchPriority="high"
                 />
               </div>
 
