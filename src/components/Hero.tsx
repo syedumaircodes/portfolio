@@ -32,7 +32,7 @@ const Hero: React.FC<HeroProps> = ({
             <h1 className="text-2xl md:text-4xl font-bold tracking-tight">
               {name}
             </h1>
-            <h2 className="text-zinc-400 text-sm md:text-lg font-medium">
+            <h2 className="text-neutral-300 text-sm md:text-lg font-medium">
               {role}
             </h2>
           </div>
@@ -40,7 +40,7 @@ const Hero: React.FC<HeroProps> = ({
 
         {/* Description Section */}
         <article className="max-w-2xl">
-          <p className="text-zinc-400 text-base md:text-lg leading-relaxed">
+          <p className="text-neutral-300 text-base md:text-lg leading-relaxed">
             {description}
           </p>
         </article>
@@ -53,7 +53,7 @@ const Hero: React.FC<HeroProps> = ({
               href="https://linkedin.com/in/syedumaircodes"
               target="_blank"
               aria-label="Follw me on Linkedin"
-              className="text-zinc-500 hover:text-white transition-colors"
+              className="text-neutral-100"
             >
               <Linkedin size={20} />
             </a>
@@ -61,14 +61,14 @@ const Hero: React.FC<HeroProps> = ({
               href="https://github.com/syedumaircodes"
               aria-label="Check my Github"
               target="_blank"
-              className="text-zinc-500 hover:text-white transition-colors"
+              className="text-neutral-100"
             >
               <Github size={20} />
             </a>
             <a
               href="mailto:syedumairali.617@gmail.com"
               aria-label="email me"
-              className="text-zinc-500 hover:text-white transition-colors"
+              className="text-neutral-100"
             >
               <Mail size={20} />
             </a>
@@ -79,12 +79,12 @@ const Hero: React.FC<HeroProps> = ({
             href={ProfileResume}
             download
             target="_blank"
-            className="group flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 hover:border-zinc-700 transition-all active:scale-95"
+            className="group flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-neutral-800 bg-neutral-950 hover:bg-neutral-900 hover:border-neutral-700 transition-all active:scale-95"
           >
             Resume
             <ArrowUpRight
               size={16}
-              className="text-zinc-500 group-hover:text-white transition-colors"
+              className="text-neutral-500 group-hover:text-white transition-colors"
             />
           </a>
         </footer>

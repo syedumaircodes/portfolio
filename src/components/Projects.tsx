@@ -15,7 +15,7 @@ const Projects: React.FC = () => {
     <section className="w-full py-12 px-6">
       <div className="max-w-3xl mx-auto">
         <header className="flex justify-between items-end mb-8">
-          <h2 className="text-[11px] font-bold tracking-[0.2em] text-zinc-500 uppercase">
+          <h2 className="text-[11px] font-bold tracking-[0.2em] text-neutral-100 uppercase">
             Projects
           </h2>
         </header>
@@ -25,7 +25,7 @@ const Projects: React.FC = () => {
             <button
               key={project.id}
               onClick={() => handleProjectClick(project)}
-              className="group text-left relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/50 aspect-16/10 transition-all hover:border-zinc-700"
+              className="group text-left relative overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50 aspect-16/10 transition-all hover:border-neutral-700"
             >
               <div className="absolute inset-0">
                 <img
@@ -43,7 +43,7 @@ const Projects: React.FC = () => {
                   {project.techStack.map((t, i) => (
                     <span
                       key={t.name}
-                      className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest"
+                      className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest"
                     >
                       {t.name}
                       {i < project.techStack.length - 1 && " •"}
