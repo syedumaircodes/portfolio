@@ -1,7 +1,7 @@
 import React from "react";
 import { Linkedin, Github, Mail, ArrowUpRight } from "lucide-react";
 import ProfileImage from "../assets/profile.webp";
-import ProfileResume from "../assets/SyedUmairAli_Resume.pdf";
+import ProfileResume from "../assets/SyedUmairAli_SoftwareEngineer.pdf";
 
 interface HeroProps {
   name?: string;
