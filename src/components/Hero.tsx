@@ -2,6 +2,7 @@ import React from "react";
 import { Linkedin, Github, Mail, ArrowUpRight } from "lucide-react";
 import ProfileImage from "../assets/profile.webp";
 import ProfileResume from "../assets/SyedUmairAli_SoftwareEngineer.pdf";
+import { useWebHaptics } from "web-haptics/react";
 
 interface HeroProps {
   name?: string;
@@ -16,6 +17,8 @@ const Hero: React.FC<HeroProps> = ({
   description = "Full-Stack Engineer building fast, reliable, and scalable systems. Proficient in Python, FastAPI, Next.js, and GCP, with hands-on experience shipping production-grade applications.",
   imageUrl = ProfileImage,
 }) => {
+  const { trigger } = useWebHaptics();
+
   return (
     <section className="w-full text-white py-8 px-6 md:py-12">
       <div className="max-w-3xl mx-auto space-y-8">
@@ -79,6 +82,7 @@ const Hero: React.FC<HeroProps> = ({
             href={ProfileResume}
             download
             target="_blank"
+            onClick={() => trigger("success")}
             className="group flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-neutral-800 bg-neutral-950 hover:bg-neutral-900 hover:border-neutral-700 transition-all active:scale-95"
           >
             Resume

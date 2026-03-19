@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { X, ExternalLink, Code2, Terminal } from "lucide-react";
 import type { Project } from "../data/data.ts";
+import { useWebHaptics } from "web-haptics/react";
 
 interface ProjectSidebarProps {
   project: Project | null;
@@ -13,7 +14,9 @@ const ProjectSidebar: React.FC<ProjectSidebarProps> = ({
   isOpen,
   onClose,
 }) => {
+  const { trigger } = useWebHaptics();
   // Prevent scrolling when sidebar is open
+
   useEffect(() => {
     if (isOpen) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "unset";
@@ -52,12 +55,14 @@ const ProjectSidebar: React.FC<ProjectSidebarProps> = ({
           <div className="flex gap-3 pt-2">
             <a
               href={project.deploymentUrl}
+              onClick={() => trigger("success")}
               className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
             >
               <ExternalLink size={16} /> Visit Deployment
             </a>
             <a
               href={project.sourceUrl}
+              onClick={() => trigger("success")}
               className="flex items-center gap-2 bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-zinc-300 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
             >
               <Code2 size={16} /> Source

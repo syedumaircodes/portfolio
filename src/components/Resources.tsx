@@ -1,5 +1,6 @@
 import React from "react";
 import { Pen, BookOpen } from "lucide-react";
+import { useWebHaptics } from "web-haptics/react";
 
 interface ResourceItem {
   title: string;
@@ -24,6 +25,8 @@ const resources: ResourceItem[] = [
 ];
 
 const Resources: React.FC = () => {
+  const { trigger } = useWebHaptics();
+
   return (
     <section className="w-full py-4 px-6">
       <div className="max-w-3xl mx-auto">
@@ -38,6 +41,7 @@ const Resources: React.FC = () => {
             <a
               key={index}
               href={item.href}
+              onClick={() => trigger("success")}
               target="_blank"
               className="group flex items-center gap-4 p-4 rounded-xl border border-neutral-800/60 bg-neutral-900/20 hover:bg-neutral-900/40 hover:border-neutral-700 transition-all duration-200"
             >
