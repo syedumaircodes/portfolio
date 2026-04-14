@@ -14,7 +14,7 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({
   name = "Syed Umair Ali",
   role = "Software and Data Engineer",
-  description = "I'm Syed Umair Ali, a full stack developer focused on shipping real products. I don't care about hype or perfect code. I care about execution - taking something from zero to live, testing it with real users, and improving it fast.",
+  description = "Full stack developer focused on shipping real products. I don't care about hype or perfect code. I care about execution - taking something from zero to live, testing it with real users, and improving it fast.",
   imageUrl = ProfileImage,
 }) => {
   const { trigger } = useWebHaptics();
