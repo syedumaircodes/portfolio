@@ -1,69 +1,64 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { projectsData, type Project } from "../data/data";
-import ProjectSidebar from "./ProjectSidebar";
+import ProjectModal from "./ProjectSidebar";
 
-const Projects: React.FC = () => {
+const ProjectList = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleProjectClick = (project: Project) => {
+  const openProject = (project: Project) => {
     setSelectedProject(project);
-    setIsSidebarOpen(true);
+    setIsModalOpen(true);
   };
 
   return (
-    <section className="w-full py-12 px-6">
+    <section className="w-full py-4 px-6">
       <div className="max-w-3xl mx-auto">
-        <header className="flex justify-between items-end mb-8">
-          <h2 className="text-[11px] font-bold tracking-[0.2em] text-neutral-100 uppercase">
-            Projects
-          </h2>
-        </header>
+        <h2 className="text-[11px] font-bold tracking-[0.2em] text-neutral-100 uppercase mb-5">
+          Projects and Concepts
+        </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="flex flex-col divide-y divide-zinc-800/50">
           {projectsData.map((project) => (
             <button
               key={project.id}
-              onClick={() => handleProjectClick(project)}
-              className="group text-left relative overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50 aspect-16/10 transition-all hover:border-neutral-700"
+              onClick={() => openProject(project)}
+              className="group flex items-center justify-between py-5 hover:px-2 transition-all duration-300 ease-out text-left"
             >
-              <div className="absolute inset-0">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover opacity-40 group-hover:scale-105 group-hover:opacity-50 transition-all duration-500"
-                  fetchPriority="high"
-                />
+              <div className="flex flex-col">
+                <span className="text-zinc-100 group-hover:text-white font-medium text-base transition-colors">
+                  {project.title}
+                </span>
               </div>
 
-              <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                <h3 className="text-lg font-bold text-white mb-1">
-                  {project.title}
-                </h3>
-                <div className="flex flex-wrap gap-x-2">
-                  {project.techStack.map((t, i) => (
-                    <span
-                      key={t.name}
-                      className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest"
-                    >
-                      {t.name}
-                      {i < project.techStack.length - 1 && " •"}
-                    </span>
-                  ))}
-                </div>
+              <div className="flex items-center gap-4">
+                <span className="text-zinc-500 font-mono text-sm tabular-nums group-hover:text-zinc-300 transition-colors">
+                  {project.month} {project.year}
+                </span>
+                <span className="text-zinc-700 group-hover:text-zinc-300 transition-colors">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path
+                      d="M4 10L10 4M10 4H5M10 4V9"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
               </div>
             </button>
           ))}
         </div>
       </div>
 
-      <ProjectSidebar
+      <ProjectModal
         project={selectedProject}
-        isOpen={isSidebarOpen}
-        onClose={() => setIsSidebarOpen(false)}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
       />
     </section>
   );
 };
 
-export default Projects;
+export default ProjectList;

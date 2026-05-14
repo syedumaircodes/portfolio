@@ -13,6 +13,7 @@ export interface Metric {
 export interface Project {
   id: string;
   title: string;
+  month: string;
   year: string;
   description: string;
   longDescription: string;
@@ -30,6 +31,7 @@ export const projectsData: Project[] = [
   {
     id: "blockforge-web3-platform",
     title: "Blockforge – Web3 Service Provider",
+    month: "June",
     year: "2025",
     description:
       "Full-stack marketing & blog platform for a Web3 SaaS startup, driving a 12% increase in customer acquisition post-launch.",
