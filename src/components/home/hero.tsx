@@ -1,0 +1,124 @@
+import { motion, type Variants } from "motion/react"
+import ProfileResume from "../../assets/SyedUmairAli_SoftwareEngineer.pdf"
+import { LinkedinIcon } from "../ui/linkedin"
+import { GithubIcon } from "../ui/github"
+import { MailboxIcon } from "../ui/mailbox"
+import { ArrowUpRightIcon } from "../ui/arrow-up-right"
+
+const Hero = () => {
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  }
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] },
+    },
+  }
+
+  return (
+    <motion.section
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="w-full px-6 py-16 md:py-20"
+    >
+      <div className="mx-auto max-w-3xl">
+        <header className="space-y-4">
+          <motion.h1
+            variants={itemVariants}
+            className="font-heading text-5xl tracking-tight text-foreground italic md:text-7xl"
+          >
+            Syed Umair Ali
+          </motion.h1>
+
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center gap-3"
+          >
+            <h2 className="font-sans text-sm font-medium tracking-[0.2em] text-muted-foreground uppercase">
+              Full-Stack Engineer & Product Builder
+            </h2>
+          </motion.div>
+        </header>
+
+        <motion.article variants={itemVariants} className="mt-10 max-w-2xl">
+          <p className="text-lg leading-relaxed font-light text-muted-foreground/90 md:text-xl">
+            I specialize in end-to-end execution. From data to deployment, my
+            focus is on shipping real products, putting them in the hands of
+            users, and iterating rapidly. Pragmatic problem-solving over perfect
+            code.
+          </p>
+        </motion.article>
+
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, delay: 0.6, ease: "circOut" }}
+          className="my-12 h-px w-full origin-left bg-border"
+        />
+
+        <footer className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center gap-8"
+          >
+            <a
+              href="https://linkedin.com/in/syedumaircodes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground transition-colors hover:text-primary"
+            >
+              <LinkedinIcon />
+            </a>
+            <a
+              href="https://github.com/syedumaircodes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground transition-colors hover:text-primary"
+            >
+              <GithubIcon />
+            </a>
+            <a
+              href="mailto:syedumairali.617@gmail.com"
+              className="text-muted-foreground transition-colors hover:text-primary"
+            >
+              <MailboxIcon />
+            </a>
+          </motion.div>
+
+          <motion.a
+            variants={itemVariants}
+            href={ProfileResume}
+            download
+            whileHover="hover"
+            whileTap={{ scale: 0.98 }}
+            className="group relative flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-3 text-sm font-medium text-primary-foreground"
+          >
+            <span className="relative z-10">Download Resume</span>
+            <motion.div
+              variants={{
+                hover: { x: 3, y: -3 },
+              }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            >
+              <ArrowUpRightIcon />
+            </motion.div>
+          </motion.a>
+        </footer>
+      </div>
+    </motion.section>
+  )
+}
+
+export default Hero

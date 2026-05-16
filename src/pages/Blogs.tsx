@@ -1,0 +1,116 @@
+// src/pages/Blogs.tsx
+import { motion, type Variants } from "motion/react"
+import { Link } from "react-router-dom"
+import { ArrowLeft } from "lucide-react"
+import Footer from "@/components/shared/Footer"
+
+// 1. Automatically fetch all MDX files
+const mdxFiles = import.meta.glob("../content/*.mdx", { eager: true })
+
+// 2. Map them into an array we can render
+const blogs = Object.entries(mdxFiles).map(
+  ([filepath, module]: [string, any]) => {
+    const slug = filepath.split("/").pop()?.replace(".mdx", "")
+    return {
+      slug,
+      ...module.meta, // Spreads title, date, readingTime, excerpt
+    }
+  }
+)
+
+const Blogs = () => {
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+  }
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  }
+
+  return (
+    <>
+      <div className="w-full px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-3xl">
+          {/* Back to Home Link */}
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="mb-12"
+          >
+            <Link
+              to="/"
+              className="group inline-flex items-center font-sans text-[10px] font-bold tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-primary"
+            >
+              <ArrowLeft
+                size={14}
+                className="mr-2 transition-transform group-hover:-translate-x-1"
+              />
+              Back to Home
+            </Link>
+          </motion.div>
+
+          <motion.header
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-16 space-y-4"
+          >
+            <h1 className="font-heading text-5xl tracking-tight text-foreground italic md:text-7xl">
+              Blogs & Articles
+            </h1>
+            <p className="font-sans text-lg leading-relaxed font-light text-muted-foreground/90 md:text-xl">
+              My thoughts on being a tech worker and personal life.
+            </p>
+          </motion.header>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col border-t border-border"
+          >
+            {blogs.map((blog) => (
+              <motion.div
+                key={blog.slug}
+                variants={itemVariants}
+                whileHover="hover"
+                className="group relative border-b border-border transition-colors hover:bg-muted/30"
+              >
+                <Link
+                  to={`/blogs/${blog.slug}`}
+                  className="flex flex-col gap-3 py-8 md:py-10"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <span className="px-3 font-sans text-[10px] font-bold tracking-[0.2em] text-muted-foreground/70 uppercase transition-colors group-hover:text-primary">
+                        {blog.date}
+                      </span>
+                    </div>
+                    <motion.div
+                      variants={{ hover: { x: 2, y: -2, scale: 1.1 } }}
+                      className="text-muted-foreground/40 transition-colors group-hover:text-foreground"
+                    ></motion.div>
+                  </div>
+                  <h2 className="px-3 font-heading text-2xl tracking-tight text-foreground italic transition-transform duration-300 md:text-3xl">
+                    {blog.title}
+                  </h2>
+                  <p className="max-w-2xl px-3 font-sans text-sm leading-relaxed font-light text-muted-foreground/80 transition-transform duration-300 md:text-base">
+                    {blog.excerpt}
+                  </p>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+      <Footer />
+    </>
+  )
+}
+
+export default Blogs
