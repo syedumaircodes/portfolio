@@ -1,14 +1,14 @@
+// src/pages/BlogPost.tsx
 import { useParams, Link } from "react-router-dom"
 import { motion } from "motion/react"
 import { ArrowLeft } from "lucide-react"
-import Footer from "@/components/shared/Footer"
+import SEO from "../components/shared/SEO" // <-- Import the SEO component
+import Footer from "../components/shared/Footer"
 
 const mdxFiles = import.meta.glob("../content/*.mdx", { eager: true })
 
 const BlogPost = () => {
   const { slug } = useParams()
-
-  // Find the file that matches the URL slug
   const fileKey = Object.keys(mdxFiles).find((key) =>
     key.includes(`${slug}.mdx`)
   )
@@ -19,14 +19,26 @@ const BlogPost = () => {
 
   const module: any = mdxFiles[fileKey]
   const meta = module.meta
-  const PostContent = module.default // MDX compiles the content into a default React component
+  const PostContent = module.default
+
+  // Create the exact URL for this post
+  const postUrl = `https://syedumaircodes.vercel.app/blogs/${slug}`
 
   return (
     <>
+      {/* 💥 Dynamic SEO Injection 💥 */}
+      <SEO
+        title={`${meta.title} | Syed Umair Ali`}
+        description={meta.excerpt}
+        url={postUrl}
+        type="article"
+        publishDate={meta.date}
+      />
+
       <article className="mx-auto max-w-3xl px-6 py-16 md:py-24">
         <Link
           to="/blogs"
-          className="mb-10 inline-flex items-center text-[11px] font-bold tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground"
+          className="mb-10 inline-flex items-center text-[10px] font-bold tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground"
         >
           <ArrowLeft size={14} className="mr-2" /> Back to Blogs
         </Link>
@@ -36,7 +48,7 @@ const BlogPost = () => {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12 space-y-6"
         >
-          <div className="flex items-center gap-3 font-sans text-[11px] tracking-widest text-muted-foreground/60 uppercase">
+          <div className="flex items-center gap-3 font-sans text-[10px] tracking-widest text-muted-foreground/60 uppercase">
             <span>{meta.date}</span>
           </div>
 
@@ -54,6 +66,7 @@ const BlogPost = () => {
           <PostContent />
         </motion.div>
       </article>
+
       <Footer />
     </>
   )
