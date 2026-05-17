@@ -38,7 +38,7 @@ const BlogPost = () => {
       <article className="mx-auto max-w-3xl px-6 py-16 md:py-24">
         <Link
           to="/blogs"
-          className="mb-10 inline-flex items-center text-[10px] font-bold tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground"
+          className="mb-10 inline-flex items-center text-[10px] font-bold tracking-[0.2em] text-foreground uppercase"
         >
           <ArrowLeft size={14} className="mr-2" /> Back to Blogs
         </Link>
@@ -48,7 +48,7 @@ const BlogPost = () => {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12 space-y-6"
         >
-          <div className="flex items-center gap-3 font-sans text-[10px] tracking-widest text-muted-foreground/60 uppercase">
+          <div className="flex items-center gap-3 font-sans text-[10px] tracking-widest text-foreground/90 uppercase">
             <span>{meta.date}</span>
           </div>
 

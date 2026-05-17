@@ -45,7 +45,7 @@ const Blogs = () => {
           >
             <Link
               to="/"
-              className="group inline-flex items-center font-sans text-[10px] font-bold tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-primary"
+              className="group inline-flex items-center font-sans text-[10px] font-bold tracking-[0.2em] text-foreground uppercase"
             >
               <ArrowLeft
                 size={14}
@@ -63,7 +63,7 @@ const Blogs = () => {
             <h1 className="font-heading text-5xl tracking-tight text-foreground italic md:text-7xl">
               Blogs & Articles
             </h1>
-            <p className="font-sans text-lg leading-relaxed font-light text-muted-foreground/90 md:text-xl">
+            <p className="font-sans text-lg leading-relaxed font-light text-foreground/80 md:text-xl">
               My thoughts on being a tech worker and personal life.
             </p>
           </motion.header>
@@ -87,19 +87,19 @@ const Blogs = () => {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <span className="px-3 font-sans text-[10px] font-bold tracking-[0.2em] text-muted-foreground/70 uppercase transition-colors group-hover:text-primary">
+                      <span className="px-3 font-sans text-[10px] font-bold tracking-[0.2em] text-foreground/80 uppercase transition-colors group-hover:text-primary">
                         {blog.date}
                       </span>
                     </div>
                     <motion.div
                       variants={{ hover: { x: 2, y: -2, scale: 1.1 } }}
-                      className="text-muted-foreground/40 transition-colors group-hover:text-foreground"
+                      className="text-foreground/40 transition-colors group-hover:text-foreground"
                     ></motion.div>
                   </div>
                   <h2 className="px-3 font-heading text-2xl tracking-tight text-foreground italic transition-transform duration-300 md:text-3xl">
                     {blog.title}
                   </h2>
-                  <p className="max-w-2xl px-3 font-sans text-sm leading-relaxed font-light text-muted-foreground/80 transition-transform duration-300 md:text-base">
+                  <p className="max-w-2xl px-3 font-sans text-sm leading-relaxed font-light text-foreground/80 transition-transform duration-300 md:text-base">
                     {blog.excerpt}
                   </p>
                 </Link>
