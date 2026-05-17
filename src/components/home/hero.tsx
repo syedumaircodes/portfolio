@@ -52,14 +52,14 @@ const Hero = () => {
           </motion.div>
         </header>
 
-        <motion.article variants={itemVariants} className="mt-10 max-w-2xl">
+        <article className="mt-10 max-w-2xl animate-in duration-1000 ease-out fill-mode-forwards fade-in slide-in-from-bottom-4">
           <p className="text-lg leading-relaxed font-light text-foreground md:text-xl">
             I specialize in end-to-end execution. From data to deployment, my
             focus is on shipping real products, putting them in the hands of
             users, and iterating rapidly. Pragmatic problem-solving over perfect
             code.
           </p>
-        </motion.article>
+        </article>
 
         <motion.div
           initial={{ scaleX: 0 }}
