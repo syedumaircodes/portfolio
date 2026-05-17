@@ -35,12 +35,9 @@ const Hero = () => {
     >
       <div className="mx-auto max-w-3xl">
         <header className="space-y-4">
-          <motion.h1
-            variants={itemVariants}
-            className="font-heading text-5xl tracking-tight text-foreground italic md:text-7xl"
-          >
+          <h1 className="font-heading text-5xl tracking-tight text-foreground italic md:text-7xl">
             Syed Umair Ali
-          </motion.h1>
+          </h1>
 
           <motion.div
             variants={itemVariants}
