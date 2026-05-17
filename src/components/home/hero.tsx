@@ -46,14 +46,14 @@ const Hero = () => {
             variants={itemVariants}
             className="flex items-center gap-3"
           >
-            <h2 className="font-sans text-sm font-medium tracking-[0.2em] text-muted-foreground uppercase">
+            <h2 className="font-sans text-sm font-medium tracking-[0.2em] text-foreground/80 uppercase">
               Full-Stack Engineer & Product Builder
             </h2>
           </motion.div>
         </header>
 
         <motion.article variants={itemVariants} className="mt-10 max-w-2xl">
-          <p className="text-lg leading-relaxed font-light text-muted-foreground/90 md:text-xl">
+          <p className="text-lg leading-relaxed font-light text-foreground md:text-xl">
             I specialize in end-to-end execution. From data to deployment, my
             focus is on shipping real products, putting them in the hands of
             users, and iterating rapidly. Pragmatic problem-solving over perfect
@@ -77,7 +77,8 @@ const Hero = () => {
               href="https://linkedin.com/in/syedumaircodes"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground transition-colors hover:text-primary"
+              aria-label="visit my LinkedIn profile"
+              className="text-foreground transition-colors hover:text-primary"
             >
               <LinkedinIcon />
             </a>
@@ -85,13 +86,15 @@ const Hero = () => {
               href="https://github.com/syedumaircodes"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground transition-colors hover:text-primary"
+              className="text-foreground transition-colors hover:text-primary"
+              aria-label="visit my Github profile"
             >
               <GithubIcon />
             </a>
             <a
               href="mailto:syedumairali.617@gmail.com"
-              className="text-muted-foreground transition-colors hover:text-primary"
+              aria-label="reach out via email"
+              className="text-foreground transition-colors hover:text-primary"
             >
               <MailboxIcon />
             </a>

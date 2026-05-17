@@ -82,7 +82,7 @@ const Resources = () => {
           >
             <Link
               to="/"
-              className="group inline-flex items-center font-sans text-[10px] font-bold tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-primary"
+              className="group inline-flex items-center font-sans text-[10px] font-bold tracking-[0.2em] text-foreground uppercase"
             >
               <ArrowLeft
                 size={14}
@@ -101,7 +101,7 @@ const Resources = () => {
             <h1 className="font-heading text-5xl tracking-tight text-foreground italic md:text-7xl">
               Favorite Resources
             </h1>
-            <p className="font-sans text-lg leading-relaxed font-light text-muted-foreground/90 md:text-xl">
+            <p className="font-sans text-lg leading-relaxed font-light text-foreground/80 md:text-xl">
               A curated list of the tools and literature I use to build and
               design software.
             </p>
@@ -149,7 +149,7 @@ const Resources = () => {
 
                           {/* Item Description */}
                           <div className="mt-2 flex flex-1 items-center justify-between sm:mt-0">
-                            <span className="font-sans text-sm font-light text-muted-foreground/80 sm:max-w-[90%]">
+                            <span className="font-sans text-sm font-light text-foreground/80 sm:max-w-[90%]">
                               {item.description}
                             </span>
                           </div>

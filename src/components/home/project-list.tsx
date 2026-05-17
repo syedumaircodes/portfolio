@@ -38,7 +38,7 @@ const ProjectList = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mb-6 font-sans text-[11px] font-bold tracking-[0.2em] text-muted-foreground/70 uppercase"
+          className="mb-6 font-sans text-[11px] font-bold tracking-[0.2em] text-foreground/80 uppercase"
         >
           Projects & Concepts
         </motion.h2>

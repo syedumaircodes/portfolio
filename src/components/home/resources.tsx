@@ -52,7 +52,7 @@ const Resources: React.FC = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mb-8 font-sans text-[11px] font-bold tracking-[0.2em] text-muted-foreground/70 uppercase"
+          className="mb-8 font-sans text-[11px] font-bold tracking-[0.2em] text-foreground/80 uppercase"
         >
           Resources
         </motion.h2>
@@ -75,7 +75,7 @@ const Resources: React.FC = () => {
               className="group flex items-center gap-4 rounded-2xl border border-border bg-card/50 p-5 transition-colors hover:bg-secondary/50"
             >
               {/* Icon Container with Sera-style subtle border */}
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-background text-muted-foreground transition-colors group-hover:border-primary/30 group-hover:text-primary">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-background text-foreground transition-colors group-hover:border-primary/30 group-hover:text-primary">
                 {item.icon}
               </div>
 
@@ -84,7 +84,7 @@ const Resources: React.FC = () => {
                 <span className="font-heading text-xl tracking-tight text-foreground italic">
                   {item.title}
                 </span>
-                <span className="font-sans text-[10px] font-medium tracking-wider text-muted-foreground/80 uppercase">
+                <span className="font-sans text-[10px] font-medium tracking-wider text-foreground/80 uppercase">
                   {item.subtitle}
                 </span>
               </div>
