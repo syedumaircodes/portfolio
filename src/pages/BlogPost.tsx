@@ -1,10 +1,8 @@
-// src/pages/BlogPost.tsx
 import { useParams, Link } from "react-router-dom"
 import { motion } from "motion/react"
 import { ArrowLeft } from "lucide-react"
 import Footer from "@/components/shared/Footer"
 
-// Fetch all MDX files again
 const mdxFiles = import.meta.glob("../content/*.mdx", { eager: true })
 
 const BlogPost = () => {
@@ -30,7 +28,7 @@ const BlogPost = () => {
           to="/blogs"
           className="mb-10 inline-flex items-center text-[11px] font-bold tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground"
         >
-          <ArrowLeft size={14} className="mr-2" /> Back to Notes
+          <ArrowLeft size={14} className="mr-2" /> Back to Blogs
         </Link>
 
         <motion.header
@@ -51,7 +49,6 @@ const BlogPost = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          // This 'prose' class from Tailwind automatically styles your markdown!
           className="prose max-w-none prose-zinc dark:prose-invert prose-headings:font-heading prose-headings:font-normal prose-headings:tracking-tight prose-p:font-sans prose-p:leading-relaxed prose-p:font-light"
         >
           <PostContent />
