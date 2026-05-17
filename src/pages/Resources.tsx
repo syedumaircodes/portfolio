@@ -2,6 +2,7 @@ import { motion, type Variants } from "motion/react"
 import { Link } from "react-router-dom"
 import { ArrowLeft } from "lucide-react"
 import Footer from "@/components/shared/Footer"
+import SEO from "@/components/shared/SEO"
 
 const resourcesData = [
   {
@@ -72,6 +73,11 @@ const Resources = () => {
 
   return (
     <>
+      <SEO
+        title="Stack & Resources | Syed Umair Ali"
+        description="A curated list of the tools and literature I use to build and design software."
+        url="https://syedumaircodes.vercel.app/resources"
+      />
       <div className="w-full px-6 py-16 md:py-24">
         <div className="mx-auto max-w-3xl">
           {/* Back to Home Link */}

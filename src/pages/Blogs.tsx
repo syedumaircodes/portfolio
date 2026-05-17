@@ -3,6 +3,7 @@ import { motion, type Variants } from "motion/react"
 import { Link } from "react-router-dom"
 import { ArrowLeft } from "lucide-react"
 import Footer from "@/components/shared/Footer"
+import SEO from "@/components/shared/SEO"
 
 // 1. Automatically fetch all MDX files
 const mdxFiles = import.meta.glob("../content/*.mdx", { eager: true })
@@ -35,6 +36,11 @@ const Blogs = () => {
 
   return (
     <>
+      <SEO
+        title="Engineering Notes | Syed Umair Ali"
+        description="My thoughts on being a tech worker and personal life."
+        url="https://syedumaircodes.vercel.app/blogs"
+      />
       <div className="w-full px-6 py-16 md:py-24">
         <div className="mx-auto max-w-3xl">
           {/* Back to Home Link */}
