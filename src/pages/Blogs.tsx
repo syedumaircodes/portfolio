@@ -37,7 +37,7 @@ const Blogs = () => {
   return (
     <>
       <SEO
-        title="Engineering Notes | Syed Umair Ali"
+        title="Blogs and Articles | Syed Umair Ali"
         description="My thoughts on being a tech worker and personal life."
         url="https://syedumaircodes.vercel.app/blogs"
       />

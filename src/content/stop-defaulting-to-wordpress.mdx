@@ -1,0 +1,36 @@
+export const meta = {
+  title: "Stop Defaulting to WordPress",
+  date: "June 2, 2026",
+  excerpt:
+    "If you’re building a portfolio, a blog, or a marketing page, you don't need a heavy PHP server and a database. The modern web has outgrown the legacy overhead and why it’s time to build with Astro.",
+}
+
+WordPress isn’t staying alive because people love it. It's alive because of pure, unadulterated inertia. It is the gravitational pull of twenty years of stack overflow answers, pre-made themes, and agency muscle memory.
+
+Sure, it powers over 40% of the web but people throw that statistic around like a shield, but market share isn't a badge of quality, It's just a habit. And honestly, the gap between what WordPress offers and what modern frameworks like Astro can do has become a chasm.
+
+Astro’s pitch is stupidly simple: your content shouldn't require a JavaScript tax just to sit on a screen. It ships exactly zero JS to the browser by default. Everything renders down to plain HTML at build time, and the framework only runs script where you explicitly ask for interactivity. Contrast that with WordPress, which started in 2003 as a basic PHP blogging engine. Instead of rebuilding its foundations over the last two decades, it just piled on layers of legacy choices. It still works, but it's carrying a massive backpack of historical debt.
+
+Think about what actually happens when a user clicks a link on a WordPress site. PHP boots up on the server, MySQL queries fire into the database, a dozen plugins hook into the lifecycle, and eventually, some HTML is spat out and sent over the wire. If you are building a simple portfolio or a marketing landing page, that is an absurd amount of overhead.
+
+Astro just skips the server-side thinking at request time because it already did the work when you ran the build. The browser gets clean, static files. You don't need to configure complex caching layers, install optimization plugins, or pay for premium CDNs to make it fast. It is fast because there's nothing there to slow it down.
+
+This isn’t just developer vanity. If you’ve ever tried to load a bloated WordPress site on a cheap Android phone with a patchy 3G connection, you know it feels like wading through wet cement. Astro sites hit perfect Lighthouse scores out of the box because the architecture makes it incredibly hard to build something slow. With WordPress, you are constantly fighting the platform's own codebase just to get decent loading speeds.
+
+Then there is security, or the lack of it. Because WordPress is everywhere, it’s the default target for every script kiddie on earth. And the plugin ecosystem is a security minefield. We’ve all been there: a client's site gets compromised because an event-calendar plugin from five years ago went unpatched, or a minor update silently breaks the database.
+
+With Astro, your server-side attack surface is basically zero. A static site is literally just a folder of files sitting on a CDN. No database to SQL-inject, no admin login to brute-force, and no PHP runtime to exploit. If you need dynamic features like forms, payments, or auth, you outsource them to specialized APIs. Stripe is always going to protect credit card data better than WooCommerce, and services like Clerk handle authentication better than any generic WordPress plugin ever could.
+
+Data ownership is another trap. WordPress locks your content inside a database, encoded in formats that change depending on whether you used Gutenberg, classic, or some third-party page builder. Migrating away is a nightmare of database exports and broken serialized arrays. With Astro, your content lives as plain Markdown or MDX files in a git repository. They are just text files. You can open them in fifty years with any basic text editor, back them up with git, and easily migrate them to whatever tool comes next.
+
+And because Astro has Content Collections, you can write a schema to validate your content. If a writer forgets to add a required author field or a featured image, the build fails locally. You find out immediately, not when a broken layout hits production. For teams, this means content changes can be previewed, reviewed, and rolled back using the exact same pull-request workflows as your code.
+
+Theme development in WordPress is also stuck in the past, forcing you to wade through spaghetti PHP templates and global variables. Astro uses the same component model as modern JavaScript frameworks, but without forcing a heavy JS bundle on the user. It is modular, clean, and framework-agnostic, meaning you can write Svelte, React, or plain HTML components in the same project. As the site grows, your code stays organized instead of turning into an archaeological dig of old custom fields and theme overrides.
+
+We also have to talk about the budget. People call WordPress cheap because shared hosting costs a few dollars a month. But they ignore the hidden tax: premium security licenses, backup tools, and the developer hours spent fixing things when an automatic update breaks the layout. Astro sites deploy to Vercel, Netlify, or Cloudflare Pages for free. The monthly hosting bill for most marketing sites is literally zero.
+
+Look, WordPress still has its place. If you are handing a site off to a non-technical team that absolutely demands a familiar, click-and-drag backend dashboard, WordPress makes sense. The ecosystem also has pre-built solutions for complex things like learning management systems or massive membership directories that would take weeks to write from scratch.
+
+But we have to stop treating WordPress as the default choice for everything. If you’re building a portfolio, a blog, or a marketing page, you do not need a database or a running server. The question isn't why you should switch to Astro. The real question is why you're still choosing WordPress.
+
+---
