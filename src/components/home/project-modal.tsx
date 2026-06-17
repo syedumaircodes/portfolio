@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import * as m from "motion/react-m"
 import { AnimatePresence } from "motion/react"
-import { X, ExternalLink } from "lucide-react"
+import { IconXMark, IconExternalLink } from "@tabler/icons-react"
 import { GithubIcon } from "../ui/github.tsx"
 import type { Project } from "../../data/data.ts"
 import { Button } from "../ui/button"
@@ -60,7 +60,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                   className="rounded-full bg-background/60 backdrop-blur-md transition-all hover:bg-secondary active:scale-95"
                   aria-label="Close modal"
                 >
-                  <X size={18} strokeWidth={1.5} />
+                  <IconXMark size={18} strokeWidth={1.5} />
                 </Button>
               </div>
 
@@ -122,7 +122,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                           target="_blank"
                           rel="noreferrer"
                         >
-                          <ExternalLink className="mr-2 h-3.5 w-3.5" /> Live
+                          <IconExternalLink className="mr-2 h-3.5 w-3.5" /> Live
                           Preview
                         </a>
                       </Button>

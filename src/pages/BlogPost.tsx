@@ -1,7 +1,7 @@
 // src/pages/BlogPost.tsx
 import { useParams, Link } from "react-router-dom"
 import * as m from "motion/react-m"
-import { ArrowLeft } from "lucide-react"
+import { IconArrowLeft } from "@tabler/icons-react"
 import SEO from "../components/shared/SEO"
 import Footer from "../components/shared/Footer"
 
@@ -40,7 +40,7 @@ const BlogPost = () => {
           to="/blogs"
           className="mb-10 inline-flex items-center text-[10px] font-bold tracking-[0.2em] text-foreground uppercase"
         >
-          <ArrowLeft size={14} className="mr-2" /> Back to Blogs
+          <IconArrowLeft size={14} className="mr-2" /> Back to Blogs
         </Link>
 
         <m.header

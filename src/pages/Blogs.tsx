@@ -1,7 +1,7 @@
 import * as m from "motion/react-m"
 import { type Variants } from "motion/react"
 import { Link } from "react-router-dom"
-import { ArrowLeft } from "lucide-react"
+import { IconArrowLeft } from "@tabler/icons-react"
 import Footer from "@/components/shared/Footer"
 import SEO from "@/components/shared/SEO"
 
@@ -53,7 +53,7 @@ const Blogs = () => {
               to="/"
               className="group inline-flex items-center font-sans text-[10px] font-bold tracking-[0.2em] text-foreground uppercase"
             >
-              <ArrowLeft
+              <IconArrowLeft
                 size={14}
                 className="mr-2 transition-transform group-hover:-translate-x-1"
               />

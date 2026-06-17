@@ -2,9 +2,7 @@
 import React from "react"
 import * as m from "motion/react-m"
 import { type Variants } from "motion/react"
-
-import { PenToolIcon } from "../ui/pen-tool"
-import { BookTextIcon } from "../ui/book-text"
+import { IconBallpen, IconBriefcase } from "@tabler/icons-react"
 
 interface ResourceItem {
   title: string
@@ -17,13 +15,13 @@ const resources: ResourceItem[] = [
   {
     title: "My Resources",
     subtitle: "Resources I use everyday",
-    icon: <BookTextIcon />,
+    icon: <IconBriefcase />,
     href: "/resources",
   },
   {
     title: "Blogs & Articles",
     subtitle: "Ramblings and Experiences",
-    icon: <PenToolIcon />,
+    icon: <IconBallpen />,
     href: "/blogs",
   },
 ]

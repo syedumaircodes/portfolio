@@ -1,6 +1,6 @@
 // src/components/shared/Footer.tsx
 import * as m from "motion/react-m"
-import { ArrowUp } from "lucide-react"
+import { IconArrowUp } from "@tabler/icons-react"
 
 // Moved outside the component to avoid recreation on every render
 const scrollToTop = () => {
@@ -60,7 +60,7 @@ const Footer = () => {
             className="group flex items-center gap-2 font-sans text-[10px] font-bold tracking-widest text-muted-foreground uppercase transition-colors hover:text-foreground"
           >
             Back to Top
-            <ArrowUp
+            <IconArrowUp
               size={14}
               strokeWidth={1.5}
               className="transition-transform duration-300 group-hover:-translate-y-1"

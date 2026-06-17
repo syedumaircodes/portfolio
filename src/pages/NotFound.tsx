@@ -1,7 +1,7 @@
 // src/pages/NotFound.tsx
 import * as m from "motion/react-m"
 import { Link } from "react-router-dom"
-import { ArrowLeft } from "lucide-react"
+import { IconArrowLeft } from "@tabler/icons-react"
 
 const NotFound = () => {
   return (
@@ -38,7 +38,7 @@ const NotFound = () => {
               to="/"
               className="group inline-flex items-center rounded-full bg-primary px-8 py-3 font-sans text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 active:scale-95"
             >
-              <ArrowLeft
+              <IconArrowLeft
                 size={16}
                 className="mr-2 transition-transform duration-300 group-hover:-translate-x-1"
               />

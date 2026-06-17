@@ -1,10 +1,12 @@
 import * as m from "motion/react-m"
 import { type Variants } from "motion/react"
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconMail,
+  IconArrowUpRight,
+} from "@tabler/icons-react"
 import ProfileResume from "../../assets/SyedUmairAli_SoftwareEngineer.pdf"
-import { LinkedinIcon } from "../ui/linkedin"
-import { GithubIcon } from "../ui/github"
-import { MailboxIcon } from "../ui/mailbox"
-import { ArrowUpRightIcon } from "../ui/arrow-up-right"
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -72,7 +74,7 @@ const Hero = () => {
               aria-label="visit my LinkedIn profile"
               className="text-foreground transition-colors hover:text-primary"
             >
-              <LinkedinIcon />
+              <IconBrandLinkedin />
             </a>
             <a
               href="https://github.com/syedumaircodes"
@@ -81,14 +83,14 @@ const Hero = () => {
               className="text-foreground transition-colors hover:text-primary"
               aria-label="visit my Github profile"
             >
-              <GithubIcon />
+              <IconBrandGithub />
             </a>
             <a
               href="mailto:syedumairali.617@gmail.com"
               aria-label="reach out via email"
               className="text-foreground transition-colors hover:text-primary"
             >
-              <MailboxIcon />
+              <IconMail />
             </a>
           </m.div>
 
@@ -107,7 +109,7 @@ const Hero = () => {
               }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
-              <ArrowUpRightIcon />
+              <IconArrowUpRight />
             </m.div>
           </m.a>
         </footer>
