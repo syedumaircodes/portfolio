@@ -1,5 +1,6 @@
 import { useState } from "react"
-import { motion, type Variants } from "motion/react"
+import * as m from "motion/react-m"
+import { type Variants } from "motion/react"
 import { projectsData, type Project } from "../../data/data"
 import ProjectModal from "./project-modal"
 
@@ -34,17 +35,17 @@ const ProjectList = () => {
     <section className="w-full px-6 py-12">
       <div className="mx-auto max-w-3xl">
         {/* Section Header */}
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="mb-6 font-sans text-[11px] font-bold tracking-[0.2em] text-foreground/80 uppercase"
         >
           Projects & Concepts
-        </motion.h2>
+        </m.h2>
 
         {/* Project List Container */}
-        <motion.div
+        <m.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -52,7 +53,7 @@ const ProjectList = () => {
           className="flex flex-col border-t border-border"
         >
           {projectsData.map((project) => (
-            <motion.button
+            <m.button
               key={project.id}
               variants={itemVariants}
               onClick={() => openProject(project)}
@@ -72,16 +73,16 @@ const ProjectList = () => {
                   {project.month} {project.year}
                 </span>
 
-                <motion.div
+                <m.div
                   variants={{
                     hover: { x: 2, y: -2, scale: 1.1 },
                   }}
                   className="text-muted-foreground/40 transition-colors group-hover:text-primary"
-                ></motion.div>
+                ></m.div>
               </div>
-            </motion.button>
+            </m.button>
           ))}
-        </motion.div>
+        </m.div>
       </div>
 
       <ProjectModal

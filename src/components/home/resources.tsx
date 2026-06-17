@@ -1,6 +1,7 @@
 // src/components/home/resources.tsx
 import React from "react"
-import { motion, type Variants } from "motion/react"
+import * as m from "motion/react-m"
+import { type Variants } from "motion/react"
 
 import { PenToolIcon } from "../ui/pen-tool"
 import { BookTextIcon } from "../ui/book-text"
@@ -49,16 +50,16 @@ const Resources: React.FC = () => {
     <section className="w-full px-6 py-10">
       <div className="mx-auto max-w-3xl">
         {/* Section Label: Matches the 'Role' style in Hero */}
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="mb-8 font-sans text-[11px] font-bold tracking-[0.2em] text-foreground/80 uppercase"
         >
           Resources
-        </motion.h2>
+        </m.h2>
 
-        <motion.div
+        <m.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -67,7 +68,7 @@ const Resources: React.FC = () => {
         >
           {/* FIX: Changed key={index} to key={item.href} */}
           {resources.map((item) => (
-            <motion.a
+            <m.a
               key={item.href}
               href={item.href}
               variants={itemVariants}
@@ -90,9 +91,9 @@ const Resources: React.FC = () => {
                   {item.subtitle}
                 </span>
               </div>
-            </motion.a>
+            </m.a>
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

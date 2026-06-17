@@ -6,25 +6,29 @@ import BlogPost from "./pages/BlogPost"
 import Resources from "./pages/Resources"
 import NotFound from "./pages/NotFound"
 import { HelmetProvider } from "react-helmet-async"
-import { MotionConfig } from "motion/react"
+// Import MotionConfig, LazyMotion, and domAnimation
+import { MotionConfig, LazyMotion, domAnimation } from "motion/react"
+
 function App() {
   return (
     <HelmetProvider>
-      <MotionConfig reducedMotion="user">
-        <Router>
-          <div className="relative min-h-screen bg-background text-foreground selection:bg-primary/30">
-            <main className="flex-1">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/blogs" element={<Blogs />} />
-                <Route path="/blogs/:slug" element={<BlogPost />} />
-                <Route path="/resources" element={<Resources />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </main>
-          </div>
-        </Router>
-      </MotionConfig>
+      <LazyMotion features={domAnimation}>
+        <MotionConfig reducedMotion="user">
+          <Router>
+            <div className="relative min-h-screen bg-background text-foreground selection:bg-primary/30">
+              <main className="flex-1">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/blogs" element={<Blogs />} />
+                  <Route path="/blogs/:slug" element={<BlogPost />} />
+                  <Route path="/resources" element={<Resources />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </main>
+            </div>
+          </Router>
+        </MotionConfig>
+      </LazyMotion>
     </HelmetProvider>
   )
 }

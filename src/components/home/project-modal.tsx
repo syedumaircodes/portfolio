@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
-import { motion, AnimatePresence } from "motion/react"
+import * as m from "motion/react-m"
+import { AnimatePresence } from "motion/react"
 import { X, ExternalLink } from "lucide-react"
 import { GithubIcon } from "../ui/github.tsx"
 import type { Project } from "../../data/data.ts"
@@ -33,7 +34,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
       {isOpen && (
         <>
           {/* Backdrop */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -42,7 +43,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
           />
 
           <div className="pointer-events-none fixed inset-0 z-60 flex items-center justify-center p-4 md:p-6">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 30, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.98 }}
@@ -161,7 +162,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                   </div>
                 </section>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </>
       )}

@@ -1,4 +1,5 @@
-import { motion, type Variants } from "motion/react"
+import * as m from "motion/react-m"
+import { type Variants } from "motion/react"
 import ProfileResume from "../../assets/SyedUmairAli_SoftwareEngineer.pdf"
 import { LinkedinIcon } from "../ui/linkedin"
 import { GithubIcon } from "../ui/github"
@@ -27,7 +28,7 @@ const Hero = () => {
   }
 
   return (
-    <motion.section
+    <m.section
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -39,14 +40,11 @@ const Hero = () => {
             Syed Umair Ali
           </h1>
 
-          <motion.div
-            variants={itemVariants}
-            className="flex items-center gap-3"
-          >
+          <m.div variants={itemVariants} className="flex items-center gap-3">
             <h2 className="font-sans text-sm font-medium tracking-[0.2em] text-foreground/80 uppercase">
               Full-Stack Engineer & Product Builder
             </h2>
-          </motion.div>
+          </m.div>
         </header>
 
         <article className="mt-10 max-w-2xl animate-in duration-1000 ease-out fill-mode-forwards fade-in slide-in-from-bottom-4">
@@ -58,7 +56,7 @@ const Hero = () => {
           </p>
         </article>
 
-        <motion.div
+        <m.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1, delay: 0.6, ease: "circOut" }}
@@ -66,10 +64,7 @@ const Hero = () => {
         />
 
         <footer className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-          <motion.div
-            variants={itemVariants}
-            className="flex items-center gap-8"
-          >
+          <m.div variants={itemVariants} className="flex items-center gap-8">
             <a
               href="https://linkedin.com/in/syedumaircodes"
               target="_blank"
@@ -95,9 +90,9 @@ const Hero = () => {
             >
               <MailboxIcon />
             </a>
-          </motion.div>
+          </m.div>
 
-          <motion.a
+          <m.a
             variants={itemVariants}
             href={ProfileResume}
             download
@@ -106,18 +101,18 @@ const Hero = () => {
             className="group relative flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-3 text-sm font-medium text-primary-foreground"
           >
             <span className="relative z-10">Download Resume</span>
-            <motion.div
+            <m.div
               variants={{
                 hover: { x: 3, y: -3 },
               }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
               <ArrowUpRightIcon />
-            </motion.div>
-          </motion.a>
+            </m.div>
+          </m.a>
         </footer>
       </div>
-    </motion.section>
+    </m.section>
   )
 }
 
