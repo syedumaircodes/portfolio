@@ -49,12 +49,11 @@ const Hero = () => {
           </m.div>
         </header>
 
-        <article className="mt-10 max-w-2xl animate-in duration-1000 ease-out fill-mode-forwards fade-in slide-in-from-bottom-4">
+        <article className="mt-10 max-w-2xl">
           <p className="text-lg leading-relaxed font-light text-foreground md:text-xl">
-            I specialize in end-to-end execution. From data to deployment, my
-            focus is on shipping real products, putting them in the hands of
-            users, and iterating rapidly. Pragmatic problem-solving over perfect
-            code.
+            I like building things that real people use. My focus is always on
+            getting a working product shipped so we can start learning from real
+            users.
           </p>
         </article>
 
