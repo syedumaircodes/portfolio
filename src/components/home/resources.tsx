@@ -1,3 +1,4 @@
+// src/components/home/resources.tsx
 import React from "react"
 import { motion, type Variants } from "motion/react"
 
@@ -64,9 +65,10 @@ const Resources: React.FC = () => {
           viewport={{ once: true }}
           className="grid grid-cols-1 gap-4 md:grid-cols-2"
         >
-          {resources.map((item, index) => (
+          {/* FIX: Changed key={index} to key={item.href} */}
+          {resources.map((item) => (
             <motion.a
-              key={index}
+              key={item.href}
               href={item.href}
               variants={itemVariants}
               whileHover={{ y: -2 }}

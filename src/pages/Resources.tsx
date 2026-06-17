@@ -1,3 +1,4 @@
+// src/pages/Resources.tsx
 import { motion, type Variants } from "motion/react"
 import { Link } from "react-router-dom"
 import { ArrowLeft } from "lucide-react"
@@ -120,9 +121,10 @@ const Resources = () => {
             animate="visible"
             className="space-y-16"
           >
-            {resourcesData.map((section, idx) => (
+            {/* 1. FIX: Changed key={idx} to key={section.category} */}
+            {resourcesData.map((section) => (
               <motion.section
-                key={idx}
+                key={section.category}
                 variants={itemVariants}
                 className="space-y-6"
               >
@@ -135,11 +137,12 @@ const Resources = () => {
 
                 {/* Items in Category */}
                 <div className="flex flex-col border-t border-border/40">
-                  {section.items.map((item, itemIdx) => {
+                  {/* 2. FIX: Changed key={itemIdx} to key={item.name} */}
+                  {section.items.map((item) => {
                     const ItemWrapper = item.link ? "a" : "div"
                     return (
                       <ItemWrapper
-                        key={itemIdx}
+                        key={item.name}
                         href={item.link ? item.link : undefined}
                         target={item.link ? "_blank" : undefined}
                         rel={item.link ? "noreferrer" : undefined}
