@@ -1,5 +1,5 @@
 // src/components/shared/Footer.tsx
-import { motion } from "motion/react"
+import * as m from "motion/react-m"
 import { ArrowUp } from "lucide-react"
 
 // Moved outside the component to avoid recreation on every render
@@ -9,7 +9,7 @@ const scrollToTop = () => {
 
 const Footer = () => {
   return (
-    <motion.footer
+    <m.footer
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -68,7 +68,7 @@ const Footer = () => {
           </button>
         </div>
       </div>
-    </motion.footer>
+    </m.footer>
   )
 }
 

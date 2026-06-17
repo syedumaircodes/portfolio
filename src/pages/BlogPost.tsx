@@ -1,8 +1,8 @@
 // src/pages/BlogPost.tsx
 import { useParams, Link } from "react-router-dom"
-import { motion } from "motion/react"
+import * as m from "motion/react-m"
 import { ArrowLeft } from "lucide-react"
-import SEO from "../components/shared/SEO" // <-- Import the SEO component
+import SEO from "../components/shared/SEO"
 import Footer from "../components/shared/Footer"
 
 const mdxFiles = import.meta.glob("../content/*.mdx", { eager: true })
@@ -43,7 +43,7 @@ const BlogPost = () => {
           <ArrowLeft size={14} className="mr-2" /> Back to Blogs
         </Link>
 
-        <motion.header
+        <m.header
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-12 space-y-6"
@@ -55,16 +55,16 @@ const BlogPost = () => {
           <h1 className="font-heading text-4xl tracking-tight text-foreground italic md:text-6xl">
             {meta.title}
           </h1>
-        </motion.header>
+        </m.header>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="prose max-w-none prose-zinc dark:prose-invert prose-headings:font-heading prose-headings:font-normal prose-headings:tracking-tight prose-p:font-sans prose-p:leading-relaxed prose-p:font-light"
         >
           <PostContent />
-        </motion.div>
+        </m.div>
       </article>
 
       <Footer />

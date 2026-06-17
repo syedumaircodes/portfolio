@@ -1,5 +1,5 @@
-// src/pages/Blogs.tsx
-import { motion, type Variants } from "motion/react"
+import * as m from "motion/react-m"
+import { type Variants } from "motion/react"
 import { Link } from "react-router-dom"
 import { ArrowLeft } from "lucide-react"
 import Footer from "@/components/shared/Footer"
@@ -44,7 +44,7 @@ const Blogs = () => {
       <div className="w-full px-6 py-16 md:py-24">
         <div className="mx-auto max-w-3xl">
           {/* Back to Home Link */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             className="mb-12"
@@ -59,9 +59,9 @@ const Blogs = () => {
               />
               Back to Home
             </Link>
-          </motion.div>
+          </m.div>
 
-          <motion.header
+          <m.header
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="mb-16 space-y-4"
@@ -72,16 +72,16 @@ const Blogs = () => {
             <p className="font-sans text-lg leading-relaxed font-light text-foreground/80 md:text-xl">
               My thoughts on being a tech worker and personal life.
             </p>
-          </motion.header>
+          </m.header>
 
-          <motion.div
+          <m.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
             className="flex flex-col border-t border-border"
           >
             {blogs.map((blog) => (
-              <motion.div
+              <m.div
                 key={blog.slug}
                 variants={itemVariants}
                 whileHover="hover"
@@ -97,10 +97,10 @@ const Blogs = () => {
                         {blog.date}
                       </span>
                     </div>
-                    <motion.div
+                    <m.div
                       variants={{ hover: { x: 2, y: -2, scale: 1.1 } }}
                       className="text-foreground/40 transition-colors group-hover:text-foreground"
-                    ></motion.div>
+                    ></m.div>
                   </div>
                   <h2 className="px-3 font-heading text-2xl tracking-tight text-foreground italic transition-transform duration-300 md:text-3xl">
                     {blog.title}
@@ -109,9 +109,9 @@ const Blogs = () => {
                     {blog.excerpt}
                   </p>
                 </Link>
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
         </div>
       </div>
       <Footer />

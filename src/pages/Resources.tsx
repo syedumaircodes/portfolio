@@ -1,5 +1,5 @@
-// src/pages/Resources.tsx
-import { motion, type Variants } from "motion/react"
+import * as m from "motion/react-m"
+import { type Variants } from "motion/react"
 import { Link } from "react-router-dom"
 import { ArrowLeft } from "lucide-react"
 import Footer from "@/components/shared/Footer"
@@ -82,7 +82,7 @@ const Resources = () => {
       <div className="w-full px-6 py-16 md:py-24">
         <div className="mx-auto max-w-3xl">
           {/* Back to Home Link */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             className="mb-12"
@@ -97,10 +97,10 @@ const Resources = () => {
               />
               Back to Home
             </Link>
-          </motion.div>
+          </m.div>
 
           {/* Page Header */}
-          <motion.header
+          <m.header
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="mb-16 space-y-4"
@@ -112,10 +112,10 @@ const Resources = () => {
               A curated list of the tools and literature I use to build and
               design software.
             </p>
-          </motion.header>
+          </m.header>
 
           {/* Categories List */}
-          <motion.div
+          <m.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -123,7 +123,7 @@ const Resources = () => {
           >
             {/* 1. FIX: Changed key={idx} to key={section.category} */}
             {resourcesData.map((section) => (
-              <motion.section
+              <m.section
                 key={section.category}
                 variants={itemVariants}
                 className="space-y-6"
@@ -167,9 +167,9 @@ const Resources = () => {
                     )
                   })}
                 </div>
-              </motion.section>
+              </m.section>
             ))}
-          </motion.div>
+          </m.div>
         </div>
       </div>
       <Footer />

@@ -1,5 +1,5 @@
 // src/pages/NotFound.tsx
-import { motion } from "motion/react"
+import * as m from "motion/react-m"
 import { Link } from "react-router-dom"
 import { ArrowLeft } from "lucide-react"
 
@@ -7,7 +7,7 @@ const NotFound = () => {
   return (
     <div className="flex min-h-[80vh] w-full items-center justify-center px-6">
       <div className="w-full max-w-3xl text-center md:text-left">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
@@ -45,7 +45,7 @@ const NotFound = () => {
               Return to Home
             </Link>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </div>
   )
