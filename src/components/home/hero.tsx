@@ -3,7 +3,7 @@ import { type Variants } from "motion/react"
 import {
   IconBrandGithub,
   IconBrandLinkedin,
-  IconMail,
+  IconFileText,
   IconArrowUpRight,
 } from "@tabler/icons-react"
 import ProfileResume from "../../assets/SyedUmairAli_SoftwareEngineer.pdf"
@@ -85,23 +85,23 @@ const Hero = () => {
               <IconBrandGithub />
             </a>
             <a
-              href="mailto:syedumairali.617@gmail.com"
-              aria-label="reach out via email"
+              href={ProfileResume}
+              download
+              aria-label="download my resume"
               className="text-foreground transition-colors hover:text-primary"
             >
-              <IconMail />
+              <IconFileText />
             </a>
           </m.div>
 
           <m.a
             variants={itemVariants}
-            href={ProfileResume}
-            download
+            href="mailto:syedumairali.617@gmail.com"
             whileHover="hover"
             whileTap={{ scale: 0.98 }}
             className="group relative flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-3 text-sm font-medium text-primary-foreground"
           >
-            <span className="relative z-10">Download Resume</span>
+            <span className="relative z-10">Email Me</span>
             <m.div
               variants={{
                 hover: { x: 3, y: -3 },
