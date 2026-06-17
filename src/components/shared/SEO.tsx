@@ -1,3 +1,4 @@
+// src/components/shared/SEO.tsx
 import React from "react"
 import { Helmet } from "react-helmet-async"
 
@@ -7,6 +8,15 @@ interface SEOProps {
   url: string
   type?: "website" | "article"
   publishDate?: string
+}
+
+// Safely stringifies objects for script injection by replacing HTML-sensitive characters
+// with their Unicode escape equivalents. JSON parsers and crawlers resolve these back automatically.
+const safeJsonStringify = (obj: unknown): string => {
+  return JSON.stringify(obj)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026")
 }
 
 const SEO: React.FC<SEOProps> = ({
@@ -74,7 +84,7 @@ const SEO: React.FC<SEOProps> = ({
 
       {/* Inject Article JSON-LD Schema if it's a blog post */}
       {jsonLd && (
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        <script type="application/ld+json">{safeJsonStringify(jsonLd)}</script>
       )}
     </Helmet>
   )
