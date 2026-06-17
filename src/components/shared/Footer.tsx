@@ -54,7 +54,8 @@ const Footer = () => {
 
         {/* Right: Back to Top (flex-1 to balance the left side, justify-end to push to right edge) */}
         <div className="flex flex-1 justify-center sm:justify-end">
-          <a
+          <button
+            type="button"
             onClick={scrollToTop}
             className="group flex items-center gap-2 font-sans text-[10px] font-bold tracking-widest text-muted-foreground uppercase transition-colors hover:text-foreground"
           >
@@ -64,7 +65,7 @@ const Footer = () => {
               strokeWidth={1.5}
               className="transition-transform duration-300 group-hover:-translate-y-1"
             />
-          </a>
+          </button>
         </div>
       </div>
     </motion.footer>
