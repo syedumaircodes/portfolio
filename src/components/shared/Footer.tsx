@@ -1,12 +1,13 @@
-// src/components/Footer.tsx
+// src/components/shared/Footer.tsx
 import { motion } from "motion/react"
 import { ArrowUp } from "lucide-react"
 
-const Footer = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+// Moved outside the component to avoid recreation on every render
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" })
+}
 
+const Footer = () => {
   return (
     <motion.footer
       initial={{ opacity: 0 }}
