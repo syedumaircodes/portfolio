@@ -6,7 +6,7 @@ import {
   IconFileText,
   IconArrowUpRight,
 } from "@tabler/icons-react"
-import ProfileResume from "../../assets/SyedUmairAli_SoftwareEngineer.pdf"
+import ProfileResume from "../../assets/SyedUmairAli_Resume.pdf"
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
