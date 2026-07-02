@@ -3,18 +3,16 @@ import * as m from "motion/react-m"
 import { type Variants } from "motion/react"
 
 const Stack: string[] = [
+  "JavaScript",
+  "TypeScript",
   "React",
   "Next.js",
-  "TypeScript",
-  "Node.js",
-  "Go",
-  "Postgres",
-  "Supabase",
-  "AWS",
+  "Python",
+  "FastAPI",
+  "SQL Databases",
   "Docker",
   "Framer Motion",
   "Tailwind",
-  "GraphQL",
 ]
 
 const containerVariants: Variants = {
@@ -47,7 +45,7 @@ const Skills: React.FC = () => {
             viewport={{ once: true }}
             className="block font-sans text-[11px] font-bold tracking-[0.2em] text-foreground/80 uppercase"
           >
-            Skills and Technologies
+            TECH STACK
           </m.span>
         </div>
 

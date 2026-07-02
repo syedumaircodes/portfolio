@@ -41,7 +41,7 @@ const ProjectList = () => {
           viewport={{ once: true }}
           className="mb-6 font-sans text-[11px] font-bold tracking-[0.2em] text-foreground/80 uppercase"
         >
-          Projects & Concepts
+          Selected work
         </m.h2>
 
         {/* Project List Container */}
