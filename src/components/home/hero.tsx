@@ -51,8 +51,7 @@ const Hero = () => {
 
         <article className="mt-10 max-w-2xl">
           <p className="text-lg leading-relaxed font-light text-foreground md:text-xl">
-            I build full-stack products that ship — from pixel-perfect frontends
-            to real-time backend systems.
+            I build fast, reliable, scalable software — from first API call to production deployment.
           </p>
         </article>
 

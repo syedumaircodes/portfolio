@@ -44,10 +44,10 @@ const resourcesData = [
         link: "https://www.dbpro.app/",
       },
       {
-        name: "Helium Browser",
+        name: "Zen Browser",
         description:
-          "Helium replaced chrome and brave for me, the perfect minimal browser",
-        link: "https://helium.computer/",
+          "Zen is spiritual successor to the Arc Browser but also it's own thing.",
+        link: "https://zen-browser.app/",
       },
     ],
   },

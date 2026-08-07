@@ -5,19 +5,21 @@ import Resources from "../components/home/resources"
 import SEO from "@/components/shared/SEO"
 import Skills from "@/components/home/skills"
 import Experience from "@/components/home/experience"
+import {SelectedExperiments}  from "@/components/home/experiments"
 
 const Home = () => {
   return (
     <>
       <SEO
         title="Syed Umair Ali | Full-Stack Engineer & Product Builder"
-        description="I build full-stack products that ship — from pixel-perfect frontends to real-time backend systems."
+        description="I build fast, reliable, scalable software — from first API call to production deployment."
         url="https://syedumaircodes.vercel.app/"
       />
       <Hero />
       <Skills />
       <Experience />
       <ProjectList />
+      <SelectedExperiments/>
       <Resources />
       <Footer />
     </>
