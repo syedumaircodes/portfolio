@@ -5,7 +5,6 @@ import Resources from "../components/home/resources"
 import SEO from "@/components/shared/SEO"
 import Skills from "@/components/home/skills"
 import Experience from "@/components/home/experience"
-import {SelectedExperiments}  from "@/components/home/experiments"
 
 const Home = () => {
   return (
@@ -19,7 +18,6 @@ const Home = () => {
       <Skills />
       <Experience />
       <ProjectList />
-      <SelectedExperiments/>
       <Resources />
       <Footer />
     </>
