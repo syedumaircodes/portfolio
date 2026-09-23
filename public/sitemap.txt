@@ -1,5 +1,1 @@
 https://syedumaircodes.vercel.app/
-https://syedumaircodes.vercel.app/blogs
-https://syedumaircodes.vercel.app/resources
-https://syedumaircodes.vercel.app/blogs/stop-defaulting-to-wordpress
-https://syedumaircodes.vercel.app/blogs/depth-over-breadth
