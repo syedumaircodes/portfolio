@@ -4,6 +4,7 @@ import {
   IconBrandGithub,
   IconBrandLinkedin,
   IconFileText,
+  IconBookmark,
 } from "@tabler/icons-react"
 import ProfileResume from "../../assets/SyedUmairAli_Resume.pdf"
 
@@ -45,7 +46,7 @@ const Hero = () => {
             Syed Umair Ali
           </m.h1>
 
-          <m.div variants={itemVariants} className="flex items-center">
+          <m.div variants={itemVariants} className="mt flex items-center">
             <h2 className="font-heading text-xs font-semibold tracking-wider text-muted-foreground uppercase sm:text-sm">
               Multi-Disciplinary Engineer
             </h2>
@@ -81,6 +82,15 @@ const Hero = () => {
               className="p-1 text-muted-foreground transition-colors hover:text-foreground"
             >
               <IconBrandGithub size={22} stroke={1.75} />
+            </a>
+            <a
+              href="https://substack.com/@syedumaircodes"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="visit my Github profile"
+              className="p-1 text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <IconBookmark size={22} stroke={1.75} />
             </a>
             <a
               href={ProfileResume}
