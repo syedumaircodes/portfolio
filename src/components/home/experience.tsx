@@ -39,7 +39,7 @@ const itemVariants: Variants = {
 
 const Experience: React.FC = () => {
   return (
-    <section className="w-full px-6 py-16 md:py-20">
+    <section className="w-full px-6 py-16">
       <div className="mx-auto max-w-3xl">
         {/* Section Eyebrow / Header */}
         <m.h2

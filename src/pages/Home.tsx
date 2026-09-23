@@ -3,7 +3,7 @@ import Hero from "../components/home/hero"
 import ProjectList from "../components/home/project-list"
 import CTA from "../components/home/cta"
 import SEO from "@/components/layout/SEO"
-import Skills from "@/components/home/skills"
+import About from "@/components/home/about"
 import Experience from "@/components/home/experience"
 
 const Home = () => {
@@ -15,7 +15,7 @@ const Home = () => {
         url="https://syedumaircodes.vercel.app/"
       />
       <Hero />
-      <Skills />
+      <About />
       <Experience />
       <ProjectList />
       <CTA />
