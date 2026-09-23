@@ -55,7 +55,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
             <button
               onClick={onClose}
               aria-label="Close modal"
-              className="absolute top-4 right-4 z-20 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-muted-foreground transition-all hover:bg-white/10 hover:text-foreground active:scale-95 sm:top-5 sm:right-5 sm:h-9 sm:w-9"
+              className="transition-color absolute top-4 right-4 z-20 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-foreground active:scale-95 sm:top-5 sm:right-5 sm:h-9 sm:w-9"
             >
               <IconX size={18} strokeWidth={1.75} />
             </button>
@@ -106,7 +106,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                       href={project.deploymentUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 font-heading text-xs font-semibold text-neutral-950 transition-all hover:bg-neutral-200 active:scale-95"
+                      className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 font-heading text-xs font-semibold text-neutral-950 transition-opacity hover:bg-neutral-200 active:scale-95"
                     >
                       <span>Live Preview</span>
                     </a>
@@ -117,7 +117,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                       href={project.sourceUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 font-heading text-xs font-semibold text-foreground transition-all hover:bg-white/10 active:scale-95"
+                      className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 font-heading text-xs font-semibold text-foreground transition-opacity hover:bg-white/10 active:scale-95"
                     >
                       <span>Codebase</span>
                     </a>

@@ -25,7 +25,7 @@ const CTA = () => {
           <div className="mt-8">
             <a
               href="mailto:syedumairali.617@gmail.com"
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-heading text-xs font-semibold text-neutral-950 transition-all hover:bg-neutral-200 active:scale-95"
+              className="group transition-color inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-heading text-xs font-semibold text-neutral-950 hover:bg-neutral-200 active:scale-95"
             >
               <span>Let's Chat</span>
             </a>

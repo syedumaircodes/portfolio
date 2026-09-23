@@ -1,52 +1,46 @@
 // src/pages/NotFound.tsx
 import * as m from "motion/react-m"
 import { Link } from "react-router-dom"
-import { IconArrowLeft } from "@tabler/icons-react"
+import Footer from "../components/layout/Footer"
 
 const NotFound = () => {
   return (
-    <div className="flex min-h-[80vh] w-full items-center justify-center px-6">
-      <div className="w-full max-w-3xl text-center md:text-left">
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className="space-y-6"
-        >
-          {/* Subtle Metadata Label */}
-          <div className="flex items-center justify-center gap-3 md:justify-start">
-            <span className="font-sans text-[11px] font-bold tracking-[0.2em] text-muted-foreground uppercase">
-              Error 404
-            </span>
-          </div>
+    <div className="flex min-h-screen flex-col justify-between">
+      {/* Centered 404 Canvas */}
+      <main className="flex flex-1 items-center justify-center px-6 py-20 sm:py-24 md:py-28">
+        <div className="mx-auto w-full max-w-3xl">
+          <m.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col items-center text-center"
+          >
+            {/* Premium, Confident Headline */}
+            <h1 className="mt-4 font-heading text-4xl leading-[1.08] font-extrabold tracking-tight text-foreground sm:text-6xl md:text-7xl">
+              Signal lost.
+            </h1>
 
-          {/* Large Editorial Heading */}
-          <h1 className="font-heading text-6xl tracking-tight text-foreground italic md:text-8xl md:leading-tight">
-            Lost in <br className="hidden md:block" />
-            the void.
-          </h1>
+            {/* Editorial Copy */}
+            <p className="mt-4 max-w-md font-sans text-sm leading-relaxed text-muted-foreground sm:text-base sm:leading-relaxed">
+              You’ve reached an unmapped route. The resource you requested has
+              either been relocated, archived, or never initialized.
+            </p>
 
-          {/* Description */}
-          <p className="mx-auto max-w-md font-sans text-lg leading-relaxed font-light text-muted-foreground/90 md:mx-0 md:text-xl">
-            The page or document you are looking for has been moved, deleted, or
-            never existed in the first place.
-          </p>
+            {/* Centered Return Action */}
+            <div className="mt-8 flex justify-center">
+              <Link
+                to="/"
+                className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-heading text-xs font-semibold text-neutral-950 transition-all hover:bg-neutral-200 active:scale-95"
+              >
+                <span>Take me back</span>
+              </Link>
+            </div>
+          </m.div>
+        </div>
+      </main>
 
-          {/* Back Action */}
-          <div className="pt-8">
-            <Link
-              to="/"
-              className="group inline-flex items-center rounded-full bg-primary px-8 py-3 font-sans text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 active:scale-95"
-            >
-              <IconArrowLeft
-                size={16}
-                className="mr-2 transition-transform duration-300 group-hover:-translate-x-1"
-              />
-              Return to Home
-            </Link>
-          </div>
-        </m.div>
-      </div>
+      {/* Pinned Footer */}
+      <Footer />
     </div>
   )
 }
