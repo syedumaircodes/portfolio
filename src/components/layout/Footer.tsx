@@ -2,7 +2,6 @@
 import * as m from "motion/react-m"
 import { IconArrowUp } from "@tabler/icons-react"
 
-// Moved outside the component to avoid recreation on every render
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" })
 }
@@ -13,57 +12,65 @@ const Footer = () => {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
-      className="mt-16 w-full border-t border-border/40 px-6 py-10 md:mt-24"
+      className="mt-20 w-full border-t border-white/10 px-6 py-10 md:mt-28 md:py-12"
     >
-      <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 sm:flex-row sm:items-center sm:justify-between">
-        {/* Left: Branding (flex-1 forces equal width sharing) */}
-        <div className="flex flex-1 flex-col items-center gap-2 sm:items-start">
-          <span className="font-heading text-2xl tracking-tight text-foreground italic">
+      <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 sm:flex-row sm:items-center sm:justify-between">
+        {/* Left: Branding & Copyright */}
+        <div className="flex flex-1 flex-col items-center gap-1 sm:items-start">
+          <span className="font-heading text-sm font-semibold tracking-tight text-foreground">
             Syed Umair Ali
           </span>
-          <span className="font-sans text-[10px] font-medium tracking-[0.2em] text-muted-foreground uppercase">
+          <span className="font-sans text-xs font-normal text-muted-foreground/60">
             © 2026 • Made in Karachi
           </span>
         </div>
 
-        {/* Center: Social Links (Natural width, stays perfectly centered) */}
-        <div className="flex items-center justify-center gap-6">
+        {/* Center: Social Links */}
+        <div className="flex items-center justify-center gap-5 sm:gap-6">
           <a
             href="https://github.com/syedumaircodes"
             target="_blank"
             rel="noreferrer"
-            className="font-sans text-[10px] font-bold tracking-widest text-muted-foreground uppercase transition-colors hover:text-primary"
+            className="font-heading text-xs font-medium tracking-wide text-muted-foreground transition-colors hover:text-foreground"
           >
-            Github
+            GitHub
           </a>
           <a
             href="https://linkedin.com/in/syedumaircodes"
             target="_blank"
             rel="noreferrer"
-            className="font-sans text-[10px] font-bold tracking-widest text-muted-foreground uppercase transition-colors hover:text-primary"
+            className="font-heading text-xs font-medium tracking-wide text-muted-foreground transition-colors hover:text-foreground"
           >
             LinkedIn
           </a>
           <a
+            href="https://substack.com/@syedumaircodes"
+            target="_blank"
+            rel="noreferrer"
+            className="font-heading text-xs font-medium tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Substack
+          </a>
+          <a
             href="mailto:syedumairali.617@gmail.com"
-            className="font-sans text-[10px] font-bold tracking-widest text-muted-foreground uppercase transition-colors hover:text-primary"
+            className="font-heading text-xs font-medium tracking-wide text-muted-foreground transition-colors hover:text-foreground"
           >
             Email
           </a>
         </div>
 
-        {/* Right: Back to Top (flex-1 to balance the left side, justify-end to push to right edge) */}
+        {/* Right: Back to Top */}
         <div className="flex flex-1 justify-center sm:justify-end">
           <button
             type="button"
             onClick={scrollToTop}
-            className="group flex items-center gap-2 font-sans text-[10px] font-bold tracking-widest text-muted-foreground uppercase transition-colors hover:text-foreground"
+            className="group flex items-center gap-1.5 font-heading text-xs font-medium tracking-wide text-muted-foreground transition-colors hover:text-foreground"
           >
-            Back to Top
+            <span>Back to Top</span>
             <IconArrowUp
               size={14}
-              strokeWidth={1.5}
-              className="transition-transform duration-300 group-hover:-translate-y-1"
+              strokeWidth={2}
+              className="transition-transform duration-200 ease-out group-hover:-translate-y-0.5"
             />
           </button>
         </div>

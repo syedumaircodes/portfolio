@@ -16,7 +16,7 @@ const experiences: ExperienceItem[] = [
     role: "Junior Software Engineer",
     company: "Heptic.it",
     period: "2025 — Present",
-    description: "Full-stack engineer building Fullstack Web and Desktop apps",
+    description: "Full-stack engineer building fullstack web and desktop apps",
   },
 ]
 
