@@ -1,8 +1,8 @@
-import Footer from "@/components/shared/Footer"
+import Footer from "@/components/layout/Footer"
 import Hero from "../components/home/hero"
 import ProjectList from "../components/home/project-list"
 import Resources from "../components/home/resources"
-import SEO from "@/components/shared/SEO"
+import SEO from "@/components/layout/SEO"
 import Skills from "@/components/home/skills"
 import Experience from "@/components/home/experience"
 

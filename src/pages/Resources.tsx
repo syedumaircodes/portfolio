@@ -2,8 +2,8 @@ import * as m from "motion/react-m"
 import { type Variants } from "motion/react"
 import { Link } from "react-router-dom"
 import { IconArrowLeft } from "@tabler/icons-react"
-import Footer from "@/components/shared/Footer"
-import SEO from "@/components/shared/SEO"
+import Footer from "@/components/layout/Footer"
+import SEO from "@/components/layout/SEO"
 
 const resourcesData = [
   {

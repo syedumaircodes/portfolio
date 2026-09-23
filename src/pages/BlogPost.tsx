@@ -2,8 +2,8 @@
 import { useParams, Link } from "react-router-dom"
 import * as m from "motion/react-m"
 import { IconArrowLeft } from "@tabler/icons-react"
-import SEO from "../components/shared/SEO"
-import Footer from "../components/shared/Footer"
+import SEO from "../components/layout/SEO"
+import Footer from "../components/layout/Footer"
 
 const mdxFiles = import.meta.glob("../content/*.mdx", { eager: true })
 
