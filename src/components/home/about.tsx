@@ -47,9 +47,9 @@ export default function About() {
       >
         {/* Statement & Bio Block */}
         <m.div variants={revealVariants} className="max-w-2xl">
-          <p className="font-heading text-2xl leading-tight font-medium tracking-tight text-foreground sm:text-3xl md:text-4xl">
+          <h1 className="font-heading text-2xl leading-tight font-medium tracking-tight text-foreground sm:text-3xl md:text-4xl">
             I design interfaces, build the databases, and write the code.
-          </p>
+          </h1>
           <p className="mt-4 font-sans text-sm leading-relaxed text-muted-foreground sm:text-base sm:leading-relaxed">
             I’m Umair, an engineer focused on data-intensive applications. From
             drafting design systems to optimizing data models and deploying
@@ -68,9 +68,9 @@ export default function About() {
               key={item.title}
               className="flex flex-col gap-2 py-5 sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:py-6"
             >
-              <h3 className="font-heading text-sm font-semibold tracking-tight text-foreground sm:w-1/3 sm:text-base">
+              <h2 className="font-heading text-sm font-semibold tracking-tight text-foreground sm:w-1/3 sm:text-base">
                 {item.title}
-              </h3>
+              </h2>
               <p className="font-sans text-xs leading-relaxed text-muted-foreground sm:w-2/3 sm:text-sm sm:leading-relaxed">
                 {item.description}
               </p>

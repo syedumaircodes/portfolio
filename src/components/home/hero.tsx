@@ -81,7 +81,7 @@ const Hero = () => {
               href="https://substack.com/@syedumaircodes"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="visit my Github profile"
+              aria-label="visit my substack"
               className="p-1 text-muted-foreground transition-colors hover:text-foreground"
             >
               <IconBookmark size={22} stroke={1.75} />

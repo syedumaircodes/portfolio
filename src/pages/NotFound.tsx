@@ -30,7 +30,7 @@ const NotFound = () => {
             <div className="mt-8 flex justify-center">
               <Link
                 to="/"
-                className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-heading text-xs font-semibold text-neutral-950 transition-all hover:bg-neutral-200 active:scale-95"
+                className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-heading text-xs font-semibold text-neutral-950 transition-colors hover:bg-neutral-200 active:scale-95"
               >
                 <span>Take me back</span>
               </Link>
