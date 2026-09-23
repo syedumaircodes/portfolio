@@ -1,77 +1,86 @@
-import React from "react"
-import * as m from "motion/react-m"
-import { type Variants } from "motion/react"
+import { m, type Variants } from "motion/react"
 
-const Stack: string[] = [
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Next.js",
-  "Python",
-  "FastAPI",
-  "SQL Databases",
-  "Docker",
-  "Framer Motion",
-  "Tailwind",
+const DISCIPLINES = [
+  {
+    title: "Product Engineering",
+    description:
+      "Full-stack architecture and frontend polish. I bridge backend logic with responsive, accessible interfaces ready for production scale.",
+  },
+  {
+    title: "Data Engineering",
+    description:
+      "Reliable data pipelines and schema design. I make high-volume, complex data clean, fast, and ready for user-facing applications.",
+  },
+  {
+    title: "Product Design",
+    description:
+      "Scalable design systems and intuitive user flows. I turn dense workflows and data dashboards into interfaces people actually want to use.",
+  },
 ]
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.05 }, // Fast stagger for a smooth waterfall effect
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
   },
 }
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 10 },
+const revealVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
   },
 }
 
-const Skills: React.FC = () => {
+export default function About() {
   return (
-    <section className="w-full px-6 py-10">
-      <div className="mx-auto max-w-3xl">
-        {/* Top Heading Group */}
-        <div className="mb-8 space-y-3">
-          {/* Section Label: Matches the 'Resources' style */}
-          <m.span
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="block font-sans text-[11px] font-bold tracking-[0.2em] text-foreground/80 uppercase"
-          >
-            TECH STACK
-          </m.span>
-        </div>
+    /* Matches Hero padding and width exactly */
+    <section id="about" className="w-full px-6 py-16 md:py-20">
+      <m.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={containerVariants}
+        className="mx-auto max-w-3xl"
+      >
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-10 lg:gap-12">
+          {/* Left Column: Heading & Bio */}
+          <m.div variants={revealVariants} className="flex flex-col">
+            <h2 className="font-heading text-xl leading-[1.2] font-medium tracking-tight text-foreground sm:text-2xl md:text-[1.65rem]">
+              I design the interface, architect the data, and ship the code.
+            </h2>
+            <p className="mt-4 font-sans text-xs leading-relaxed text-muted-foreground sm:text-[13px] md:text-sm md:leading-relaxed">
+              I’m Umair, an engineer focused on data-intensive applications.
+              From drafting design systems to optimizing data models and
+              deploying production services, I help teams build tools that look
+              sharp, perform under load, and solve real user problems.
+            </p>
+          </m.div>
 
-        {/* Full-width Skill Pills Row */}
-        <m.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="flex flex-wrap gap-2.5 sm:gap-3"
-        >
-          {Stack.map((item) => (
-            <m.div
-              key={item}
-              variants={itemVariants}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="cursor-default rounded-full bg-card px-5 py-2.5 font-sans text-sm font-medium text-white select-none"
-            >
-              {item}
-            </m.div>
-          ))}
-        </m.div>
-      </div>
+          {/* Right Column: Disciplines */}
+          <m.div
+            variants={revealVariants}
+            className="divide-y divide-white/10 md:self-start"
+          >
+            {DISCIPLINES.map((item) => (
+              <div
+                key={item.title}
+                className="py-4 first:pt-0 last:pb-0 md:py-5 md:first:pt-0 md:last:pb-0"
+              >
+                <h3 className="font-heading text-sm font-semibold tracking-tight text-foreground md:text-[15px]">
+                  {item.title}
+                </h3>
+                <p className="mt-1.5 font-sans text-xs leading-relaxed text-muted-foreground md:text-[13px]">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </m.div>
+        </div>
+      </m.div>
     </section>
   )
 }
-
-export default Skills

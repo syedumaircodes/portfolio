@@ -45,12 +45,6 @@ const Hero = () => {
           >
             Syed Umair Ali
           </m.h1>
-
-          <m.div variants={itemVariants} className="mt flex items-center">
-            <h2 className="font-heading text-xs font-semibold tracking-wider text-muted-foreground uppercase sm:text-sm">
-              Multi-Disciplinary Engineer
-            </h2>
-          </m.div>
         </header>
 
         {/* Bio / Summary Block */}
