@@ -1,24 +1,25 @@
 import { useState } from "react"
 import * as m from "motion/react-m"
 import { type Variants } from "motion/react"
+import { IconArrowUpRight } from "@tabler/icons-react"
 import { projectsData, type Project } from "../../data/data"
 import ProjectModal from "./project-modal"
 
-// Animation variants
+// Animation variants matching Experience & Hero
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.08 },
+    transition: { staggerChildren: 0.1 },
   },
 }
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 10 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] },
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
   },
 }
 
@@ -32,16 +33,16 @@ const ProjectList = () => {
   }
 
   return (
-    <section className="w-full px-6 py-12">
+    <section className="w-full px-6 py-16 md:py-20">
       <div className="mx-auto max-w-3xl">
         {/* Section Header */}
         <m.h2
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mb-6 font-sans text-[11px] font-bold tracking-[0.2em] text-foreground/80 uppercase"
+          className="mb-8 font-heading text-xs font-semibold tracking-wider text-muted-foreground uppercase"
         >
-          Selected work
+          Selected Work
         </m.h2>
 
         {/* Project List Container */}
@@ -49,8 +50,8 @@ const ProjectList = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="flex flex-col border-t border-border"
+          viewport={{ once: true, amount: 0.2 }}
+          className="flex flex-col divide-y divide-white/10 border-y border-white/10"
         >
           {projectsData.map((project) => (
             <m.button
@@ -58,27 +59,30 @@ const ProjectList = () => {
               variants={itemVariants}
               onClick={() => openProject(project)}
               whileHover="hover"
-              className="group relative flex items-center justify-between border-b border-border py-6 text-left transition-colors hover:bg-muted/30 md:py-8"
+              className="group relative flex w-full items-center justify-between py-5 text-left transition-colors sm:py-6 md:py-7"
             >
               {/* Left Side: Title */}
-              <div className="flex flex-col gap-1">
-                <span className="font-heading text-2xl tracking-tight text-foreground italic transition-all duration-300 group-hover:pl-2 md:text-3xl">
+              <div className="flex items-center gap-3">
+                <span className="font-heading text-lg font-medium tracking-tight text-foreground transition-transform duration-200 ease-out group-hover:translate-x-1 sm:text-xl">
                   {project.title}
                 </span>
               </div>
 
-              {/* Right Side: Meta and Icon */}
-              <div className="flex items-center gap-2">
-                <span className="hidden font-sans text-[10px] font-medium tracking-[0.15em] text-muted-foreground uppercase transition-colors group-hover:text-foreground sm:block">
+              {/* Right Side: Meta and Animated Arrow Icon */}
+              <div className="flex items-center gap-3 sm:gap-4">
+                <span className="hidden font-sans text-xs font-medium tracking-wider text-muted-foreground uppercase transition-colors group-hover:text-foreground sm:block">
                   {project.month} {project.year}
                 </span>
 
                 <m.div
                   variants={{
-                    hover: { x: 2, y: -2, scale: 1.1 },
+                    hover: { x: 2, y: -2 },
                   }}
-                  className="text-muted-foreground/40 transition-colors group-hover:text-primary"
-                ></m.div>
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="text-muted-foreground/50 transition-colors group-hover:text-foreground"
+                >
+                  <IconArrowUpRight size={18} stroke={1.75} />
+                </m.div>
               </div>
             </m.button>
           ))}
