@@ -1,0 +1,39 @@
+{
+  "entries": [
+    {
+      "identifier": "urn:air:syedumaircodes.vercel.app:portfolio:syed-umair-ali",
+      "displayName": "Syed Umair Ali Portfolio",
+      "type": "text/html",
+      "url": "https://syedumaircodes.vercel.app",
+      "description": "Personal portfolio of Syed Umair Ali, a full-stack software engineer and product builder based in Karachi, Pakistan.",
+      "tags": [
+        "software-engineering",
+        "full-stack-development",
+        "web-development",
+        "react",
+        "nextjs",
+        "python",
+        "fastapi",
+        "product-development"
+      ],
+      "representativeQueries": [
+        "Find a full-stack software engineer who works with React and Python",
+        "Find a software engineer experienced with Next.js and FastAPI",
+        "Find a developer who builds full-stack web applications and SaaS products",
+        "Find Syed Umair Ali's software engineering portfolio"
+      ],
+      "capabilities": [
+        "FullStackDevelopment",
+        "FrontendDevelopment",
+        "BackendDevelopment",
+        "ReactDevelopment",
+        "NextJSDevelopment",
+        "PythonDevelopment",
+        "FastAPIDevelopment",
+        "SaaSDevelopment"
+      ],
+      "version": "1.0.0",
+      "updatedAt": "2026-09-24"
+    }
+  ]
+}
