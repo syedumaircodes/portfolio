@@ -1,5 +1,3 @@
-import { m, type Variants } from "motion/react"
-
 const DISCIPLINES = [
   {
     title: "Product Engineering",
@@ -18,35 +16,12 @@ const DISCIPLINES = [
   },
 ]
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
-  },
-}
-
-const revealVariants: Variants = {
-  hidden: { opacity: 0, y: 12 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-}
-
 export default function About() {
   return (
     <section id="about" className="w-full px-6 py-16 md:py-20">
-      <m.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
-        className="mx-auto max-w-3xl"
-      >
+      <div className="mx-auto max-w-3xl">
         {/* Statement & Bio Block */}
-        <m.div variants={revealVariants} className="max-w-2xl">
+        <div className="max-w-2xl">
           <h1 className="font-heading text-2xl leading-tight font-medium tracking-tight text-foreground sm:text-3xl md:text-4xl">
             I design interfaces, build the databases, and write the code.
           </h1>
@@ -56,13 +31,10 @@ export default function About() {
             production services, I help teams build tools that look sharp,
             perform under load, and solve real user problems.
           </p>
-        </m.div>
+        </div>
 
         {/* Disciplines Linear Rows */}
-        <m.div
-          variants={revealVariants}
-          className="mt-12 divide-y divide-white/10 border-y border-white/10"
-        >
+        <div className="mt-12 divide-y divide-white/10 border-y border-white/10">
           {DISCIPLINES.map((item) => (
             <div
               key={item.title}
@@ -76,8 +48,8 @@ export default function About() {
               </p>
             </div>
           ))}
-        </m.div>
-      </m.div>
+        </div>
+      </div>
     </section>
   )
 }

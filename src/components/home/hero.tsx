@@ -1,5 +1,3 @@
-import * as m from "motion/react-m"
-import { type Variants } from "motion/react"
 import {
   IconBrandGithub,
   IconBrandLinkedin,
@@ -8,57 +6,29 @@ import {
 } from "@tabler/icons-react"
 import ProfileResume from "../../assets/SyedUmairAli_Resume.pdf"
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
-    },
-  },
-}
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] },
-  },
-}
-
 const Hero = () => {
   return (
-    <m.section
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="w-full px-6 py-20 sm:py-24 md:py-28"
-    >
+    <section className="w-full px-6 py-20 sm:py-24 md:py-28">
       <div className="mx-auto max-w-3xl">
         {/* Header Block */}
         <header className="flex flex-col gap-3 md:gap-4">
-          <m.h1
-            variants={itemVariants}
-            className="font-heading text-4xl leading-[1.08] font-medium tracking-tight text-foreground sm:text-6xl md:text-7xl"
-          >
+          <h1 className="font-heading text-4xl leading-[1.08] font-medium tracking-tight text-foreground sm:text-6xl md:text-7xl">
             Syed Umair Ali
-          </m.h1>
+          </h1>
         </header>
 
         {/* Bio / Summary Block */}
-        <m.article variants={itemVariants} className="mt-6 md:mt-8">
+        <article className="mt-6 md:mt-8">
           <p className="font-sans text-base leading-relaxed font-normal text-muted-foreground sm:text-lg md:text-xl">
             I build software that handles serious scale without sacrificing
             design polish. Clean architecture on the backend, effortless UX on
             the frontend.
           </p>
-        </m.article>
+        </article>
 
         {/* Actions & Social Links */}
         <footer className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between md:mt-14">
-          <m.div variants={itemVariants} className="flex items-center gap-5">
+          <div className="flex items-center gap-5">
             <a
               href="https://linkedin.com/in/syedumaircodes"
               target="_blank"
@@ -94,20 +64,17 @@ const Hero = () => {
             >
               <IconFileText size={22} stroke={1.75} />
             </a>
-          </m.div>
+          </div>
 
-          <m.a
-            variants={itemVariants}
+          <a
             href="mailto:syedumairali.617@gmail.com"
-            whileHover="hover"
-            whileTap={{ scale: 0.98 }}
             className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3 font-heading text-sm font-semibold text-primary-foreground shadow-sm transition-shadow hover:shadow-md"
           >
             <span className="relative z-10">Get in Touch</span>
-          </m.a>
+          </a>
         </footer>
       </div>
-    </m.section>
+    </section>
   )
 }
 

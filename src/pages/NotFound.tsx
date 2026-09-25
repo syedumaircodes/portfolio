@@ -1,5 +1,3 @@
-// src/pages/NotFound.tsx
-import * as m from "motion/react-m"
 import { Link } from "react-router-dom"
 import Footer from "../components/layout/Footer"
 
@@ -9,12 +7,7 @@ const NotFound = () => {
       {/* Centered 404 Canvas */}
       <main className="flex flex-1 items-center justify-center px-6 py-20 sm:py-24 md:py-28">
         <div className="mx-auto w-full max-w-3xl">
-          <m.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-center text-center"
-          >
+          <div className="flex flex-col items-center text-center">
             {/* Premium, Confident Headline */}
             <h1 className="mt-4 font-heading text-4xl leading-[1.08] font-extrabold tracking-tight text-foreground sm:text-6xl md:text-7xl">
               Signal lost.
@@ -35,7 +28,7 @@ const NotFound = () => {
                 <span>Take me back</span>
               </Link>
             </div>
-          </m.div>
+          </div>
         </div>
       </main>
 

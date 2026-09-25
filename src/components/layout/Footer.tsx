@@ -1,5 +1,4 @@
 // src/components/shared/Footer.tsx
-import * as m from "motion/react-m"
 import { IconArrowUp } from "@tabler/icons-react"
 
 const scrollToTop = () => {
@@ -8,12 +7,7 @@ const scrollToTop = () => {
 
 const Footer = () => {
   return (
-    <m.footer
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      className="mt-20 w-full border-t border-white/10 px-6 py-10 md:mt-28 md:py-12"
-    >
+    <footer className="mt-20 w-full border-t border-white/10 px-6 py-10 md:mt-28 md:py-12">
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 sm:flex-row sm:items-center sm:justify-between">
         {/* Left: Branding & Copyright */}
         <div className="flex flex-1 flex-col items-center gap-1 sm:items-start">
@@ -75,7 +69,7 @@ const Footer = () => {
           </button>
         </div>
       </div>
-    </m.footer>
+    </footer>
   )
 }
 
