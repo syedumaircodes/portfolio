@@ -14,7 +14,7 @@ const Footer = () => {
           <span className="font-heading text-sm font-semibold tracking-tight text-foreground">
             Syed Umair Ali
           </span>
-          <span className="font-sans text-xs font-normal text-muted-foreground/60">
+          <span className="font-sans text-xs font-normal text-muted-foreground">
             © 2026 • Made in Karachi
           </span>
         </div>
