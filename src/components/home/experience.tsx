@@ -20,40 +20,36 @@ const experiences: ExperienceItem[] = [
 
 const Experience: React.FC = () => {
   return (
-    <section className="w-full px-6 py-16">
-      <div className="mx-auto max-w-3xl">
-        {/* Section Eyebrow / Header */}
-        <h2 className="mb-8 font-heading text-xs font-semibold tracking-wider text-muted-foreground uppercase">
-          Work History
-        </h2>
+    <section id="experience" className="w-full px-5 py-16 sm:px-6 sm:py-20 lg:py-24">
+      <div className="mx-auto max-w-6xl pt-10 sm:pt-12">
+        <div className="grid gap-8 md:grid-cols-12 md:gap-10 lg:gap-16">
+          <h2 className="font-heading text-3xl leading-[1.02] font-semibold tracking-[-0.04em] text-balance text-foreground sm:text-4xl md:col-span-5 md:text-5xl">
+            Work history
+          </h2>
 
-        {/* Experience List Container */}
-        <div className="divide-y divide-white/10 border-y border-white/10">
-          {experiences.map((exp) => (
-            <div key={exp.id} className="group py-6 transition-colors md:py-7">
-              <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between md:gap-8">
-                {/* Left Side: Role & Company */}
-                <div className="flex flex-col gap-1 transition-transform duration-200 ease-out group-hover:translate-x-1">
-                  <h3 className="font-heading text-lg font-semibold tracking-tight text-foreground sm:text-xl">
+          <div className="md:col-span-7">
+            {experiences.map((exp) => (
+              <article
+                key={exp.id}
+                className="grid gap-4 border-y border-border py-6 sm:py-7 md:grid-cols-[minmax(0,1fr)_auto] md:gap-8"
+              >
+                <div>
+                  <h3 className="font-heading text-lg font-semibold tracking-[-0.02em] text-foreground sm:text-xl">
                     {exp.role}
                   </h3>
-                  <span className="font-sans text-xs font-medium tracking-wide text-muted-foreground">
-                    at <span className="text-foreground/90">{exp.company}</span>
-                  </span>
-                </div>
-
-                {/* Right Side: Period & Description */}
-                <div className="flex flex-col items-start gap-1.5 md:max-w-xs md:items-end md:text-right lg:max-w-sm">
-                  <span className="font-sans text-xs font-medium tracking-wider text-muted-foreground uppercase">
-                    {exp.period}
-                  </span>
-                  <p className="font-sans text-xs leading-relaxed text-muted-foreground sm:text-[13px]">
+                  <p className="mt-1 font-sans text-sm leading-6 text-muted-foreground sm:text-[15px]">
+                    {exp.company}
+                  </p>
+                  <p className="mt-4 max-w-lg font-sans text-sm leading-6 text-muted-foreground sm:text-[15px] sm:leading-7">
                     {exp.description}
                   </p>
                 </div>
-              </div>
-            </div>
-          ))}
+                <p className="font-sans text-xs font-medium tracking-wide text-muted-foreground sm:text-sm md:pt-1 md:text-right">
+                  {exp.period}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
