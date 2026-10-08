@@ -18,14 +18,13 @@ const DISCIPLINES = [
 
 export default function About() {
   return (
-    <section id="about" className="w-full px-6 py-16 md:py-20">
-      <div className="mx-auto max-w-3xl">
-        {/* Statement & Bio Block */}
-        <div className="max-w-2xl">
-          <h1 className="font-heading text-2xl leading-tight font-medium tracking-tight text-foreground sm:text-3xl md:text-4xl">
+    <section id="about" className="w-full px-5 py-16 sm:px-6 sm:py-20 lg:py-24">
+      <div className="mx-auto max-w-6xl pt-10 sm:pt-12">
+        <div className="grid gap-7 md:grid-cols-12 md:gap-10 lg:gap-16">
+          <h2 className="font-heading text-3xl leading-[1.02] font-semibold tracking-[-0.04em] text-balance text-foreground sm:text-4xl md:col-span-5 md:text-5xl">
             I design interfaces, build the databases, and write the code.
-          </h1>
-          <p className="mt-4 font-sans text-sm leading-relaxed text-muted-foreground sm:text-base sm:leading-relaxed">
+          </h2>
+          <p className="max-w-2xl self-end font-sans text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 md:col-span-7 md:pb-1">
             I’m Umair, an engineer focused on data-intensive applications. From
             drafting design systems to optimizing data models and deploying
             production services, I help teams build tools that look sharp,
@@ -33,20 +32,19 @@ export default function About() {
           </p>
         </div>
 
-        {/* Disciplines Linear Rows */}
-        <div className="mt-12 divide-y divide-white/10 border-y border-white/10">
+        <div className="mt-12 grid sm:mt-16 md:grid-cols-3">
           {DISCIPLINES.map((item) => (
-            <div
+            <article
               key={item.title}
-              className="flex flex-col gap-2 py-5 sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:py-6"
+              className="py-5 sm:py-6 md:border-b-0 md:py-7 md:pr-7 md:not-last:pr-8 lg:pr-10 lg:not-last:pr-12"
             >
-              <h2 className="font-heading text-sm font-semibold tracking-tight text-foreground sm:w-1/3 sm:text-base">
+              <h3 className="font-heading text-base font-semibold tracking-[-0.02em] text-foreground sm:text-lg">
                 {item.title}
-              </h2>
-              <p className="font-sans text-xs leading-relaxed text-muted-foreground sm:w-2/3 sm:text-sm sm:leading-relaxed">
+              </h3>
+              <p className="mt-3 max-w-sm font-sans text-sm leading-6 text-muted-foreground sm:mt-4 sm:text-[15px] sm:leading-7">
                 {item.description}
               </p>
-            </div>
+            </article>
           ))}
         </div>
       </div>
