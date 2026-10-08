@@ -20,36 +20,36 @@ const experiences: ExperienceItem[] = [
 
 const Experience: React.FC = () => {
   return (
-    <section id="experience" className="w-full px-5 py-16 sm:px-6 sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-6xl pt-10 sm:pt-12">
-        <div className="grid gap-8 md:grid-cols-12 md:gap-10 lg:gap-16">
-          <h2 className="font-heading text-3xl leading-[1.02] font-semibold tracking-[-0.04em] text-balance text-foreground sm:text-4xl md:col-span-5 md:text-5xl">
-            Work history
-          </h2>
+    <section
+      id="experience"
+      className="w-full px-4 py-16 sm:px-5 sm:py-20 lg:py-24"
+    >
+      <div className="mx-auto max-w-5xl pt-10 sm:pt-12">
+        <h2 className="mb-10 font-heading text-3xl leading-[1.02] font-semibold tracking-[-0.04em] text-balance text-foreground sm:mb-12 sm:text-4xl">
+          Work history
+        </h2>
 
-          <div className="md:col-span-7">
-            {experiences.map((exp) => (
-              <article
-                key={exp.id}
-                className="grid gap-4 border-y border-border py-6 sm:py-7 md:grid-cols-[minmax(0,1fr)_auto] md:gap-8"
-              >
-                <div>
-                  <h3 className="font-heading text-lg font-semibold tracking-[-0.02em] text-foreground sm:text-xl">
+        <div className="divide-y divide-border border-y border-border">
+          {experiences.map((exp) => (
+            <article key={exp.id} className="py-6 sm:py-8">
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <h3 className="font-heading text-base leading-snug font-medium tracking-[-0.02em] text-foreground sm:text-lg">
                     {exp.role}
                   </h3>
-                  <p className="mt-1 font-sans text-sm leading-6 text-muted-foreground sm:text-[15px]">
+                  <p className="mt-1 font-sans text-xs leading-5 text-muted-foreground sm:text-sm">
                     {exp.company}
                   </p>
-                  <p className="mt-4 max-w-lg font-sans text-sm leading-6 text-muted-foreground sm:text-[15px] sm:leading-7">
-                    {exp.description}
-                  </p>
                 </div>
-                <p className="font-sans text-xs font-medium tracking-wide text-muted-foreground sm:text-sm md:pt-1 md:text-right">
+                <p className="shrink-0 pt-0.5 font-sans text-[11px] font-medium tracking-wide text-muted-foreground tabular-nums sm:text-xs">
                   {exp.period}
                 </p>
-              </article>
-            ))}
-          </div>
+              </div>
+              <p className="mt-3 max-w-2xl font-sans text-sm leading-6 text-muted-foreground sm:text-[15px] sm:leading-7">
+                {exp.description}
+              </p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
