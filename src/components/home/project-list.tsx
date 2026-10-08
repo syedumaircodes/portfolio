@@ -13,7 +13,7 @@ const ProjectList = () => {
   }
 
   return (
-    <section className="w-full px-6 py-16 md:py-20">
+    <section id="work" className="w-full px-6 py-16 md:py-20">
       <div className="mx-auto max-w-3xl">
         {/* Section Header */}
         <h2 className="mb-8 font-heading text-xs font-semibold tracking-wider text-muted-foreground uppercase">
