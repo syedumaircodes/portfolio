@@ -75,7 +75,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/75 p-0 sm:items-center sm:p-6 md:p-8"
+      className="fixed inset-0 z-50 flex items-stretch justify-start bg-black/75 p-0 sm:items-center sm:justify-center sm:p-6 md:p-8"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onClose()
       }}
@@ -87,7 +87,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         aria-labelledby="project-modal-title"
         aria-describedby="project-modal-description"
         tabIndex={-1}
-        className="relative flex h-[100dvh] max-h-[100dvh] w-full max-w-none flex-col overflow-hidden border-0 bg-background outline-none sm:h-auto sm:max-h-[88dvh] sm:max-w-3xl sm:rounded-xl sm:border"
+        className="relative flex h-[100dvh] max-h-[100dvh] w-[min(90vw,28rem)] max-w-none flex-col overflow-hidden rounded-r-xl border-r border-border bg-background outline-none max-sm:animate-in max-sm:slide-in-from-left max-sm:duration-300 motion-reduce:animate-none sm:h-auto sm:max-h-[88dvh] sm:w-full sm:max-w-3xl sm:rounded-xl sm:border"
       >
         <button
           type="button"

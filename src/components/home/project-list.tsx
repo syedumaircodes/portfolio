@@ -32,7 +32,7 @@ const ProjectList = () => {
               aria-label={`View project: ${project.title}`}
               className="group grid w-full gap-6 text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring sm:gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center"
             >
-              <span className="relative block aspect-[4/3] overflow-hidden rounded-xl bg-secondary">
+              <span className="relative block aspect-4/3 overflow-hidden rounded-xl bg-secondary">
                 {projectImages[project.id] ? (
                   <img
                     src={projectImages[project.id]}
@@ -45,14 +45,16 @@ const ProjectList = () => {
                     {project.title}
                   </span>
                 )}
-                <span className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-white/10" />
+                <span className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-white/10 ring-inset" />
               </span>
 
               <span className="flex min-w-0 flex-col items-start py-1 md:py-4">
                 <span className="flex items-center gap-2 font-sans text-xs font-medium tracking-wide text-muted-foreground">
                   <span className="size-1.5 rounded-full bg-violet-400" />
                   <span className="capitalize">{project.category}</span>
-                  <span aria-hidden="true" className="text-foreground/30">/</span>
+                  <span aria-hidden="true" className="text-foreground/30">
+                    /
+                  </span>
                   <time dateTime={project.year}>
                     {project.month} {project.year}
                   </time>
