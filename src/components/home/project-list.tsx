@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { IconArrowUpRight } from "@tabler/icons-react"
 import { projectsData, type Project } from "../../data/data"
 import ProjectModal from "./project-modal"
 import blockforgeCover from "../../assets/projects/blockforge_cover.webp"
-
+import commonplaceCover from "../../assets/projects/commonplace-cover.webp"
 const projectImages: Record<string, string> = {
   "blockforge-web3-platform": blockforgeCover,
+  "commonplace-knowledge-hub": commonplaceCover,
 }
 
 const ProjectList = () => {
@@ -67,11 +67,6 @@ const ProjectList = () => {
                 </span>
                 <span className="mt-6 inline-flex min-h-11 items-center gap-2 border-b border-foreground/25 font-sans text-sm font-medium text-foreground transition-colors group-hover:border-foreground group-hover:text-white">
                   Explore project
-                  <IconArrowUpRight
-                    size={17}
-                    stroke={1.75}
-                    className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  />
                 </span>
               </span>
             </button>

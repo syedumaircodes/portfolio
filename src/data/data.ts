@@ -1,4 +1,4 @@
-export type ProjectCategory = "completed" | "concept"
+export type ProjectCategory = "completed" | "ongoing"
 
 export interface Tech {
   name: string
@@ -22,7 +22,7 @@ export const projectsData: Project[] = [
   {
     id: "blockforge-web3-platform",
     category: "completed",
-    title: "Blockforge – Web3 Service Provider",
+    title: "Blockforge",
     month: "June",
     year: "2025",
     description:
@@ -37,7 +37,27 @@ export const projectsData: Project[] = [
       { name: "TailwindCSS", color: "bg-sky-400" },
       { name: "Framer Motion", color: "bg-purple-500" },
       { name: "MDX", color: "bg-yellow-400" },
-      { name: "Netlify", color: "bg-teal-400" },
+      { name: "Cloudflare", color: "bg-teal-400" },
+    ],
+  },
+
+  {
+    id: "commonplace-knowledge-hub",
+    category: "ongoing",
+    title: "Commonplace",
+    month: "October",
+    year: "2026",
+    description: "MDX powered personal knowledge hub",
+    overview:
+      "Built Commonplace as a digital home for collecting and connecting ideas. Its simple, focused design makes it easy to capture notes, revisit them later, and see how thoughts grow over time.",
+    deploymentUrl: "https://commonplace.syedumairali-617.workers.dev/",
+    sourceUrl: "https://github.com/syedumaircodes/commonplace",
+    techStack: [
+      { name: "Astro.js", color: "bg-purple-500" },
+      { name: "React", color: "bg-cyan-400" },
+      { name: "TailwindCSS", color: "bg-sky-400" },
+      { name: "MDX", color: "bg-yellow-400" },
+      { name: "Cloudflare", color: "bg-orange-500" },
     ],
   },
 ]
