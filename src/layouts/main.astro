@@ -1,0 +1,171 @@
+---
+import "@/styles/global.css"
+import SiteFooter from "@/components/site-footer.astro"
+import { site } from "@/data/site"
+
+interface Props {
+  title?: string
+  description?: string
+  /** Absolute URL of this page. Defaults to the home page. */
+  canonical?: string
+  /** Path-relative or absolute social preview image. */
+  image?: string
+}
+
+const { seo } = site
+const {
+  title = seo.title,
+  description = seo.description,
+  canonical = seo.url,
+  image = seo.ogImage,
+} = Astro.props
+
+const absoluteImage = new URL(image, seo.url).href
+const remoteSocials = site.socials
+  .map((social) => social.href)
+  .filter((href) => /^https?:\/\//.test(href))
+const sameAs = Array.from(new Set([...seo.sameAs, ...remoteSocials]))
+
+/**
+ * Person + WebSite graph so search engines and AI answer engines can resolve
+ * the "syedumaircodes" handle to a real person. Keep in sync with site.seo.
+ */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${seo.url}/#person`,
+      name: site.name,
+      alternateName: [seo.handle, "SyedUmairCodes"],
+      jobTitle: site.role,
+      description: seo.summary,
+      url: `${seo.url}/`,
+      image: absoluteImage,
+      email: `mailto:${site.email}`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: seo.location.city,
+        addressRegion: seo.location.region,
+        addressCountry: seo.location.countryCode,
+      },
+      timeZone: seo.location.timeZone,
+      knowsAbout: seo.skills,
+      hasCredential: seo.certifications.map((name) => ({
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "certification",
+        name,
+      })),
+      alumniOf: {
+        "@type": "CollegeOrUniversity",
+        name: seo.education.institution,
+      },
+      hasOccupation: {
+        "@type": "Occupation",
+        title: site.role,
+        skills: seo.skills,
+        sameAs,
+      },
+      knowsLanguage: ["Python", "TypeScript", "JavaScript"],
+      sameAs,
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${seo.url}/#projects`,
+      name: `Projects by ${site.name}`,
+      itemListElement: site.projects.map((project, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "SoftwareApplication",
+          name: project.title,
+          description: project.description,
+          url: project.live,
+          codeRepository: project.github,
+          programmingLanguage: project.technologies,
+        },
+      })),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${seo.url}/#website`,
+      url: `${seo.url}/`,
+      name: site.name,
+      description: seo.description,
+      inLanguage: "en",
+      publisher: { "@id": `${seo.url}/#person` },
+    },
+  ],
+}
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0b0b0c" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={site.name} />
+    <link rel="canonical" href={canonical} />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1"
+    />
+    <meta
+      name="keywords"
+      content={`${site.name}, ${seo.handle}, full-stack engineer Karachi, software engineer Pakistan, ${site.role}, ${seo.skills.slice(0, 6).join(", ")}`}
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={seo.summary} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={absoluteImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="600" />
+    <meta property="og:image:alt" content={seo.ogImageAlt} />
+    <meta property="profile:first_name" content="Syed Umair" />
+    <meta property="profile:last_name" content="Ali" />
+    <meta property="profile:username" content={seo.handle} />
+
+    <!-- X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={seo.twitter} />
+    <meta name="twitter:creator" content={seo.twitter} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={seo.summary} />
+    <meta name="twitter:image" content={absoluteImage} />
+    <meta name="twitter:image:alt" content={seo.ogImageAlt} />
+
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(jsonLd)}
+    />
+  </head>
+  <body class="relative min-h-svh overflow-x-hidden">
+    <a
+      href="#main"
+      class="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-6 focus-visible:left-6 focus-visible:z-50 focus-visible:rounded-full focus-visible:bg-foreground focus-visible:px-4 focus-visible:py-2 focus-visible:text-sm focus-visible:font-medium focus-visible:text-background"
+    >
+      Skip to content
+    </a>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <SiteFooter />
+  </body>
+</html>

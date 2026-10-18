@@ -1,0 +1,13 @@
+{
+  "name": "Syed Umair Ali — Full-Stack Engineer & Product Builder",
+  "short_name": "SU Ali",
+  "description": "Portfolio of Syed Umair Ali, a full-stack engineer and product builder based in Karachi, Pakistan.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0b0c",
+  "theme_color": "#0b0b0c",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "48x48", "type": "image/x-icon" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

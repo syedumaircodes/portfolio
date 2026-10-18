@@ -1,0 +1,89 @@
+---
+import Icon from "@/components/icon.astro"
+import { site } from "@/data/site"
+import claudeIcon from "@/assets/icons/claude.svg"
+import chatgptIcon from "@/assets/icons/chatgpt.svg"
+import grokIcon from "@/assets/icons/grok.svg"
+
+const prompt =
+  "Explore%20https%3A%2F%2Fsyedumaircodes.vercel.app%2F%20and%20tell%20me%20about%20Syed%20Umair%20Ali.%20Give%20me%20a%20concise%2C%20useful%20overview%20of%20his%20background%2C%20technical%20strengths%2C%20projects%2C%20and%20the%20kinds%20of%20problems%20he%20can%20help%20solve.%20Focus%20on%20information%20that%20would%20help%20me%20understand%20whether%20his%20work%20is%20relevant%20to%20what%20I%E2%80%99m%20looking%20for."
+
+const aiList = [
+  {
+    name: "ChatGPT",
+    icon: chatgptIcon,
+    href: `https://chatgpt.com/?q=${prompt}`,
+  },
+  {
+    name: "Claude",
+    icon: claudeIcon,
+    href: `https://claude.ai/new?q=${prompt}`,
+  },
+  {
+    name: "Grok",
+    icon: grokIcon,
+    href: `https://grok.com/?q=${prompt}`,
+  },
+]
+---
+
+<section
+  id="contact"
+  class="w-full scroll-mt-24 px-5 pt-16 pb-14 sm:px-6 sm:pt-20 sm:pb-16 md:pt-24 md:pb-20"
+>
+  <div class="mx-auto max-w-5xl pt-9 sm:pt-11">
+    <div class="grid gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
+      <div>
+        <h2 class="font-heading text-2xl leading-[1.08] font-semibold tracking-[-0.035em] text-balance text-foreground sm:text-3xl">
+          Ask your favorite AI about me
+        </h2>
+        <p class="mt-4 max-w-lg font-sans text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
+          Still curious about my background, skills, and work? Prompt your go-to
+          AI model to get an unbiased summary.
+        </p>
+        <nav
+          aria-label="Ask an AI about Umair"
+          class="mt-6 flex flex-wrap gap-2"
+        >
+          {aiList.map((ai) => (
+            <a
+              href={ai.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Ask ${ai.name} about ${site.name}`}
+              class="group inline-flex min-h-11 items-center gap-2 rounded-full px-3 font-sans text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+            >
+              <img
+                src={ai.icon.src}
+                alt=""
+                class="size-5 object-contain opacity-75 transition-opacity duration-200 group-hover:opacity-100"
+              />
+              {ai.name}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <div class="md:border-l md:border-border md:pl-10 lg:pl-12">
+        <h2 class="font-heading text-2xl leading-[1.08] font-semibold tracking-[-0.035em] text-balance text-foreground sm:text-3xl">
+          Let's build something together.
+        </h2>
+        <p class="mt-4 max-w-lg font-sans text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
+          I'm always open to discussing new opportunities, technical challenges,
+          or interesting products. Feel free to reach out.
+        </p>
+        <a
+          href={`mailto:${site.email}`}
+          class="group mt-6 inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-primary px-6 font-heading text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+        >
+          Let's Chat
+          <Icon
+            name="arrow-up-right"
+            size={17}
+            class="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

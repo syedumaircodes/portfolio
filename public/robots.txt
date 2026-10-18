@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Tell crawlers where to find your sitemap
 Sitemap: https://syedumaircodes.vercel.app/sitemap.txt

@@ -1,0 +1,31 @@
+---
+import { site } from "@/data/site"
+
+// Résumé lives in the hero's social row, not the footer.
+const footerSocials = site.socials.filter((social) => !social.download)
+---
+
+<footer>
+  <div class="mx-auto flex w-full max-w-360 flex-col items-center gap-6 px-6 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-16">
+    <p class="text-sm text-muted-foreground">© 2026 {site.name}</p>
+
+    <div class="flex w-full items-center justify-center gap-6 sm:w-auto sm:justify-start">
+      <ul class="flex flex-wrap items-center gap-x-5 gap-y-3">
+        {footerSocials.map((social) => (
+          <li>
+            <a
+              href={social.href}
+              class="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              {...(social.href.startsWith("http")
+                ? { target: "_blank", rel: "noreferrer noopener" }
+                : {})}
+              {...(social.download ? { download: social.download } : {})}
+            >
+              {social.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</footer>

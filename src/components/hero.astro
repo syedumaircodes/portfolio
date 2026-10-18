@@ -1,0 +1,99 @@
+---
+import Icon from "@/components/icon.astro"
+import { site } from "@/data/site"
+
+const lines = site.headline.split("\n")
+
+const primaryButton =
+  "group inline-flex h-12 basis-0 flex-1 items-center justify-center gap-2.5 rounded-full bg-foreground px-6 text-[0.9375rem] font-medium whitespace-nowrap text-background transition-colors duration-200 select-none hover:bg-foreground/88 sm:h-14 sm:w-auto sm:flex-none sm:px-7 sm:text-base"
+
+const secondaryButton =
+  "group inline-flex h-12 basis-0 flex-1 items-center justify-center gap-2.5 rounded-full border border-border bg-surface px-6 text-[0.9375rem] font-medium whitespace-nowrap transition-colors duration-200 select-none hover:bg-surface-hover sm:h-14 sm:w-auto sm:flex-none sm:px-7 sm:text-base"
+---
+
+<section id="top" class="relative">
+  <div class="mx-auto flex min-h-svh w-full max-w-360 flex-col px-6 pt-20 pb-8 sm:px-10 sm:pt-28 sm:pb-10 lg:px-16 lg:pb-16">
+    <!-- Main block: vertically centered in the leftover viewport space -->
+    <div class="flex min-w-0 flex-1 flex-col justify-center">
+      <div class="w-full max-w-208">
+        <div class="reveal" style="--reveal-delay: 60ms">
+          <h1 class="text-2xl font-semibold tracking-[-0.02em] text-balance sm:text-3xl">
+            {site.name}
+          </h1>
+          <p class="mt-2 text-base text-muted-foreground sm:mt-2.5 sm:text-lg">
+            {site.role}
+          </p>
+        </div>
+
+        <p
+          class="reveal mt-10 text-[clamp(2.125rem,6.4vw,4rem)] leading-[1.06] font-semibold tracking-[-0.035em] text-balance sm:mt-14"
+          style="--reveal-delay: 140ms"
+        >
+          {lines.map((line, index) => (
+            <>
+              {index > 0 && (
+                <>
+                  {" "}
+                  <br class="hidden sm:inline" />
+                </>
+              )}
+              {line}
+            </>
+          ))}
+        </p>
+
+        <p
+          class="reveal mt-7 max-w-176 text-base leading-[1.7] text-pretty text-muted-foreground sm:mt-8 sm:text-lg"
+          style="--reveal-delay: 220ms"
+        >
+          {site.intro}
+        </p>
+
+        <div
+          class="reveal mt-10 flex flex-wrap items-center gap-3 sm:mt-12 sm:gap-4"
+          style="--reveal-delay: 300ms"
+        >
+          <a href="mailto:syedumairali.617@gmail.com" class={primaryButton}>
+            Let's talk
+            <Icon
+              name="arrow-up-right"
+              class="size-5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </a>
+          <a href="#work" class={secondaryButton}>
+            Explore my work
+            <Icon
+              name="arrow-down"
+              class="size-5 text-muted-foreground transition-transform duration-200 group-hover:translate-y-0.5"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social row: pinned to the bottom edge, always a hairline away from the CTAs -->
+    <div class="reveal mt-16 shrink-0" style="--reveal-delay: 380ms">
+      <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-10">
+        <h2 class="text-sm font-semibold tracking-tight">Elsewhere</h2>
+        <ul class="-ml-3 flex items-center gap-1 sm:gap-2">
+          {site.socials.map((social) => (
+            <li>
+              <a
+                href={social.href}
+                aria-label={social.label}
+                title={social.label}
+                class="inline-flex size-11 items-center justify-center rounded-full text-muted-foreground transition-colors duration-200 hover:bg-surface-hover hover:text-foreground"
+                {...(social.href.startsWith("http")
+                  ? { target: "_blank", rel: "noreferrer noopener" }
+                  : {})}
+                {...(social.download ? { download: social.download } : {})}
+              >
+                <Icon name={social.icon} class="size-6" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

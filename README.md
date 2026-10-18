@@ -1,81 +1,58 @@
-# Syed Umair Ali | Full-Stack Engineer & Product Builder
+# astro-folio
 
-![Portfolio Preview](./public/readme_preview.png)
+A minimal, single-page dark portfolio built with Astro, Tailwind CSS v4 and shadcn
+tokens. No client-side framework code ships — the only JavaScript on the page is a
+small inline script that powers the sticky-header state and scroll reveals.
 
-> **I specialize in end-to-end execution.** From data to deployment, my focus is on shipping real products, putting them in the hands of users, and iterating rapidly. Pragmatic problem-solving over perfect code.
+## Content
 
-This repository holds the source code for my personal portfolio, digital garden (blog), and engineering archive. It is designed with a highly optimized, minimalist editorial aesthetic and heavily leverages modern web technologies for maximum performance and AI-engine discoverability.
+Everything on the page is driven by one file: [`src/data/site.ts`](src/data/site.ts).
+Edit the name, headline, intro, socials, projects, capabilities and about copy there —
+no component changes are required.
 
-🌐 **Live Site:** [syedumaircodes.vercel.app](https://syedumaircodes.vercel.app/)
+> The email address, social URLs and project entries are placeholders and should be
+> replaced before shipping.
 
-## ⚡ Tech Stack
+## Structure
 
-- **Framework:** [React 19](https://react.dev/) + [Vite 7](https://vitejs.dev/)
-- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) (using OKLCH semantic color variables)
-- **Typography:** Instrument Serif (Headings) & Manrope (Sans)
-- **Motion:** [Motion](https://motion.dev/) (formerly Framer Motion) for staggered layout reveals and hardware accelerated micro-interactions.
-- **Content:** MDX (`@mdx-js/rollup`) + Tailwind Typography for file-based blog routing.
-
-## ✨ Key Architecture & Features
-
-### 1. AEO & GEO Optimized (AI-First SEO)
-
-Traditional keyword SEO is dead. This portfolio is engineered for **Answer Engine Optimization (AEO)** and **Generative Engine Optimization (GEO)** (Perplexity, ChatGPT, Google AI Overviews).
-
-- Dynamic `react-helmet-async` injection.
-- Strict `application/ld+json` Schema markup (`@type: "Person"` and `@type: "BlogPosting"`) mapped to my GitHub and LinkedIn.
-- Accessible markup for screen readers (`sr-only` icon labels).
-
-### 2. MDX Digital Garden
-
-The `/blogs` route acts as a static CMS. Powered by Vite 7's `import.meta.glob({ eager: true })`, it parses local `.mdx` files into React components at build time, resulting in instantaneous page loads without database queries or layout shifts.
-
-### 3. Editorial Dark Mode
-
-Structurally locked into a pure dark-mode UI. It completely avoids JS-based theme providers in favor of native `:root` OKLCH variable overrides in `index.css` for zero-flash initial loading. Features luxury-print design cues, extreme negative space, and typographic hierarchy.
-
-## 🚀 Local Development
-
-To clone and run this project locally:
-
-**1. Clone the repository**
-
-```bash
-git clone https://github.com/syedumaircodes/portfolio.git
-cd portfolio
 ```
-
-**2. Install dependencies**
-
-```bash
-npm install
-```
-
-**3. Start the development server**
-
-```bash
-npm run dev
-```
-
-## 📂 Project Structure
-
-```text
 src/
-├── components/      # Reusable UI components (Hero, SEO, Footer, Modals)
-├── content/         # .mdx files for engineering notes/blogs
-├── data/            # data.ts (Projects, tech stack, and metrics definitions)
-├── pages/           # Route views (Home, Blogs, BlogPost, Uses, NotFound)
-├── App.tsx          # React Router & HelmetProvider setup
-└── index.css        # Tailwind v4 imports and OKLCH root variables
+  data/site.ts            content model + copy
+  layouts/main.astro      document shell: head/SEO, skip link, footer
+  components/
+    hero.astro            full-screen hero: centered identity block, bottom-pinned social row
+    work.astro            selected-work list
+    contact.astro         contact call to action
+    site-footer.astro     copyright + links
+    icon.astro            inline SVG icon set (no icon runtime)
+    ui/button.tsx         shadcn/base-ui button, available for future use
+  styles/global.css       design tokens, base layer, hero reveal utility
+  pages/index.astro       section composition
 ```
 
-## 🤝 Let's Connect
+## Design notes
 
-If you're looking for a developer who cares about shipping, or just want to chat about system architecture and building products:
+- **Tokens** live in `src/styles/global.css`. The dark palette is the shipped theme; the
+  near-black background, hairline borders and surface tints are tuned for contrast.
+- **Typography** is Inter Variable throughout, with tight tracking on display sizes and a
+  fluid `clamp()` headline so it never needs a breakpoint of its own.
+- **Motion** is CSS-only: above-the-fold content fades up on load via the `.reveal`
+  utility, and both the effect and scrolling are disabled under
+  `prefers-reduced-motion`. All content remains visible without JavaScript.
+- **Layout** uses a single `max-w-[90rem]` container with responsive gutters (`px-6` →
+  `sm:px-10` → `lg:px-16`), so the composition holds from 390px up. The hero is a
+  three-band flex column — top padding, a `flex-1` centered identity block, and a
+  bottom-anchored social row behind a hairline divider — so it always fills exactly one
+  viewport without the CTAs crowding the social row on short screens.
 
-- **LinkedIn:** [linkedin.com/in/syedumaircodes](https://linkedin.com/in/syedumaircodes)
-- **Email:** syedumairali.617@gmail.com
+## Commands
 
----
-
-_Crafted in Karachi, Pakistan._
+```bash
+bun install
+bun run dev        # local dev server
+bun run build      # static build to dist/
+bun run preview    # preview the build
+bun run typecheck  # astro check
+bun run lint       # eslint
+bun run format     # prettier
+```

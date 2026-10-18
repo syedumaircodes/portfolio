@@ -1,0 +1,100 @@
+---
+import Icon from "@/components/icon.astro"
+import { site } from "@/data/site"
+
+// Normalize optional covers to a plain URL so the native <img> is happy:
+// imported assets expose their resolved URL on `.src`.
+const projects = site.projects.map((project) => ({
+  ...project,
+  coverSrc:
+    typeof project.cover === "string" ? project.cover : project.cover?.src,
+}))
+---
+
+<section
+  id="work"
+  class="w-full scroll-mt-24 px-3 py-16 sm:px-4 sm:py-20 lg:py-18"
+>
+  <div class="mx-auto max-w-6xl pt-10 sm:pt-12">
+    <h2 class="mb-10 font-heading text-3xl leading-[1.02] font-semibold tracking-[-0.04em] text-balance text-foreground sm:mb-12 sm:text-4xl">
+      Selected work
+    </h2>
+
+    <div class="space-y-5 sm:space-y-7">
+      {projects.map((project) => (
+        <article class="group grid w-full gap-6 text-left sm:gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+          <div class="relative aspect-4/3 overflow-hidden rounded-xl bg-secondary">
+            {project.coverSrc ? (
+              <img
+                src={project.coverSrc}
+                alt={`Screenshot of ${project.title}`}
+                loading="lazy"
+                class="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.025]"
+              />
+            ) : (
+              <span class="flex size-full items-center justify-center font-heading text-2xl font-semibold tracking-[-0.04em] text-muted-foreground">
+                {project.title}
+              </span>
+            )}
+            <span class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-white/10 ring-inset" />
+          </div>
+
+          <div class="flex min-w-0 flex-col items-start py-1 md:py-4">
+            <div class="flex items-center gap-2 font-sans text-xs font-medium tracking-wide text-muted-foreground">
+              <span class="capitalize">{project.category}</span>
+              <span aria-hidden="true" class="text-foreground/30">
+                /
+              </span>
+              <time datetime={project.year}>
+                {project.month} {project.year}
+              </time>
+            </div>
+
+            <h3 class="mt-4 font-heading text-2xl leading-[1.08] font-semibold tracking-[-0.035em] text-foreground transition-colors group-hover:text-white sm:text-3xl">
+              {project.title}
+            </h3>
+
+            <p class="mt-3 max-w-lg font-sans text-sm leading-6 text-muted-foreground sm:text-[15px] sm:leading-7">
+              {project.description}
+            </p>
+
+            <ul class="mt-5 flex flex-wrap gap-2">
+              {project.technologies.map((tech) => (
+                <li class="rounded-full border border-border px-2.5 py-1 font-sans text-xs whitespace-nowrap text-muted-foreground">
+                  {tech}
+                </li>
+              ))}
+            </ul>
+
+            <div class="mt-6 flex flex-wrap items-center gap-3">
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={`${project.title} source code on GitHub`}
+                class="inline-flex min-h-10 items-center gap-2 rounded-full border border-border px-4 font-sans text-sm font-medium text-foreground transition-colors hover:bg-surface-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              >
+                <Icon name="github" size={16} />
+                GitHub
+              </a>
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={`View the live ${project.title} project`}
+                class="inline-flex min-h-10 items-center gap-2 rounded-full px-4 font-sans text-sm font-medium text-muted-foreground transition-colors hover:bg-surface-hover hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              >
+                Live
+                <Icon
+                  name="arrow-up-right"
+                  size={16}
+                  class="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
