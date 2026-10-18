@@ -16,7 +16,7 @@ const secondaryButton =
     <!-- Main block: vertically centered in the leftover viewport space -->
     <div class="flex min-w-0 flex-1 flex-col justify-center">
       <div class="w-full max-w-208">
-        <div class="reveal" style="--reveal-delay: 60ms">
+        <div>
           <h1 class="text-2xl font-semibold tracking-[-0.02em] text-balance sm:text-3xl">
             {site.name}
           </h1>
@@ -26,8 +26,7 @@ const secondaryButton =
         </div>
 
         <p
-          class="reveal mt-10 text-[clamp(2.125rem,6.4vw,4rem)] leading-[1.06] font-semibold tracking-[-0.035em] text-balance sm:mt-14"
-          style="--reveal-delay: 140ms"
+          class="mt-10 text-[clamp(2.125rem,6.4vw,4rem)] leading-[1.06] font-semibold tracking-[-0.035em] text-balance sm:mt-14"
         >
           {lines.map((line, index) => (
             <>
@@ -43,16 +42,12 @@ const secondaryButton =
         </p>
 
         <p
-          class="reveal mt-7 max-w-176 text-base leading-[1.7] text-pretty text-muted-foreground sm:mt-8 sm:text-lg"
-          style="--reveal-delay: 220ms"
+          class="mt-7 max-w-176 text-base leading-[1.7] text-pretty text-muted-foreground sm:mt-8 sm:text-lg"
         >
           {site.intro}
         </p>
 
-        <div
-          class="reveal mt-10 flex flex-wrap items-center gap-3 sm:mt-12 sm:gap-4"
-          style="--reveal-delay: 300ms"
-        >
+        <div class="mt-10 flex flex-wrap items-center gap-3 sm:mt-12 sm:gap-4">
           <a href="mailto:syedumairali.617@gmail.com" class={primaryButton}>
             Let's talk
             <Icon
@@ -72,7 +67,7 @@ const secondaryButton =
     </div>
 
     <!-- Social row: pinned to the bottom edge, always a hairline away from the CTAs -->
-    <div class="reveal mt-16 shrink-0" style="--reveal-delay: 380ms">
+    <div class="mt-16 shrink-0">
       <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-10">
         <h2 class="text-sm font-semibold tracking-tight">Elsewhere</h2>
         <ul class="-ml-3 flex items-center gap-1 sm:gap-2">

@@ -2,7 +2,7 @@
 
 A minimal, single-page dark portfolio built with Astro, Tailwind CSS v4 and shadcn
 tokens. No client-side framework code ships — the only JavaScript on the page is a
-small inline script that powers the sticky-header state and scroll reveals.
+small inline script that powers the sticky-header state.
 
 ## Content
 
@@ -26,7 +26,7 @@ src/
     site-footer.astro     copyright + links
     icon.astro            inline SVG icon set (no icon runtime)
     ui/button.tsx         shadcn/base-ui button, available for future use
-  styles/global.css       design tokens, base layer, hero reveal utility
+  styles/global.css       design tokens and base layer
   pages/index.astro       section composition
 ```
 
@@ -36,9 +36,10 @@ src/
   near-black background, hairline borders and surface tints are tuned for contrast.
 - **Typography** is Inter Variable throughout, with tight tracking on display sizes and a
   fluid `clamp()` headline so it never needs a breakpoint of its own.
-- **Motion** is CSS-only: above-the-fold content fades up on load via the `.reveal`
-  utility, and both the effect and scrolling are disabled under
-  `prefers-reduced-motion`. All content remains visible without JavaScript.
+- **Motion** is CSS-only transitions (e.g. button hovers), and scrolling plus every
+  transition is disabled under `prefers-reduced-motion`. Above-the-fold content
+  renders visible immediately (no entrance animation) so it can never delay
+  Largest Contentful Paint.
 - **Layout** uses a single `max-w-[90rem]` container with responsive gutters (`px-6` →
   `sm:px-10` → `lg:px-16`), so the composition holds from 390px up. The hero is a
   three-band flex column — top padding, a `flex-1` centered identity block, and a

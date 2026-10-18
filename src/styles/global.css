@@ -154,23 +154,6 @@
   }
 }
 
-/* Entrance for above-the-fold content. Runs once, no JS required. */
-@layer utilities {
-  .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    animation: reveal-in 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: var(--reveal-delay, 0ms);
-  }
-}
-
-@keyframes reveal-in {
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -181,9 +164,5 @@
     animation-duration: 0.001ms !important;
     animation-delay: 0ms !important;
     transition-duration: 0.001ms !important;
-  }
-  .reveal {
-    opacity: 1;
-    transform: none;
   }
 }
