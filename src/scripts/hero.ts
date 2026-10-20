@@ -45,7 +45,6 @@ function run(root: HTMLElement) {
   const bloom = q<HTMLElement>(root, "[data-bloom]")
   const grain = q<HTMLElement>(root, "[data-grain]")
   const support = q<HTMLElement>(root, "[data-support]")
-  const ticker = q<HTMLElement>(root, "[data-ticker]")
 
   const words = qa<HTMLElement>(root, "[data-word]")
   const indexItems = qa<HTMLElement>(root, "[data-index-item]")
@@ -121,16 +120,6 @@ function run(root: HTMLElement) {
       support,
       [
         { opacity: 0, transform: "translate3d(0,20px,0)" },
-        { opacity: 1, transform: "translate3d(0,0,0)" },
-      ],
-      { duration: 1000, delay: 1200, easing: EASE }
-    )
-
-    // 1200 — the ticker.
-    at(
-      ticker,
-      [
-        { opacity: 0, transform: "translate3d(0,100%,0)" },
         { opacity: 1, transform: "translate3d(0,0,0)" },
       ],
       { duration: 1000, delay: 1200, easing: EASE }
@@ -244,33 +233,6 @@ function run(root: HTMLElement) {
     observer.observe(root)
   } else if (motion) {
     play()
-  }
-
-  /* ---------------------------------------------------------------------
-     Ticker. The travel distance is half the track, so the duration is
-     derived from the measured width. That keeps the speed identical on
-     every screen, whatever the type scales to, and keeps the loop seamless.
-  --------------------------------------------------------------------- */
-  const track = q<HTMLElement>(root, ".marquee-track")
-  if (track) {
-    const SPEED = 74 // pixels per second
-
-    const syncDuration = () => {
-      const distance = track.scrollWidth / 2
-      if (!distance) return
-      track.style.setProperty(
-        "--marquee-duration",
-        `${(distance / SPEED).toFixed(2)}s`
-      )
-    }
-
-    syncDuration()
-    window.addEventListener("resize", syncDuration, { passive: true })
-    document.fonts?.ready.then(syncDuration).catch(() => {})
-
-    if ("ResizeObserver" in window) {
-      new ResizeObserver(syncDuration).observe(track)
-    }
   }
 
   /* ---------------------------------------------------------------------

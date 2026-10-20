@@ -165,27 +165,6 @@ const secondaryButton =
       </div>
     </div>
   </div>
-
-  <!-- Ticker: full-bleed, runs under everything -->
-  <div
-    data-ticker
-    class="hero-ticker relative z-20 overflow-hidden border-y border-border bg-background/60 py-4 backdrop-blur-sm"
-  >
-    <div class="marquee-track">
-      {[0, 1].map(() => (
-        <ul class="flex shrink-0 items-center">
-          {site.seo.skills.map((skill) => (
-            <li class="hero-ticker__item meta flex items-center text-muted-foreground">
-              <span class="hero-ticker__label">{skill}</span>
-              <span aria-hidden="true" class="text-foreground/40">
-                ◦
-              </span>
-            </li>
-          ))}
-        </ul>
-      ))}
-    </div>
-  </div>
 </section>
 
 <script>
@@ -194,16 +173,6 @@ const secondaryButton =
 </script>
 
 <style>
-  /* The ticker type scales with the viewport, so a phone doesn't show three
-     oversized items and a desktop doesn't show a row of ants. */
-  .hero-ticker__item {
-    font-size: clamp(0.6875rem, 0.6rem + 0.2vw, 0.8125rem);
-  }
-
-  .hero-ticker__label {
-    padding-inline: clamp(1.125rem, 0.75rem + 0.9vw, 1.75rem);
-  }
-
   /* The curtain only exists when JavaScript can lift it. */
   [data-curtain] {
     opacity: 0;

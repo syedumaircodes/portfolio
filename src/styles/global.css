@@ -199,22 +199,6 @@
   background-size: 200px 200px;
 }
 
-/* Infinite ticker. The track is duplicated, so a -50% translate loops
-   seamlessly. The duration is set from the measured track width so the speed
-   stays constant no matter how the type scales. */
-@utility marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee var(--marquee-duration, 38s) linear infinite;
-  will-change: transform;
-}
-
-@keyframes marquee {
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
 @keyframes grain-drift {
   0% {
     transform: translate3d(0, 0, 0);
@@ -249,17 +233,5 @@ html.lenis body {
     animation-duration: 0.001ms !important;
     animation-delay: 0ms !important;
     transition-duration: 0.001ms !important;
-  }
-  /* No motion: the ticker stops and becomes a plain scrollable strip, so
-     every skill is still reachable. */
-  .marquee-track {
-    animation: none !important;
-  }
-  .hero-ticker {
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .hero-ticker::-webkit-scrollbar {
-    display: none;
   }
 }
