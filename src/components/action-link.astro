@@ -1,0 +1,79 @@
+---
+import Icon from "@/components/icon.astro"
+import type { IconName } from "@/data/site"
+
+interface Props {
+  href: string
+  label: string
+  /** Primary is the solid white pill; secondary is the hairline outline. */
+  variant?: "primary" | "secondary"
+  icon?: IconName
+  /** Opens in a new tab with the safe rel attributes. */
+  external?: boolean
+  download?: string
+  /** Height of the pill. */
+  size?: "sm" | "md" | "lg"
+  class?: string
+}
+
+const {
+  href,
+  label,
+  variant = "secondary",
+  icon,
+  external = false,
+  download,
+  size = "md",
+  class: className = "",
+} = Astro.props
+
+const base =
+  "group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full px-5 text-sm font-medium transition-[background-color,border-color,box-shadow,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+
+const sizes = {
+  sm: "h-9 px-4 text-[0.8125rem]",
+  md: "h-11",
+  lg: "h-12 px-6",
+} as const
+
+const variants = {
+  primary:
+    "bg-primary text-primary-foreground shadow-[0_0_0_0_color-mix(in_oklch,var(--primary)_0%,transparent)] hover:shadow-[0_0_40px_-12px_color-mix(in_oklch,var(--primary)_60%,transparent)]",
+  secondary:
+    "border border-border bg-transparent text-foreground hover:border-foreground/25 hover:bg-surface-hover",
+} as const
+
+// The icon travels in the direction it points.
+const shifts: Partial<Record<IconName, string>> = {
+  "arrow-up-right": "group-hover:translate-x-0.5 group-hover:-translate-y-0.5",
+  "arrow-down": "group-hover:translate-y-0.5",
+  "arrow-right": "group-hover:translate-x-0.5",
+}
+---
+
+<a
+  href={href}
+  class:list={[base, sizes[size], variants[variant], className]}
+  {...(external ? { target: "_blank", rel: "noreferrer noopener" } : {})}
+  {...(download ? { download } : {})}
+>
+  <span class="relative z-10">{label}</span>
+  {variant === "primary" && (
+    <span
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(100deg,transparent,color-mix(in_oklch,var(--primary-foreground)_10%,transparent),transparent)] transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-full"
+    />
+  )}
+  {icon && (
+    <Icon
+      name={icon}
+      class:list={[
+        "relative z-10 size-4",
+        shifts[icon] ?? "",
+        variant === "secondary" &&
+          icon !== "github" &&
+          "text-muted-foreground group-hover:text-foreground",
+      ]}
+    />
+  )}
+</a>

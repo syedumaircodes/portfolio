@@ -1,4 +1,4 @@
-import { getLenis } from "./lenis"
+import { getLenis, initLenis, lockScroll, unlockScroll } from "./lenis"
 
 /**
  * Hero choreography.
@@ -40,6 +40,10 @@ export function initHero() {
 }
 
 function run(root: HTMLElement) {
+  // The hero locks the scroll while it assembles, so the scroll instance has
+  // to exist first. initLenis is idempotent.
+  initLenis()
+
   const curtain = q<HTMLElement>(root, "[data-curtain]")
   const title = q<HTMLElement>(root, "[data-title]")
   const bloom = q<HTMLElement>(root, "[data-bloom]")
@@ -124,6 +128,36 @@ function run(root: HTMLElement) {
       ],
       { duration: 1000, delay: 1200, easing: EASE }
     )
+
+    /* -------------------------------------------------------------------
+       The page is frozen for the length of the reveal and released the
+       moment the last beat lands. A visitor who tries to scroll in the
+       meantime releases it immediately — nobody should feel stuck.
+    ------------------------------------------------------------------- */
+    lockScroll()
+
+    const release = () => {
+      unlockScroll()
+      window.removeEventListener("wheel", release)
+      window.removeEventListener("pointerdown", release)
+      window.removeEventListener("keydown", release)
+    }
+
+    window.addEventListener("wheel", release, { passive: true, once: true })
+    // pointerdown fires before click, so a tap on an in-page link during the
+    // reveal unlocks the page and the click still lands.
+    window.addEventListener("pointerdown", release, {
+      passive: true,
+      once: true,
+    })
+    window.addEventListener("keydown", release, { once: true })
+
+    const last = tl[tl.length - 1]
+    if (last) {
+      last.finished.then(release).catch(release)
+    }
+    // Backstop, in case the animation never reports back.
+    window.setTimeout(release, 3200)
   } else {
     // Reduced motion: drop the curtain and release the clips so the hero is
     // simply present rather than animated.
@@ -201,9 +235,11 @@ function run(root: HTMLElement) {
     if (bloom) {
       const bx = hasPointer ? eased.x : window.innerWidth * 0.5
       const by = hasPointer ? eased.y : window.innerHeight * 0.35
-      bloom.style.transform = `translate3d(${(bx - 320).toFixed(
+      // The bloom is sized responsively, so centre it on its own box.
+      const offset = bloom.offsetWidth / 2
+      bloom.style.transform = `translate3d(${(bx - offset).toFixed(
         1
-      )}px, ${(by - 320 + progress * -60).toFixed(1)}px, 0)`
+      )}px, ${(by - offset + progress * -60).toFixed(1)}px, 0)`
     }
 
     if (grain) {

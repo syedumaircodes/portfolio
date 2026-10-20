@@ -1,4 +1,5 @@
 ---
+import ActionLink from "@/components/action-link.astro"
 import Icon from "@/components/icon.astro"
 import { site } from "@/data/site"
 
@@ -9,88 +10,121 @@ const projects = site.projects.map((project) => ({
   coverSrc:
     typeof project.cover === "string" ? project.cover : project.cover?.src,
 }))
+
+const latest = projects[0]
 ---
 
 <section
   id="work"
-  class="w-full scroll-mt-24 px-3 py-16 sm:px-4 sm:py-20 lg:py-18"
+  data-work
+  class="relative mx-auto w-full max-w-360 scroll-mt-24 px-6 sm:px-10 lg:px-16"
 >
-  <div class="mx-auto max-w-6xl pt-10 sm:pt-12">
-    <h2 class="mb-10 font-heading text-3xl leading-[1.02] font-semibold tracking-[-0.04em] text-balance text-foreground sm:mb-12 sm:text-4xl">
-      Selected work
-    </h2>
+  <div class="pt-10 sm:pt-14">
+    <!-- Section head -->
+    <div class="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
+      <h2 class="display text-[clamp(2.25rem,5vw,4rem)]">Selected work</h2>
+    </div>
 
-    <div class="space-y-5 sm:space-y-7">
-      {projects.map((project) => (
-        <article class="group grid w-full gap-6 text-left sm:gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
-          <div class="relative aspect-4/3 overflow-hidden rounded-xl bg-secondary">
+    <div class="mt-12 sm:mt-16 lg:mt-20">
+      {projects.map((project, index) => (
+        <article class="group">
+          {index > 0 && (
+            <span
+              data-reveal="rule"
+              class="block h-px w-full origin-left scale-x-0 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] mb-16 sm:mb-24"
+            />
+          )}
+
+          <div
+            class="relative overflow-hidden bg-secondary"
+            data-reveal="media"
+          >
             {project.coverSrc ? (
-              <img
-                src={project.coverSrc}
-                alt={`Screenshot of ${project.title}`}
-                loading="lazy"
-                class="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.025]"
-              />
-            ) : (
-              <span class="flex size-full items-center justify-center font-heading text-2xl font-semibold tracking-[-0.04em] text-muted-foreground">
-                {project.title}
-              </span>
-            )}
-            <span class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-white/10 ring-inset" />
-          </div>
-
-          <div class="flex min-w-0 flex-col items-start py-1 md:py-4">
-            <div class="meta flex items-center gap-2 text-muted-foreground">
-              <span class="capitalize">{project.category}</span>
-              <span aria-hidden="true" class="text-foreground/30">
-                /
-              </span>
-              <time datetime={project.year}>
-                {project.month} {project.year}
-              </time>
-            </div>
-
-            <h3 class="mt-4 font-heading text-2xl leading-[1.08] font-semibold tracking-[-0.035em] text-foreground transition-colors group-hover:text-white sm:text-3xl">
-              {project.title}
-            </h3>
-
-            <p class="mt-3 max-w-lg font-sans text-sm leading-6 text-muted-foreground sm:text-[15px] sm:leading-7">
-              {project.description}
-            </p>
-
-            <ul class="mt-5 flex flex-wrap gap-2">
-              {project.technologies.map((tech) => (
-                <li class="rounded-full border border-border px-2.5 py-1 font-sans text-xs whitespace-nowrap text-muted-foreground">
-                  {tech}
-                </li>
-              ))}
-            </ul>
-
-            <div class="mt-6 flex flex-wrap items-center gap-3">
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label={`${project.title} source code on GitHub`}
-                class="inline-flex min-h-10 items-center gap-2 rounded-full border border-border px-4 font-sans text-sm font-medium text-foreground transition-colors hover:bg-surface-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-              >
-                <Icon name="github" size={16} />
-                GitHub
-              </a>
               <a
                 href={project.live}
                 target="_blank"
                 rel="noreferrer noopener"
-                aria-label={`View the live ${project.title} project`}
-                class="inline-flex min-h-10 items-center gap-2 rounded-full px-4 font-sans text-sm font-medium text-muted-foreground transition-colors hover:bg-surface-hover hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                aria-label={`Open ${project.title} in a new tab`}
+                class="block"
               >
-                Live
-                <Icon
-                  name="arrow-up-right"
-                  size={16}
-                  class="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                <img
+                  src={project.coverSrc}
+                  alt={`Screenshot of ${project.title}`}
+                  loading="lazy"
+                  decoding="async"
+                  class="aspect-4/3 w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] sm:aspect-16/10 lg:aspect-16/9"
                 />
               </a>
+            ) : (
+              <div class="flex aspect-4/3 w-full items-center justify-center sm:aspect-16/10 lg:aspect-16/9">
+                <span class="display text-2xl text-muted-foreground">
+                  {project.title}
+                </span>
+              </div>
+            )}
+
+            {/* A scrim keeps the label legible over any screenshot. */}
+            <span
+              aria-hidden="true"
+              class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,color-mix(in_oklch,var(--background)_80%,transparent),transparent_45%)] opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+            />
+            <span class="pointer-events-none absolute right-5 bottom-5 flex translate-y-2 items-center gap-2 rounded-full border border-foreground/15 bg-background/70 px-4 py-2 text-xs text-foreground opacity-0 backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-100 sm:right-7 sm:bottom-7">
+              View project
+              <Icon name="arrow-up-right" size={14} />
+            </span>
+          </div>
+
+          {/* Details */}
+          <div class="mt-8 grid gap-8 md:grid-cols-[1.05fr_0.95fr] md:gap-16 lg:mt-10">
+            <div>
+              <p class="meta text-muted-foreground" data-reveal="text">
+                {project.category} / {project.month} {project.year}
+              </p>
+              <h3
+                class="display mt-4 text-[clamp(2rem,3.6vw,3.25rem)]"
+                data-reveal="text"
+                style="--reveal-delay: 90ms"
+              >
+                {project.title}
+              </h3>
+            </div>
+
+            <div class="md:pt-10">
+              <p
+                class="max-w-lg text-base leading-relaxed text-pretty text-muted-foreground"
+                data-reveal="text"
+                style="--reveal-delay: 180ms"
+              >
+                {project.description}
+              </p>
+
+              <p
+                class="meta mt-6 text-muted-foreground"
+                data-reveal="text"
+                style="--reveal-delay: 260ms"
+              >
+                {project.technologies.join("  ·  ")}
+              </p>
+
+              <div
+                class="mt-7 flex flex-wrap items-center gap-3"
+                data-reveal="text"
+                style="--reveal-delay: 340ms"
+              >
+                <ActionLink
+                  href={project.live}
+                  label="Live"
+                  variant="primary"
+                  icon="arrow-up-right"
+                  external
+                />
+                <ActionLink
+                  href={project.github}
+                  label="Source"
+                  icon="github"
+                  external
+                />
+              </div>
             </div>
           </div>
         </article>
@@ -98,3 +132,55 @@ const projects = site.projects.map((project) => ({
     </div>
   </div>
 </section>
+
+<script>
+  import { initWork } from "@/scripts/work"
+  initWork()
+</script>
+
+<style>
+  /* Scroll reveals. The hidden state is gated behind `html.js` so the
+     section still renders without JavaScript, and the whole sequence is
+     instant under prefers-reduced-motion. */
+  [data-reveal] {
+    transition:
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  :global(html.js) [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+
+  :global(html.js) [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* The cover unmasks from the bottom and settles back to scale. */
+  :global(html.js) [data-reveal="media"] {
+    clip-path: inset(0% 0% 100% 0%);
+    transform: scale(1.05);
+    transition:
+      clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(html.js) [data-reveal="media"].is-visible {
+    clip-path: inset(0% 0% 0% 0%);
+    transform: scale(1);
+  }
+
+  /* Hairlines draw from the left. */
+  [data-reveal="rule"] {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(html.js) [data-reveal="rule"].is-visible {
+    transform: scaleX(1);
+  }
+</style>
