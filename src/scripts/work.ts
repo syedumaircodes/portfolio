@@ -22,7 +22,20 @@ export function initWork() {
   let pending = Array.from(root.querySelectorAll<HTMLElement>("[data-reveal]"))
   if (!pending.length) return
 
-  const show = (element: Element) => element.classList.add("is-visible")
+  const show = (element: Element) => {
+    element.classList.add("is-visible")
+
+    // A clip-path keeps its element promoted to its own compositing layer
+    // even when it is fully open, so it is released once the mask is done.
+    const target = element as HTMLElement
+    if (target.dataset.reveal === "media") {
+      target.addEventListener("transitionend", (event) => {
+        if ((event as TransitionEvent).propertyName === "clip-path") {
+          target.style.clipPath = "none"
+        }
+      })
+    }
+  }
 
   // No motion: everything is simply present.
   if (reduced()) {

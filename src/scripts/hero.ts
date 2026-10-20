@@ -67,17 +67,31 @@ function run(root: HTMLElement) {
       tl.push(el.animate(keyframes, { fill: "both", ...options }))
     }
 
-    // Safety net: if the tab is backgrounded mid-load the compositor can
-    // starve and leave the hero half-assembled. Snap to the end state.
-    window.setTimeout(() => {
+    /* -------------------------------------------------------------------
+       Settle the reveal.
+
+       Each word carries a clip-path, and both the clip and a `will-change`
+       keep it promoted to its own compositing layer. Eleven permanently
+       promoted text layers is real memory and real rasterisation work, for
+       an effect that has already played.
+
+       The animations are cancelled rather than left holding their final
+       keyframe — a filled animation overrides inline styles and the
+       stylesheet, so clearing the clip alone would not release the layer.
+       Cancelling returns every element to its stylesheet state, which is
+       the finished state, once `is-settled` lifts the word clips.
+    ------------------------------------------------------------------- */
+    const settle = () => {
       tl.forEach((animation) => {
         try {
-          animation.finish()
+          animation.cancel()
         } catch {
-          /* already settled */
+          /* already gone */
         }
       })
-    }, 4000)
+      root.classList.add("is-settled")
+      curtain?.remove()
+    }
 
     // 0 — the curtain lifts off the page.
     at(
@@ -158,6 +172,13 @@ function run(root: HTMLElement) {
     }
     // Backstop, in case the animation never reports back.
     window.setTimeout(release, 3200)
+
+    // Settle the reveal once it has played, and as a backstop if the tab was
+    // backgrounded and the compositor never got to it.
+    if (last) {
+      last.finished.then(settle).catch(settle)
+    }
+    window.setTimeout(settle, 3600)
   } else {
     // Reduced motion: drop the curtain and release the clips so the hero is
     // simply present rather than animated.
@@ -173,6 +194,9 @@ function run(root: HTMLElement) {
   let scroll = 0
   let scrollTarget = 0
   let hasPointer = false
+  let lastProgress = -1
+  let lastBloomX = Number.NaN
+  let lastBloomY = Number.NaN
 
   const lenis = getLenis()
   if (lenis) {
@@ -199,7 +223,14 @@ function run(root: HTMLElement) {
     { passive: true }
   )
 
-  const heroHeight = () => root.offsetHeight || window.innerHeight
+  // The hero's height is read on every frame to work out the scroll
+  // progress. Reading it live forces a synchronous layout, so it is cached
+  // and only refreshed when the layout could have changed.
+  let heroHeight = root.offsetHeight || window.innerHeight
+  const measure = () => {
+    heroHeight = root.offsetHeight || window.innerHeight
+  }
+  window.addEventListener("resize", measure, { passive: true })
 
   // The loop only runs while the hero is on screen. Everything it writes is
   // a transform or an opacity, so nothing is laid out while it runs.
@@ -213,23 +244,28 @@ function run(root: HTMLElement) {
     eased.x += (pointer.x - eased.x) * 0.06
     eased.y += (pointer.y - eased.y) * 0.06
 
-    const progress = Math.min(1, Math.max(0, scroll / heroHeight()))
+    const progress = Math.min(1, Math.max(0, scroll / heroHeight))
 
-    if (title) {
-      const lift = progress * -70
-      const scale = 1 - progress * 0.055
-      const driftX = hasPointer ? (eased.x / window.innerWidth - 0.5) * 14 : 0
-      title.style.transform = `translate3d(${driftX.toFixed(2)}px, ${lift.toFixed(
-        2
-      )}px, 0) scale(${scale.toFixed(4)})`
-      title.style.opacity = String(Math.max(0, 1 - progress * 0.55))
-    }
+    // Only touch the DOM when the values have actually moved. An idle
+    // pointer should cost nothing.
+    if (Math.abs(progress - lastProgress) > 0.0005) {
+      lastProgress = progress
+      if (title) {
+        const lift = progress * -70
+        const scale = 1 - progress * 0.055
+        const driftX = hasPointer ? (eased.x / window.innerWidth - 0.5) * 14 : 0
+        title.style.transform = `translate3d(${driftX.toFixed(2)}px, ${lift.toFixed(
+          2
+        )}px, 0) scale(${scale.toFixed(4)})`
+        title.style.opacity = String(Math.max(0, 1 - progress * 0.55))
+      }
 
-    if (support) {
-      support.style.opacity = String(Math.max(0, 1 - progress * 1.5))
-      support.style.transform = `translate3d(0, ${(-progress * 34).toFixed(
-        2
-      )}px, 0)`
+      if (support) {
+        support.style.opacity = String(Math.max(0, 1 - progress * 1.5))
+        support.style.transform = `translate3d(0, ${(-progress * 34).toFixed(
+          2
+        )}px, 0)`
+      }
     }
 
     if (bloom) {
@@ -237,9 +273,17 @@ function run(root: HTMLElement) {
       const by = hasPointer ? eased.y : window.innerHeight * 0.35
       // The bloom is sized responsively, so centre it on its own box.
       const offset = bloom.offsetWidth / 2
-      bloom.style.transform = `translate3d(${(bx - offset).toFixed(
-        1
-      )}px, ${(by - offset + progress * -60).toFixed(1)}px, 0)`
+      const x = bx - offset
+      const y = by - offset + progress * -60
+      // The bloom is a large painted surface; moving it costs a composite
+      // every frame, so it only moves when it has actually moved.
+      if (Math.abs(x - lastBloomX) > 0.5 || Math.abs(y - lastBloomY) > 0.5) {
+        lastBloomX = x
+        lastBloomY = y
+        bloom.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(
+          1
+        )}px, 0)`
+      }
     }
 
     if (grain) {

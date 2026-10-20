@@ -10,8 +10,6 @@ const projects = site.projects.map((project) => ({
   coverSrc:
     typeof project.cover === "string" ? project.cover : project.cover?.src,
 }))
-
-const latest = projects[0]
 ---
 
 <section

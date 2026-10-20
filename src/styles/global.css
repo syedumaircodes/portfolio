@@ -5,6 +5,48 @@
 @import "@fontsource/instrument-serif/latin-400.css";
 @import "@fontsource/instrument-serif/latin-400-italic.css";
 
+/* ---------------------------------------------------------------------------
+   Metric-matched fallbacks.
+
+   Both web fonts load with `font-display: swap`, so the fallback renders
+   first and the real face replaces it. Unless the fallback occupies exactly
+   the same space, that swap re-wraps the headline and moves the whole page
+   below it — a layout shift on every cold load.
+
+   These overrides scale the fallback to the real face's average advance
+   width and pin its ascent and descent, so the swap is invisible. The
+   figures are measured, not guessed.
+--------------------------------------------------------------------------- */
+
+/* Instrument Serif: 3192.9 units per 100px of sample text, ascent 99,
+   descent 31. Times/Liberation Serif: 3865.87, ascent 89, descent 22. */
+@font-face {
+  font-family: "Instrument Serif Fallback";
+  src: local("Times New Roman"), local("Liberation Serif"), local("Times");
+  size-adjust: 82.6%;
+  ascent-override: 99%;
+  descent-override: 31%;
+}
+
+/* DejaVu Serif is the generic serif on some Linux systems: 4914.26 wide. */
+@font-face {
+  font-family: "Instrument Serif Fallback";
+  src: local("DejaVu Serif");
+  size-adjust: 65%;
+  ascent-override: 99%;
+  descent-override: 31%;
+}
+
+/* Inter Variable: 4500.88 wide, ascent 96, descent 25. Arial/Helvetica/
+   Liberation Sans: 4196.83, ascent 90, descent 22. */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial"), local("Helvetica"), local("Liberation Sans");
+  size-adjust: 107.2%;
+  ascent-override: 96%;
+  descent-override: 25%;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -81,9 +123,9 @@
 }
 
 @theme inline {
-  --font-sans: "Inter Variable", sans-serif;
-  --font-heading: "Inter Variable", sans-serif;
-  --font-display: "Instrument Serif", serif;
+  --font-sans: "Inter Variable", "Inter Fallback", sans-serif;
+  --font-heading: "Inter Variable", "Inter Fallback", sans-serif;
+  --font-display: "Instrument Serif", "Instrument Serif Fallback", serif;
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -197,15 +239,6 @@
 @utility grain {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
   background-size: 200px 200px;
-}
-
-@keyframes grain-drift {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-200px, -200px, 0);
-  }
 }
 
 /* Lenis drives the scroll; the browser's own smooth scrolling would fight it. */

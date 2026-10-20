@@ -37,17 +37,21 @@ const lines: Word[][] = site.headline.split("\n").map((line) =>
     class="pointer-events-none absolute inset-0 overflow-hidden"
     aria-hidden="true"
   >
+    <!-- The grain is static: a blend mode over an animating layer forces a
+         repaint of the whole area on every frame. -->
     <div
       data-grain
       class="grain absolute -inset-[200px] opacity-[0.05] mix-blend-overlay"
-      style="animation: grain-drift 7s linear infinite alternate"
     ></div>
   </div>
 
+  <!-- A soft light source that follows the pointer. The falloff is built
+       into the gradient rather than a blur filter, which would repaint a
+       screen-sized layer on every frame. -->
   <div
     data-bloom
     aria-hidden="true"
-    class="pointer-events-none fixed top-0 left-0 z-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,color-mix(in_oklch,var(--foreground)_9%,transparent),transparent_62%)] blur-[100px] sm:h-[680px] sm:w-[680px]"
+    class="pointer-events-none fixed top-0 left-0 z-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,color-mix(in_oklch,var(--foreground)_10%,transparent)_0%,color-mix(in_oklch,var(--foreground)_4%,transparent)_38%,transparent_68%)] sm:h-[680px] sm:w-[680px]"
   ></div>
 
   <div class="relative z-10 mx-auto flex min-h-svh w-full max-w-360 flex-col px-6 sm:px-10 lg:px-16">
@@ -173,11 +177,16 @@ const lines: Word[][] = site.headline.split("\n").map((line) =>
      renders without JavaScript, and released by the timeline on load. */
   .hero-word {
     display: inline-block;
-    will-change: transform, clip-path;
   }
 
   :global(html.js) .hero-word {
     clip-path: inset(-0.25em 0 100% 0);
+  }
+
+  /* Once the reveal has played, the clip is dropped so the words stop
+     holding a compositing layer for the rest of the session. */
+  :global(html.js) [data-hero].is-settled .hero-word {
+    clip-path: none;
   }
 
   /* The italic word uses the display face's true italic cut. */
