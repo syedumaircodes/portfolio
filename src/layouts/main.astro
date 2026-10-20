@@ -152,7 +152,12 @@ const jsonLd = {
       type="application/ld+json"
       is:inline
       set:html={JSON.stringify(jsonLd)}
-    />
+    ></script>
+    <!-- Marks that JavaScript is available, so motion-dependent styles only
+         apply when they can actually be animated. -->
+    <script is:inline>
+      document.documentElement.classList.add("js")
+    </script>
   </head>
   <body class="relative min-h-svh overflow-x-hidden">
     <a
@@ -169,3 +174,8 @@ const jsonLd = {
     <SiteFooter />
   </body>
 </html>
+
+<script>
+  import { initLenis } from "@/scripts/lenis"
+  initLenis()
+</script>

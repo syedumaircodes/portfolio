@@ -2,6 +2,8 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
+@import "@fontsource/instrument-serif/latin-400.css";
+@import "@fontsource/instrument-serif/latin-400-italic.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -81,6 +83,7 @@
 @theme inline {
   --font-sans: "Inter Variable", sans-serif;
   --font-heading: "Inter Variable", sans-serif;
+  --font-display: "Instrument Serif", serif;
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -154,6 +157,88 @@
   }
 }
 
+/* Engineered meta layer: small, tracked, uppercase labels that pair with the
+   Instrument Serif display type to keep the page precise. */
+@utility meta {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Display type: Instrument Serif is a single-weight (400) high-contrast serif.
+   It is used for statements only — never below ~28px, never for body copy. */
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 0.98;
+}
+
+/* ---------------------------------------------------------------------------
+   Hero motion primitives
+   Everything below animates transform/opacity only, so the whole hero stays
+   on the compositor and holds 60fps on mid-range hardware.
+--------------------------------------------------------------------------- */
+
+/* A word sits inside a mask that clips it; the word then rises out of it. */
+@utility mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+/* Film grain. A single inline SVG turbulence, tiled, drifting on the GPU. */
+@utility grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Infinite ticker. The track is duplicated, so a -50% translate loops
+   seamlessly. The duration is set from the measured track width so the speed
+   stays constant no matter how the type scales. */
+@utility marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 38s) linear infinite;
+  will-change: transform;
+}
+
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes grain-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-200px, -200px, 0);
+  }
+}
+
+/* Lenis drives the scroll; the browser's own smooth scrolling would fight it. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -164,5 +249,17 @@
     animation-duration: 0.001ms !important;
     animation-delay: 0ms !important;
     transition-duration: 0.001ms !important;
+  }
+  /* No motion: the ticker stops and becomes a plain scrollable strip, so
+     every skill is still reachable. */
+  .marquee-track {
+    animation: none !important;
+  }
+  .hero-ticker {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .hero-ticker::-webkit-scrollbar {
+    display: none;
   }
 }

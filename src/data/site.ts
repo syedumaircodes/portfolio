@@ -6,7 +6,6 @@ import type { ImageMetadata } from "astro"
 import commonplaceCover from "@/assets/projects/commonplace-cover.webp"
 import resumePdf from "@/assets/SyedUmairAli_Resume.pdf"
 
-
 export type IconName =
   | "arrow-up-right"
   | "arrow-down"
@@ -47,13 +46,25 @@ export type Project = {
   cover?: ImageMetadata | string
 }
 
+export type Capability = {
+  /** Short discipline name. */
+  label: string
+  /** The tools that back it up. */
+  detail: string
+}
+
 export type Site = {
   name: string
   role: string
-  /** Rendered as-is, split on "\n" into headline lines. */
+  /**
+   * Rendered as-is, split on "\n" into headline lines. Wrap a word in
+   * asterisks to set it in the display face's true italic.
+   */
   headline: string
   intro: string
   email: string
+  /** Disciplines listed in the hero's index. */
+  capabilities: Capability[]
   socials: Social[]
   projects: Project[]
   /** Everything below feeds <head>, JSON-LD and llms.txt. Edit here, not the layout. */
@@ -105,10 +116,28 @@ export type Seo = {
 export const site: Site = {
   name: "Syed Umair Ali",
   role: "Full-stack software engineer",
-  headline: "I turn ideas into software\nthat works in the real world.",
+  headline: "I turn ideas into *software*\nthat works in the real world.",
   intro:
-    "I turn complex workflows into simple, reliable experiences that work for the people using them.",
+    "I'm Syed Umair Ali. I turn complex workflows into simple, reliable experiences that work for the people using them.",
   email: "syedumairali.617@gmail.com",
+  capabilities: [
+    {
+      label: "Backend & APIs",
+      detail: "Python · FastAPI · Node.js · REST",
+    },
+    {
+      label: "Interface systems",
+      detail: "TypeScript · React · Next.js · Astro",
+    },
+    {
+      label: "Infrastructure",
+      detail: "GCP · Docker · CI/CD · PostgreSQL",
+    },
+    {
+      label: "Applied AI",
+      detail: "LLM API integration · Data pipelines",
+    },
+  ],
 
   socials: [
     {
@@ -126,8 +155,8 @@ export const site: Site = {
       href: "https://substack.com/@syedumaircodes",
       icon: "bookmark",
     },
-    
-  {
+
+    {
       label: "Résumé",
       href: resumePdf,
       icon: "file",

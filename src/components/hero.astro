@@ -2,93 +2,230 @@
 import Icon from "@/components/icon.astro"
 import { site } from "@/data/site"
 
-const lines = site.headline.split("\n")
+/**
+ * The statement is broken into words so each one can rise out of its own clip
+ * on load. `*word*` in the data is set in the display face's true italic.
+ */
+
+type Word = { text: string; italic: boolean }
+
+const lines: Word[][] = site.headline.split("\n").map((line) =>
+  line
+    .split(/(\*[^*]+\*)/)
+    .filter(Boolean)
+    .flatMap((part) =>
+      part
+        .replace(/\*/g, "")
+        .split(" ")
+        .filter(Boolean)
+        .map((text) => ({ text, italic: part.startsWith("*") }))
+    )
+)
 
 const primaryButton =
-  "group inline-flex h-12 basis-0 flex-1 items-center justify-center gap-2.5 rounded-full bg-foreground px-6 text-[0.9375rem] font-medium whitespace-nowrap text-background transition-colors duration-200 select-none hover:bg-foreground/88 sm:h-14 sm:w-auto sm:flex-none sm:px-7 sm:text-base"
+  "group relative inline-flex h-12 items-center gap-2.5 overflow-hidden rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground shadow-[0_0_0_0_color-mix(in_oklch,var(--primary)_0%,transparent)] transition-[box-shadow,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_0_40px_-12px_color-mix(in_oklch,var(--primary)_60%,transparent)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
 
 const secondaryButton =
-  "group inline-flex h-12 basis-0 flex-1 items-center justify-center gap-2.5 rounded-full border border-border bg-surface px-6 text-[0.9375rem] font-medium whitespace-nowrap transition-colors duration-200 select-none hover:bg-surface-hover sm:h-14 sm:w-auto sm:flex-none sm:px-7 sm:text-base"
+  "group relative inline-flex h-12 items-center gap-2.5 overflow-hidden rounded-full border border-border bg-transparent px-6 text-sm font-medium text-foreground transition-[background-color,border-color,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-foreground/25 hover:bg-surface-hover active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
 ---
 
-<section id="top" class="relative">
-  <div class="mx-auto flex min-h-svh w-full max-w-360 flex-col px-6 pt-20 pb-8 sm:px-10 sm:pt-28 sm:pb-10 lg:px-16 lg:pb-16">
-    <!-- Main block: vertically centered in the leftover viewport space -->
-    <div class="flex min-w-0 flex-1 flex-col justify-center">
-      <div class="w-full max-w-208">
-        <div>
-          <h1 class="text-2xl font-semibold tracking-[-0.02em] text-balance sm:text-3xl">
-            {site.name}
-          </h1>
-          <p class="mt-2 text-base text-muted-foreground sm:mt-2.5 sm:text-lg">
-            {site.role}
-          </p>
-        </div>
+<section id="top" data-hero class="relative isolate">
+  <!-- The curtain: covers the page for a beat, then lifts. -->
+  <div
+    data-curtain
+    aria-hidden="true"
+    class="pointer-events-none fixed inset-0 z-50 bg-background"
+  ></div>
 
-        <p
-          class="mt-10 text-[clamp(2.125rem,6.4vw,4rem)] leading-[1.06] font-semibold tracking-[-0.035em] text-balance sm:mt-14"
-        >
+  <!-- Atmosphere: grain, pointer bloom -->
+  <div
+    class="pointer-events-none absolute inset-0 overflow-hidden"
+    aria-hidden="true"
+  >
+    <div
+      data-grain
+      class="grain absolute -inset-[200px] opacity-[0.05] mix-blend-overlay"
+      style="animation: grain-drift 7s linear infinite alternate"
+    ></div>
+  </div>
+
+  <div
+    data-bloom
+    aria-hidden="true"
+    class="pointer-events-none fixed top-0 left-0 z-0 h-[680px] w-[680px] rounded-full bg-[radial-gradient(circle,color-mix(in_oklch,var(--foreground)_9%,transparent),transparent_62%)] blur-[100px]"
+  ></div>
+
+  <div class="relative z-10 mx-auto flex min-h-svh w-full max-w-360 flex-col px-6 sm:px-10 lg:px-16">
+    <!-- Body -->
+    <div class="flex flex-1 flex-col justify-center py-16 sm:py-20 lg:py-24">
+      <!-- The statement -->
+      <div class="relative">
+        <!-- 9vw keeps the long second line ("that works in the real world.")
+             on one row from the sm breakpoint up; 8rem is the display ceiling. -->
+        <h1 data-title class="display text-[clamp(2.75rem,9vw,8rem)]">
           {lines.map((line, index) => (
             <>
               {index > 0 && (
                 <>
-                  {" "}
-                  <br class="hidden sm:inline" />
+                  <br class="hidden sm:inline" />{" "}
                 </>
               )}
-              {line}
+              {line.map((word, wordIndex) => (
+                <>
+                  <span
+                    class:list={[
+                      "hero-word",
+                      word.italic && "hero-word--italic",
+                    ]}
+                    data-word
+                  >
+                    {word.text}
+                  </span>
+                  {wordIndex < line.length - 1 && " "}
+                </>
+              ))}{" "}
             </>
           ))}
-        </p>
-
-        <p
-          class="mt-7 max-w-176 text-base leading-[1.7] text-pretty text-muted-foreground sm:mt-8 sm:text-lg"
-        >
-          {site.intro}
-        </p>
-
-        <div class="mt-10 flex flex-wrap items-center gap-3 sm:mt-12 sm:gap-4">
-          <a href="mailto:syedumairali.617@gmail.com" class={primaryButton}>
-            Let's talk
-            <Icon
-              name="arrow-up-right"
-              class="size-5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
-          </a>
-          <a href="#work" class={secondaryButton}>
-            Explore my work
-            <Icon
-              name="arrow-down"
-              class="size-5 text-muted-foreground transition-transform duration-200 group-hover:translate-y-0.5"
-            />
-          </a>
-        </div>
+        </h1>
       </div>
-    </div>
 
-    <!-- Social row: pinned to the bottom edge, always a hairline away from the CTAs -->
-    <div class="mt-16 shrink-0">
-      <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-10">
-        <h2 class="text-sm font-semibold tracking-tight">Elsewhere</h2>
-        <ul class="-ml-3 flex items-center gap-1 sm:gap-2">
-          {site.socials.map((social) => (
-            <li>
+      <!-- Supporting column + index -->
+      <div class="mt-10 grid gap-12 sm:mt-12 md:grid-cols-[1.25fr_0.9fr] md:items-end md:gap-16 lg:mt-14">
+        <div data-support>
+          <p class="max-w-176 text-base leading-[1.75] text-pretty text-muted-foreground sm:text-lg">
+            {site.intro}
+          </p>
+
+          <div class="mt-9 flex flex-wrap items-center gap-3 sm:mt-10">
+            <a href={`mailto:${site.email}`} class={primaryButton}>
+              <span class="relative z-10">Let's talk</span>
+              <span
+                aria-hidden="true"
+                class="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(100deg,transparent,color-mix(in_oklch,var(--primary-foreground)_10%,transparent),transparent)] transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-full"
+              ></span>
+              <Icon
+                name="arrow-up-right"
+                class="relative z-10 size-4.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </a>
+            <a href="#work" class={secondaryButton}>
+              <span class="relative z-10">Explore my work</span>
+              <Icon
+                name="arrow-down"
+                class="relative z-10 size-4.5 text-muted-foreground transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0.5 group-hover:text-foreground"
+              />
+            </a>
+          </div>
+
+          <ul class="mt-10 flex items-center gap-1 sm:gap-2">
+            {site.socials.map((social) => (
+              <li>
+                <a
+                  href={social.href}
+                  aria-label={social.label}
+                  title={social.label}
+                  class="group/social relative inline-flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors duration-300 hover:bg-surface-hover hover:text-foreground"
+                  {...(social.href.startsWith("http")
+                    ? { target: "_blank", rel: "noreferrer noopener" }
+                    : {})}
+                  {...(social.download ? { download: social.download } : {})}
+                >
+                  <Icon name={social.icon} class="size-5" />
+                  <span class="pointer-events-none absolute inset-0 rounded-full border border-foreground/20 opacity-0 transition-opacity duration-300 group-hover/social:opacity-100" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- The index -->
+        <ol data-index class="flex flex-col [&>li:last-child]:border-b">
+          {site.capabilities.map((capability) => (
+            <li data-index-item class="border-t border-border">
               <a
-                href={social.href}
-                aria-label={social.label}
-                title={social.label}
-                class="inline-flex size-11 items-center justify-center rounded-full text-muted-foreground transition-colors duration-200 hover:bg-surface-hover hover:text-foreground"
-                {...(social.href.startsWith("http")
-                  ? { target: "_blank", rel: "noreferrer noopener" }
-                  : {})}
-                {...(social.download ? { download: social.download } : {})}
+                href="#work"
+                class="group flex items-baseline justify-between gap-5 py-3.5 sm:py-4"
               >
-                <Icon name={social.icon} class="size-6" />
+                <span class="min-w-0">
+                  <span class="block text-[0.9375rem] font-medium text-foreground transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1">
+                    {capability.label}
+                  </span>
+                  <span class="mt-1 block text-xs text-muted-foreground">
+                    {capability.detail}
+                  </span>
+                </span>
+                <Icon
+                  name="arrow-up-right"
+                  class="size-4 shrink-0 -translate-x-1 text-muted-foreground opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:opacity-100"
+                />
               </a>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     </div>
   </div>
+
+  <!-- Ticker: full-bleed, runs under everything -->
+  <div
+    data-ticker
+    class="hero-ticker relative z-20 overflow-hidden border-y border-border bg-background/60 py-4 backdrop-blur-sm"
+  >
+    <div class="marquee-track">
+      {[0, 1].map(() => (
+        <ul class="flex shrink-0 items-center">
+          {site.seo.skills.map((skill) => (
+            <li class="hero-ticker__item meta flex items-center text-muted-foreground">
+              <span class="hero-ticker__label">{skill}</span>
+              <span aria-hidden="true" class="text-foreground/40">
+                ◦
+              </span>
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  </div>
 </section>
+
+<script>
+  import { initHero } from "@/scripts/hero"
+  initHero()
+</script>
+
+<style>
+  /* The ticker type scales with the viewport, so a phone doesn't show three
+     oversized items and a desktop doesn't show a row of ants. */
+  .hero-ticker__item {
+    font-size: clamp(0.6875rem, 0.6rem + 0.2vw, 0.8125rem);
+  }
+
+  .hero-ticker__label {
+    padding-inline: clamp(1.125rem, 0.75rem + 0.9vw, 1.75rem);
+  }
+
+  /* The curtain only exists when JavaScript can lift it. */
+  [data-curtain] {
+    opacity: 0;
+  }
+
+  :global(html.js) [data-curtain] {
+    opacity: 1;
+  }
+
+  /* Words rise out of a clip. The clip is applied in CSS so the page still
+     renders without JavaScript, and released by the timeline on load. */
+  .hero-word {
+    display: inline-block;
+    will-change: transform, clip-path;
+  }
+
+  :global(html.js) .hero-word {
+    clip-path: inset(-0.25em 0 100% 0);
+  }
+
+  /* The italic word uses the display face's true italic cut. */
+  .hero-word--italic {
+    font-style: italic;
+  }
+</style>
