@@ -139,26 +139,19 @@ const secondaryButton =
         </div>
 
         <!-- The index -->
-        <ol data-index class="flex flex-col [&>li:last-child]:border-b">
+        <ol data-index class="flex flex-col">
           {site.capabilities.map((capability) => (
-            <li data-index-item class="border-t border-border">
-              <a
-                href="#work"
-                class="group flex items-baseline justify-between gap-5 py-3.5 sm:py-4"
-              >
+            <li data-index-item>
+              <div class="group flex items-baseline justify-between gap-5 py-3.5 sm:py-4">
                 <span class="min-w-0">
-                  <span class="block text-[0.9375rem] font-medium text-foreground transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1">
+                  <span class="block text-[0.9375rem] font-medium text-foreground transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
                     {capability.label}
                   </span>
                   <span class="mt-1 block text-xs text-muted-foreground">
                     {capability.detail}
                   </span>
                 </span>
-                <Icon
-                  name="arrow-up-right"
-                  class="size-4 shrink-0 -translate-x-1 text-muted-foreground opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:opacity-100"
-                />
-              </a>
+              </div>
             </li>
           ))}
         </ol>
