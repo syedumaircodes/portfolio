@@ -29,60 +29,85 @@ const aiList = [
 
 <section
   id="contact"
-  class="w-full scroll-mt-24 px-5 pt-16 pb-14 sm:px-6 sm:pt-20 sm:pb-16 md:pt-24 md:pb-20"
+  class="relative mx-auto w-full max-w-360 scroll-mt-24 px-6 sm:px-10 lg:px-16"
 >
-  <div class="mx-auto max-w-5xl pt-9 sm:pt-11">
-    <div class="grid gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
+  <div class="py-20 sm:py-24 lg:py-32">
+    <div class="grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
+      <!-- The closing statement, and the one thing to do next -->
       <div>
-        <h2 class="font-heading text-2xl leading-[1.08] font-semibold tracking-[-0.035em] text-balance text-foreground sm:text-3xl">
-          Ask your favorite AI about me
-        </h2>
-        <p class="mt-4 max-w-lg font-sans text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
-          Still curious about my background, skills, and work? Prompt your go-to
-          AI model to get an unbiased summary.
-        </p>
-        <nav
-          aria-label="Ask an AI about Umair"
-          class="mt-6 flex flex-wrap gap-2"
+        <h2
+          class="display text-[clamp(2.25rem,5vw,4.25rem)]"
+          data-reveal="text"
         >
-          {aiList.map((ai) => (
+          Let's build something <em class="italic">together.</em>
+        </h2>
+
+        <p
+          class="mt-7 max-w-xl text-base leading-[1.75] text-pretty text-muted-foreground sm:text-lg"
+          data-reveal="text"
+          style="--reveal-delay: 90ms"
+        >
+          I'm always open to discussing new opportunities, technical challenges,
+          or interesting products. Feel free to reach out.
+        </p>
+
+        <a
+          href={`mailto:${site.email}`}
+          class="group mt-10 inline-flex items-center gap-3 text-[clamp(1.375rem,2.4vw,1.875rem)] text-foreground"
+          data-reveal="text"
+          style="--reveal-delay: 180ms"
+        >
+          <span class="relative">
+            {site.email}
+            <span class="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-foreground transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:origin-left group-hover:scale-x-100"></span>
+          </span>
+          <Icon
+            name="arrow-up-right"
+            class="size-6 shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1 group-hover:-translate-y-1"
+          />
+        </a>
+      </div>
+
+      <!-- The agent-readable layer: a quiet, secondary column -->
+      <div class="lg:border-l lg:border-border lg:pl-16">
+        <h3 class="meta text-muted-foreground" data-reveal="text">
+          Ask any AI about me
+        </h3>
+
+        <p
+          class="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground"
+          data-reveal="text"
+          style="--reveal-delay: 90ms"
+        >
+          Still curious about my background, skills, and work? Prompt your go-to
+          model for an unbiased summary.
+        </p>
+
+        <nav aria-label="Ask an AI about Umair" class="mt-7 flex flex-col">
+          {aiList.map((ai, index) => (
             <a
               href={ai.href}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Ask ${ai.name} about ${site.name}`}
-              class="group inline-flex min-h-11 items-center gap-2 rounded-full px-3 font-sans text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              class="group flex items-center gap-3 border-t border-border py-3.5 transition-colors duration-300"
+              data-reveal="text"
+              style={`--reveal-delay: ${140 + index * 70}ms`}
             >
               <img
                 src={ai.icon.src}
                 alt=""
-                class="size-5 object-contain opacity-75 transition-opacity duration-200 group-hover:opacity-100"
+                class="size-4.5 object-contain opacity-60 transition-opacity duration-300 group-hover:opacity-100"
               />
-              {ai.name}
+              <span class="text-sm text-foreground">{ai.name}</span>
+              <Icon
+                name="arrow-up-right"
+                class="ml-auto size-4 -translate-x-1 text-muted-foreground opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:opacity-100"
+              />
             </a>
           ))}
+          <span class="block h-px w-full bg-border" />
         </nav>
-      </div>
-
-      <div class="md:border-l md:border-border md:pl-10 lg:pl-12">
-        <h2 class="display text-balance text-[clamp(2rem,4.5vw,3.25rem)]">
-          Let's build something <em class="italic">together.</em>
-        </h2>
-        <p class="mt-4 max-w-lg font-sans text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
-          I'm always open to discussing new opportunities, technical challenges,
-          or interesting products. Feel free to reach out.
-        </p>
-        <a
-          href={`mailto:${site.email}`}
-          class="group mt-6 inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-primary px-6 font-heading text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-        >
-          Let's Chat
-          <Icon
-            name="arrow-up-right"
-            size={17}
-            class="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          />
-        </a>
       </div>
     </div>
   </div>

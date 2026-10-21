@@ -1,9 +1,11 @@
 /**
- * Work section reveals.
+ * Scroll reveals.
  *
- * Each project reveals as it enters the viewport: the cover unmasks from the
- * bottom while the details stagger up behind it. One-shot — once an element
- * has been revealed it stays revealed, so scrolling back up never re-runs it.
+ * Elements marked with `data-reveal` animate in as they enter the viewport:
+ * the work section's cover unmasks from the bottom while its details stagger
+ * up, and the contact section's statement and links follow the same grammar.
+ * One-shot — once an element has been revealed it stays revealed, so
+ * scrolling back up never re-runs it.
  *
  * The check is driven by the scroll event rather than a rAF loop or an
  * IntersectionObserver. A full-bleed cover is taller than the viewport, and
@@ -15,11 +17,10 @@
 const reduced = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
-export function initWork() {
-  const root = document.querySelector<HTMLElement>("[data-work]")
-  if (!root) return
-
-  let pending = Array.from(root.querySelectorAll<HTMLElement>("[data-reveal]"))
+export function initReveals() {
+  const pending = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-reveal]")
+  )
   if (!pending.length) return
 
   const show = (element: Element) => {
@@ -43,26 +44,26 @@ export function initWork() {
     return
   }
 
+  let queue = pending
+
   const check = () => {
-    if (!pending.length) return
+    if (!queue.length) return
 
     // Reveal once an element's top edge crosses 92% of the viewport, and
     // reveal anything already scrolled past.
     const line = window.innerHeight * 0.92
     const reveal: HTMLElement[] = []
 
-    for (const element of pending) {
+    for (const element of queue) {
       const rect = element.getBoundingClientRect()
       if (rect.bottom < 0 || rect.top < line) reveal.push(element)
     }
 
     // Write after the reads, so the pass never forces a reflow mid-loop.
     reveal.forEach(show)
-    pending = pending.filter(
-      (element) => !element.classList.contains("is-visible")
-    )
+    queue = queue.filter((element) => !element.classList.contains("is-visible"))
 
-    if (!pending.length) {
+    if (!queue.length) {
       window.removeEventListener("scroll", check)
       window.removeEventListener("resize", check)
     }
