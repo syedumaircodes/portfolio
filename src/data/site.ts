@@ -4,7 +4,6 @@
  */
 import type { ImageMetadata } from "astro"
 import commonplaceCover from "@/assets/projects/commonplace-cover.webp"
-import resumePdf from "@/assets/SyedUmairAli_Resume.pdf"
 
 export type IconName =
   | "arrow-up-right"
@@ -12,6 +11,7 @@ export type IconName =
   | "arrow-right"
   | "github"
   | "linkedin"
+  | "twitter"
   | "bookmark"
   | "file"
   | "mail"
@@ -93,6 +93,7 @@ export type Seo = {
     timeZone: string
   }
   currentRole: {
+    /** Kept out of public copy. Populated only if you want it named anywhere. */
     employer: string
     title: string
     startDate: string
@@ -118,20 +119,24 @@ export const site: Site = {
   role: "Full-stack software engineer",
   headline: "I turn ideas into *software*\nthat works in the real world.",
   intro:
-    "I'm Syed Umair Ali. I turn complex workflows into simple, reliable experiences that work for the people using them.",
+    "I'm Syed Umair Ali, a full-stack engineer in Karachi. I build backends, interfaces, and the deployment pipeline that gets a product into users' hands.",
   email: "syedumairali.617@gmail.com",
   capabilities: [
     {
       label: "Backend & APIs",
-      detail: "Python · FastAPI · Node.js · REST",
+      detail: "Python · FastAPI · Node.js · Nest.js · REST",
     },
     {
       label: "Interface systems",
-      detail: "TypeScript · React · Next.js · Astro",
+      detail: "TypeScript · React · Next.js · Astro · TailwindCSS",
     },
     {
       label: "Infrastructure",
-      detail: "GCP · Docker · CI/CD · PostgreSQL",
+      detail: "GCP · Docker · CI/CD · PostgreSQL · Redis",
+    },
+    {
+      label: "Creative front-end",
+      detail: "GSAP · Three.js · Framer Motion",
     },
     {
       label: "Applied AI",
@@ -151,6 +156,11 @@ export const site: Site = {
       icon: "github",
     },
     {
+      label: "Twitter",
+      href: "https://twitter.com/syedumaircodes",
+      icon: "twitter",
+    },
+    {
       label: "Substack",
       href: "https://substack.com/@syedumaircodes",
       icon: "bookmark",
@@ -158,7 +168,7 @@ export const site: Site = {
 
     {
       label: "Résumé",
-      href: resumePdf,
+      href: "/resume.pdf",
       icon: "file",
       download: "SyedUmairAli_Resume.pdf",
     },
@@ -166,14 +176,14 @@ export const site: Site = {
 
   projects: [
     {
-      id: "atlas-analytics-workspace",
+      id: "commonplace-web-app",
       title: "Commonplace",
-      category: "Web app",
+      category: "Personal notebook",
       month: "Oct",
       year: "2026",
       description:
-        "A digital home for my notes, Its simple, focused design makes it easy to capture notes and revisit them later.",
-      technologies: ["React", "Markdown", "TailwindCSS"],
+        "My reading notes, published. Each note is an MDX file grouped by topic and source, then compiled into static pages by Astro at build time. No database, no CMS, no editor to log into.",
+      technologies: ["Astro", "MDX", "React", "TailwindCSS"],
       github: "https://github.com/syedumaircodes/commonplace",
       live: "https://commonplace.syedumairali-617.workers.dev/",
       cover: commonplaceCover,
@@ -186,7 +196,7 @@ export const site: Site = {
     twitter: "@syedumaircodes",
     title: "Syed Umair Ali | Full-Stack Engineer & Product Builder in Karachi",
     description:
-      "Syed Umair Ali (syedumaircodes) is a full-stack engineer and product builder in Karachi, Pakistan. 5+ years shipping SaaS products end to end with Python, FastAPI, Next.js and GCP.",
+      "Full-stack engineer and product builder in Karachi, Pakistan. Syed Umair Ali builds SaaS products end to end with Python, FastAPI, Next.js and GCP.",
     summary:
       "Full-stack engineer and product builder based in Karachi, Pakistan. I specialise in end-to-end execution — from data to deployment — shipping real products, putting them in users' hands, and iterating rapidly. Pragmatic problem-solving over perfect code.",
     location: {
@@ -197,7 +207,7 @@ export const site: Site = {
       timeZone: "Asia/Karachi",
     },
     currentRole: {
-      employer: "Heptic",
+      employer: "",
       title: "Software Engineer",
       startDate: "2025-07",
     },
@@ -214,21 +224,27 @@ export const site: Site = {
       "Nest.js",
       "REST APIs",
       "TypeScript",
+      "JavaScript",
       "React",
       "Next.js",
       "Astro.js",
       "MDX",
       "TailwindCSS",
+      "GSAP",
+      "Three.js",
+      "Framer Motion",
       "PostgreSQL",
+      "MySQL",
       "MongoDB",
       "Redis",
       "Google Cloud Platform",
       "Docker",
       "CI/CD",
+      "Vercel",
+      "Netlify",
+      "Edge computing",
       "Data pipelines",
       "LLM API integration",
-      "GSAP",
-      "Framer Motion",
       "Agile",
     ],
     certifications: [

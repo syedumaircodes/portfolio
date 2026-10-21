@@ -50,6 +50,7 @@ function run(root: HTMLElement) {
 
   const words = qa<HTMLElement>(root, "[data-word]")
   const indexItems = qa<HTMLElement>(root, "[data-index-item]")
+  const indexLabel = q<HTMLElement>(root, "[data-index-label]")
 
   /* ---------------------------------------------------------------------
      Load timeline
@@ -120,6 +121,15 @@ function run(root: HTMLElement) {
     })
 
     // 950 — the capability index, row by row.
+    at(
+      indexLabel,
+      [
+        { opacity: 0, transform: "translate3d(0,14px,0)" },
+        { opacity: 1, transform: "translate3d(0,0,0)" },
+      ],
+      { duration: 800, delay: 880, easing: EASE }
+    )
+
     indexItems.forEach((item, i) => {
       at(
         item,

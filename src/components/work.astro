@@ -19,7 +19,10 @@ const projects = site.projects.map((project) => ({
   <div class="pt-10 sm:pt-14">
     <!-- Section head -->
     <div class="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
-      <h2 class="display text-[clamp(2.25rem,5vw,4rem)]">Selected work</h2>
+      <h2 class="display text-[clamp(2.25rem,5vw,4rem)]">Work</h2>
+      <p class="meta text-muted-foreground" data-reveal="text">
+        Client work and side projects
+      </p>
     </div>
 
     <div class="mt-12 sm:mt-16 lg:mt-20">
@@ -100,14 +103,14 @@ const projects = site.projects.map((project) => ({
               >
                 <ActionLink
                   href={project.live}
-                  label="Live"
+                  label="Visit site"
                   variant="primary"
                   icon="arrow-up-right"
                   external
                 />
                 <ActionLink
                   href={project.github}
-                  label="Source"
+                  label="View source"
                   icon="github"
                   external
                 />
