@@ -1,6 +1,5 @@
 ---
 import ActionLink from "@/components/action-link.astro"
-import Icon from "@/components/icon.astro"
 import { site } from "@/data/site"
 
 // Normalize optional covers to a plain URL so the native <img> is happy:
@@ -60,16 +59,6 @@ const projects = site.projects.map((project) => ({
                 </span>
               </div>
             )}
-
-            {/* A scrim keeps the label legible over any screenshot. */}
-            <span
-              aria-hidden="true"
-              class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,color-mix(in_oklch,var(--background)_80%,transparent),transparent_45%)] opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-            />
-            <span class="pointer-events-none absolute right-5 bottom-5 flex translate-y-2 items-center gap-2 rounded-full border border-foreground/15 bg-background/70 px-4 py-2 text-xs text-foreground opacity-0 backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-100 sm:right-7 sm:bottom-7">
-              View project
-              <Icon name="arrow-up-right" size={14} />
-            </span>
           </div>
 
           {/* Details */}

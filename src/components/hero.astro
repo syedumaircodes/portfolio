@@ -32,28 +32,6 @@ const lines: Word[][] = site.headline.split("\n").map((line) =>
     class="pointer-events-none fixed inset-0 z-50 bg-background"
   ></div>
 
-  <!-- Atmosphere: grain, pointer bloom -->
-  <div
-    class="pointer-events-none absolute inset-0 overflow-hidden"
-    aria-hidden="true"
-  >
-    <!-- The grain is static: a blend mode over an animating layer forces a
-         repaint of the whole area on every frame. -->
-    <div
-      data-grain
-      class="grain absolute -inset-[200px] opacity-[0.05] mix-blend-overlay"
-    ></div>
-  </div>
-
-  <!-- A soft light source that follows the pointer. The falloff is built
-       into the gradient rather than a blur filter, which would repaint a
-       screen-sized layer on every frame. -->
-  <div
-    data-bloom
-    aria-hidden="true"
-    class="pointer-events-none fixed top-0 left-0 z-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,color-mix(in_oklch,var(--foreground)_10%,transparent)_0%,color-mix(in_oklch,var(--foreground)_4%,transparent)_38%,transparent_68%)] sm:h-[680px] sm:w-[680px]"
-  ></div>
-
   <div class="relative z-10 mx-auto flex min-h-svh w-full max-w-360 flex-col px-6 sm:px-10 lg:px-16">
     <!-- Body -->
     <div class="flex flex-1 flex-col justify-center py-16 sm:py-20 lg:py-24">

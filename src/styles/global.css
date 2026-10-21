@@ -235,12 +235,6 @@
   margin-bottom: -0.14em;
 }
 
-/* Film grain. A single inline SVG turbulence, tiled, drifting on the GPU. */
-@utility grain {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
-  background-size: 200px 200px;
-}
-
 /* Lenis drives the scroll; the browser's own smooth scrolling would fight it. */
 html.lenis,
 html.lenis body {

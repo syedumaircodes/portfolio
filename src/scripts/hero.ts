@@ -46,8 +46,6 @@ function run(root: HTMLElement) {
 
   const curtain = q<HTMLElement>(root, "[data-curtain]")
   const title = q<HTMLElement>(root, "[data-title]")
-  const bloom = q<HTMLElement>(root, "[data-bloom]")
-  const grain = q<HTMLElement>(root, "[data-grain]")
   const support = q<HTMLElement>(root, "[data-support]")
 
   const words = qa<HTMLElement>(root, "[data-word]")
@@ -195,8 +193,6 @@ function run(root: HTMLElement) {
   let scrollTarget = 0
   let hasPointer = false
   let lastProgress = -1
-  let lastBloomX = Number.NaN
-  let lastBloomY = Number.NaN
 
   const lenis = getLenis()
   if (lenis) {
@@ -266,30 +262,6 @@ function run(root: HTMLElement) {
           2
         )}px, 0)`
       }
-    }
-
-    if (bloom) {
-      const bx = hasPointer ? eased.x : window.innerWidth * 0.5
-      const by = hasPointer ? eased.y : window.innerHeight * 0.35
-      // The bloom is sized responsively, so centre it on its own box.
-      const offset = bloom.offsetWidth / 2
-      const x = bx - offset
-      const y = by - offset + progress * -60
-      // The bloom is a large painted surface; moving it costs a composite
-      // every frame, so it only moves when it has actually moved.
-      if (Math.abs(x - lastBloomX) > 0.5 || Math.abs(y - lastBloomY) > 0.5) {
-        lastBloomX = x
-        lastBloomY = y
-        bloom.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(
-          1
-        )}px, 0)`
-      }
-    }
-
-    if (grain) {
-      grain.style.transform = `translate3d(${(progress * -40).toFixed(
-        2
-      )}px, ${(progress * -40).toFixed(2)}px, 0)`
     }
 
     if (visible) requestAnimationFrame(frame)
