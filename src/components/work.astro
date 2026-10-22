@@ -8,6 +8,12 @@ const projects = site.projects.map((project) => ({
   ...project,
   coverSrc:
     typeof project.cover === "string" ? project.cover : project.cover?.src,
+  // Intrinsic size of imported covers, so the <img> can reserve its own
+  // aspect ratio and never crop or zoom the screenshot.
+  coverWidth:
+    typeof project.cover === "string" ? undefined : project.cover?.width,
+  coverHeight:
+    typeof project.cover === "string" ? undefined : project.cover?.height,
 }))
 ---
 
@@ -19,10 +25,7 @@ const projects = site.projects.map((project) => ({
   <div class="pt-10 sm:pt-14">
     <!-- Section head -->
     <div class="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
-      <h2 class="display text-[clamp(2.25rem,5vw,4rem)]">Work</h2>
-      <p class="meta text-muted-foreground" data-reveal="text">
-        Client work and side projects
-      </p>
+      <h2 class="display text-[clamp(2.25rem,5vw,4rem)]">Selected Work</h2>
     </div>
 
     <div class="mt-12 sm:mt-16 lg:mt-20">
@@ -50,9 +53,11 @@ const projects = site.projects.map((project) => ({
                 <img
                   src={project.coverSrc}
                   alt={`Screenshot of ${project.title}`}
+                  width={project.coverWidth}
+                  height={project.coverHeight}
                   loading="lazy"
                   decoding="async"
-                  class="aspect-4/3 w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] sm:aspect-16/10 lg:aspect-16/9"
+                  class="h-auto w-full object-contain transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
                 />
               </a>
             ) : (

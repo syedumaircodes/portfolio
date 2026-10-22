@@ -3,7 +3,7 @@
  * Placeholder copy lives here — edit this file, not the components.
  */
 import type { ImageMetadata } from "astro"
-import commonplaceCover from "@/assets/projects/commonplace-cover.webp"
+import spiritLibraryCover from "@/assets/projects/spirit-library.webp"
 
 export type IconName =
   | "arrow-up-right"
@@ -176,17 +176,17 @@ export const site: Site = {
 
   projects: [
     {
-      id: "commonplace-web-app",
-      title: "Commonplace",
-      category: "Personal notebook",
+      id: "spirit-library-web-app",
+      title: "Spirit Library",
+      category: "Living notebook",
       month: "Oct",
       year: "2026",
       description:
-        "My reading notes, published. Each note is an MDX file grouped by topic and source, then compiled into static pages by Astro at build time. No database, no CMS, no editor to log into.",
+        "A living personal library of everything I learn — notes on software engineering, databases, security and cloud. Each note is an MDX file grouped by topic and source, then compiled into static pages by Astro at build time. No database, no CMS, no editor to log into.",
       technologies: ["Astro", "MDX", "React", "TailwindCSS"],
       github: "https://github.com/syedumaircodes/commonplace",
-      live: "https://commonplace.syedumairali-617.workers.dev/",
-      cover: commonplaceCover,
+      live: "https://spiritlibrary.vercel.app",
+      cover: spiritLibraryCover,
     },
   ],
 
