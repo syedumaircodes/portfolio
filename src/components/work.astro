@@ -25,7 +25,9 @@ const projects = site.projects.map((project) => ({
   <div class="pt-10 sm:pt-14">
     <!-- Section head -->
     <div class="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
-      <h2 class="display text-[clamp(2.25rem,5vw,4rem)]">Selected Work</h2>
+      <h2 class="display text-[clamp(2.25rem,5vw,4rem)]" data-reveal="text">
+        Selected Work
+      </h2>
     </div>
 
     <div class="mt-12 sm:mt-16 lg:mt-20">
@@ -34,7 +36,7 @@ const projects = site.projects.map((project) => ({
           {index > 0 && (
             <span
               data-reveal="rule"
-              class="block h-px w-full origin-left scale-x-0 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] mb-16 sm:mb-24"
+              class="mb-16 block h-px w-full bg-border sm:mb-24"
             />
           )}
 
@@ -56,6 +58,7 @@ const projects = site.projects.map((project) => ({
                   width={project.coverWidth}
                   height={project.coverHeight}
                   loading="lazy"
+                  fetchpriority="low"
                   decoding="async"
                   class="h-auto w-full object-contain transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
                 />

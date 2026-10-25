@@ -2,10 +2,20 @@
  * Scroll reveals.
  *
  * Elements marked with `data-reveal` animate in as they enter the viewport:
- * the work section's cover unmasks from the bottom while its details stagger
- * up, and the contact section's statement and links follow the same grammar.
+ * the work section's heading, rules and covers unmask while the project
+ * details stagger up, and the contact section follows the same grammar.
  * One-shot — once an element has been revealed it stays revealed, so
  * scrolling back up never re-runs it.
+ *
+ * LCP safety: the hidden state is never in the stylesheet up front. This
+ * module *arms* only the elements that sit entirely below the viewport at
+ * init; anything already on screen is marked visible and painted at full
+ * opacity. A reveal therefore cannot delay a potential LCP element, and with
+ * no JavaScript there is no hidden state at all.
+ *
+ * CLS safety: only opacity, transform and clip-path are animated. The base
+ * layout — including the cover's reserved aspect ratio — is untouched, so
+ * no reveal can move content around it.
  *
  * The check is driven by the scroll event rather than a rAF loop or an
  * IntersectionObserver. A full-bleed cover is taller than the viewport, and
@@ -16,6 +26,9 @@
 
 const reduced = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+/** How far into the viewport an element must be before it reveals. */
+const TRIGGER = 0.92
 
 export function initReveals() {
   const pending = Array.from(
@@ -44,14 +57,27 @@ export function initReveals() {
     return
   }
 
-  let queue = pending
+  let queue: HTMLElement[] = []
+
+  // Arm only what is fully below the fold. Everything else — including a
+  // deep link that lands mid-page — is visible immediately. Arming happens
+  // after that first measurement, so the browser never paints a hidden
+  // element that was already on screen.
+  pending.forEach((element) => {
+    if (element.getBoundingClientRect().top >= window.innerHeight) {
+      element.setAttribute("data-reveal-armed", "")
+      queue.push(element)
+    } else {
+      show(element)
+    }
+  })
+
+  if (!queue.length) return
 
   const check = () => {
     if (!queue.length) return
 
-    // Reveal once an element's top edge crosses 92% of the viewport, and
-    // reveal anything already scrolled past.
-    const line = window.innerHeight * 0.92
+    const line = window.innerHeight * TRIGGER
     const reveal: HTMLElement[] = []
 
     for (const element of queue) {
@@ -72,6 +98,6 @@ export function initReveals() {
   window.addEventListener("scroll", check, { passive: true })
   window.addEventListener("resize", check, { passive: true })
 
-  // Whatever is already in view (or above it) reveals straight away.
+  // A resize may have pulled an armed element into view already.
   check()
 }
