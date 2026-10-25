@@ -238,9 +238,15 @@
 /* ---------------------------------------------------------------------------
    Scroll reveals.
 
-   Shared by the work and contact sections. The hidden state is gated behind
-   `html.js` so the page still renders without JavaScript, and the whole
-   sequence is instant under prefers-reduced-motion.
+   Shared by the work and contact sections. The hidden state is opt-in: only
+   elements below the fold at init are "armed" by reveal.ts. Anything already
+   in the viewport renders at full opacity immediately, so a reveal can never
+   delay paint of a potential LCP element. Without JavaScript nothing is
+   armed, so the page is fully readable.
+
+   Everything animates opacity, transform and clip-path only. The <img> keeps
+   its width/height attributes and the cover keeps its own box, so the layout
+   is reserved before the reveal runs and nothing can shift.
 --------------------------------------------------------------------------- */
 [data-reveal] {
   transition:
@@ -249,38 +255,44 @@
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-html.js [data-reveal] {
+[data-reveal-armed] {
   opacity: 0;
   transform: translate3d(0, 24px, 0);
 }
 
-html.js [data-reveal].is-visible {
+[data-reveal-armed].is-visible {
   opacity: 1;
   transform: none;
 }
 
 /* The cover unmasks from the bottom and settles back to scale. */
-html.js [data-reveal="media"] {
-  clip-path: inset(0% 0% 100% 0%);
-  transform: scale(1.05);
+[data-reveal="media"] {
   transition:
     clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1),
     transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-html.js [data-reveal="media"].is-visible {
+[data-reveal="media"][data-reveal-armed] {
+  clip-path: inset(0% 0% 100% 0%);
+  transform: scale(1.05);
+}
+
+[data-reveal="media"][data-reveal-armed].is-visible {
   clip-path: inset(0% 0% 0% 0%);
   transform: scale(1);
 }
 
 /* Hairlines draw from the left. */
 [data-reveal="rule"] {
-  transform: scaleX(0);
   transform-origin: left;
   transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-html.js [data-reveal="rule"].is-visible {
+[data-reveal="rule"][data-reveal-armed] {
+  transform: scaleX(0);
+}
+
+[data-reveal="rule"][data-reveal-armed].is-visible {
   transform: scaleX(1);
 }
 

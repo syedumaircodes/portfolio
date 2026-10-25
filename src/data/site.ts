@@ -182,7 +182,7 @@ export const site: Site = {
       month: "Oct",
       year: "2026",
       description:
-        "A living personal library of everything I learn — notes on software engineering, databases, security and cloud. Each note is an MDX file grouped by topic and source, then compiled into static pages by Astro at build time. No database, no CMS, no editor to log into.",
+        "A living personal library of everything I learn. Each note is an MDX file grouped by topic and source, then compiled into static pages by Astro at build time. No database, no CMS, no editor to log into.",
       technologies: ["Astro", "MDX", "React", "TailwindCSS"],
       github: "https://github.com/syedumaircodes/commonplace",
       live: "https://spiritlibrary.vercel.app",
