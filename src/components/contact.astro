@@ -36,7 +36,7 @@ const aiList = [
       <!-- The closing statement, and the one thing to do next -->
       <div>
         <h2
-          class="display text-[clamp(2.25rem,5vw,4.25rem)]"
+          class="display text-[clamp(2.25rem,5vw,4.25rem)] max-sm:text-3xl sm:max-lg:text-4xl"
           data-reveal="text"
         >
           Tell me what you're <em class="italic">building.</em>
@@ -47,19 +47,17 @@ const aiList = [
           data-reveal="text"
           style="--reveal-delay: 90ms"
         >
-          I build backends, interfaces, and the infrastructure that keeps them
-          running. If you have a product to ship, a workflow to untangle, or a
-          role you need filled, email me.
+          Have a product to ship or a role to fill? Email me.
         </p>
 
         <a
           href={`mailto:${site.email}`}
-          class="group mt-10 inline-flex items-center gap-3 text-[clamp(1.375rem,2.4vw,1.875rem)] text-foreground"
+          class="group mt-10 inline-flex items-center gap-3 text-[clamp(1.375rem,2.4vw,1.875rem)] max-sm:text-lg text-foreground"
           data-reveal="text"
           style="--reveal-delay: 180ms"
         >
           <span class="relative">
-            {site.email}
+            Email me
             <span class="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-foreground transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:origin-left group-hover:scale-x-100"></span>
           </span>
           <Icon
