@@ -50,7 +50,7 @@ const projects = site.projects.map((project) => ({
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label={`Open ${project.title} in a new tab`}
-                class="block"
+                class="block aspect-4/3 sm:aspect-16/10"
               >
                 <img
                   src={project.coverSrc}
@@ -60,7 +60,7 @@ const projects = site.projects.map((project) => ({
                   loading="lazy"
                   fetchpriority="low"
                   decoding="async"
-                  class="h-auto w-full object-contain transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+                  class="h-full w-full object-cover object-top transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
                 />
               </a>
             ) : (
