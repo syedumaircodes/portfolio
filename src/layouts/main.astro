@@ -207,7 +207,12 @@ const jsonLd = {
 <script>
   import { initLenis } from "@/scripts/lenis"
   import { initReveals } from "@/scripts/reveal"
+  import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-  initLenis()
+  const lenis = initLenis()
+  // Lenis owns the scroll position; ScrollTrigger needs to hear about it
+  // directly so scrubbed timelines track the smoothed value.
+  lenis?.on("scroll", ScrollTrigger.update)
+
   initReveals()
 </script>

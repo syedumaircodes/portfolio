@@ -1,0 +1,232 @@
+---
+/**
+ * Spirit Library cover — an architectural drawing of a domed library tower
+ * that rules itself in as the reader scrolls.
+ * as the reader scrolls.
+ *
+ * The drawing is generated at build time by `lib/library-sketch.ts`: a 3D
+ * model projected through a three-quarter camera, then left as exact,
+ * ruled linework — dentils, ribs and balustrade ruled in one pass. All
+ * this component does is lay those strokes out, order them for the
+ * timeline, and scrub them with GSAP.
+ *
+ * Every path carries `pathLength="1"`, so a dash offset of 1 hides it and 0
+ * completes it — no measurement, no reflow. The hidden state lives in CSS
+ * behind `html.js`, so with JavaScript off the finished sketch is what
+ * renders.
+ */
+import { buildLibrarySketch } from "@/lib/library-sketch"
+
+const strokes = buildLibrarySketch()
+
+// Shade is painted first (it sits under the linework) but drawn last.
+const ordered = [...strokes].sort(
+  (a, b) => Number(a.cls === "hatch") - Number(b.cls === "hatch")
+)
+---
+
+<div
+  data-spirit-paper
+  class="spirit-paper relative h-full w-full overflow-hidden"
+>
+  <svg
+    data-spirit-sketch
+    viewBox="0 0 1200 900"
+    preserveAspectRatio="xMidYMid meet"
+    role="img"
+    aria-label="Architectural ink drawing of a domed classical library building that draws itself as you scroll"
+    class="spirit-drawing h-full w-full"
+  >
+    {
+      ordered.map((stroke) => (
+        <path
+          data-stage={stroke.stage}
+          class={stroke.cls}
+          d={stroke.d}
+          pathLength="1"
+        />
+      ))
+    }
+  </svg>
+</div>
+
+<style is:global>
+  /* A sheet of warm drafting paper for the drawing to sit on — never pure
+     white, and ruled with a barely-there grid beneath the ink. */
+  [data-spirit-paper] {
+    background:
+      repeating-linear-gradient(
+        0deg,
+        rgb(23 22 19 / 3.5%) 0 1px,
+        transparent 1px 64px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgb(23 22 19 / 3.5%) 0 1px,
+        transparent 1px 64px
+      ),
+      #f7f5f0;
+    box-shadow: inset 0 0 0 1px rgb(23 22 19 / 6%);
+    transition:
+      transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-spirit-paper]:hover {
+    transform: scale(1.015);
+    box-shadow:
+      inset 0 0 0 1px rgb(23 22 19 / 10%),
+      0 24px 60px -40px rgb(23 22 19 / 45%);
+  }
+
+  /* Fine, even pen — slightly heavier on the silhouette only. Widths are
+     in viewBox units and are re-stated per breakpoint so the line reads at
+     the same optical weight whether the sheet is 327px or 1312px wide. */
+  [data-spirit-sketch] {
+    --w1: 5.6;
+    --w2: 3.6;
+    --w3: 2.6;
+    --wh: 2.0;
+    display: block;
+  }
+
+  [data-spirit-sketch] path {
+    fill: none;
+    stroke: #171613;
+    /* A ruling pen, not a felt tip: square ends, sharp corners. */
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+  }
+
+  [data-spirit-sketch] path.w1 {
+    stroke-width: var(--w1);
+  }
+  [data-spirit-sketch] path.w2 {
+    stroke-width: var(--w2);
+  }
+  [data-spirit-sketch] path.w3 {
+    stroke-width: var(--w3);
+  }
+  [data-spirit-sketch] path.hatch {
+    stroke-width: var(--wh);
+    stroke-opacity: 0.5;
+  }
+
+  @media (min-width: 640px) {
+    [data-spirit-sketch] {
+      --w1: 3.8;
+      --w2: 2.4;
+      --w3: 1.75;
+      --wh: 1.3;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    [data-spirit-sketch] {
+      --w1: 2.3;
+      --w2: 1.5;
+      --w3: 1.1;
+      --wh: 0.8;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    [data-spirit-sketch] {
+      --w1: 1.7;
+      --w2: 1.1;
+      --w3: 0.85;
+      --wh: 0.6;
+    }
+  }
+
+  /* Hidden only when there is JavaScript to draw it back in. */
+  html.js [data-spirit-sketch] path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.js [data-spirit-sketch] path {
+      stroke-dasharray: none;
+      stroke-dashoffset: 0;
+    }
+  }
+</style>
+
+<script>
+  /**
+   * The drawing pass.
+   *
+   * One timeline per sketch, scrubbed by scroll: each stage is a tween of
+   * that stage's paths from hidden to drawn, laid end to end with a little
+   * overlap so the pen never stops moving. Lenis owns the scroll position
+   * and reports it to ScrollTrigger (see main.astro), so the scrub tracks
+   * the smoothed value rather than the raw one.
+   */
+  import gsap from "gsap"
+  import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  const reduced = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+  /** stage → [scroll position it starts, how long it takes] */
+  const BEATS: Array<[number, number, number]> = [
+    [1, 0.0, 1.5], // massing, dome and all
+    [2, 1.25, 0.7], // steps
+    [3, 1.8, 1.4], // columns
+    [4, 3.05, 1.6], // order
+    [5, 4.45, 1.4], // openings
+    [6, 5.7, 1.6], // shade
+  ]
+
+  const sketches = document.querySelectorAll<SVGSVGElement>(
+    "[data-spirit-sketch]"
+  )
+
+  sketches.forEach((svg) => {
+    const paths = Array.from(
+      svg.querySelectorAll<SVGPathElement>("path[data-stage]")
+    )
+    if (!paths.length) return
+
+    // No motion: the drawing is simply there, fully inked.
+    if (reduced()) {
+      paths.forEach((path) => {
+        path.style.strokeDashoffset = "0"
+      })
+      return
+    }
+
+    const stages = new Map<number, SVGPathElement[]>()
+    paths.forEach((path) => {
+      const stage = Number(path.dataset.stage)
+      stages.set(stage, [...(stages.get(stage) ?? []), path])
+    })
+
+    const timeline = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: svg,
+        start: "top 92%",
+        end: "top 22%",
+        scrub: 0.7,
+      },
+    })
+
+    BEATS.forEach(([stage, at, span]) => {
+      const elements = stages.get(stage)
+      if (!elements?.length) return
+
+      // Divide the stage's span evenly across its paths: the whole stage
+      // takes exactly `span`, with each path handing over to the next.
+      const step = span / elements.length
+      timeline.to(
+        elements,
+        { strokeDashoffset: 0, duration: step, stagger: step },
+        at
+      )
+    })
+  })
+</script>

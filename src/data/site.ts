@@ -3,7 +3,6 @@
  * Placeholder copy lives here — edit this file, not the components.
  */
 import type { ImageMetadata } from "astro"
-import spiritLibraryCover from "@/assets/projects/spirit-library.webp"
 
 export type IconName =
   | "arrow-up-right"
@@ -44,6 +43,12 @@ export type Project = {
    * Falls back to the project title.
    */
   cover?: ImageMetadata | string
+  /**
+   * Optional hand-drawn cover rendered instead of `cover`: an animated SVG
+   * that builds itself as the reader scrolls. Keys map to components in
+   * `work.astro`.
+   */
+  sketch?: "library"
 }
 
 export type Capability = {
@@ -186,7 +191,7 @@ export const site: Site = {
       technologies: ["Astro", "MDX", "React", "TailwindCSS"],
       github: "https://github.com/syedumaircodes/commonplace",
       live: "https://spiritlibrary.vercel.app",
-      cover: spiritLibraryCover,
+      sketch: "library",
     },
   ],
 
