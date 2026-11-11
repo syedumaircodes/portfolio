@@ -296,6 +296,24 @@
   transform: scaleX(1);
 }
 
+/* Display type rises out of its own clip — headlines never fade in as a
+   block; the line slides up inside an overflow-hidden wrapper that the
+   markup supplies. Opacity stays at one: the mask does all the work. */
+[data-reveal="line"] {
+  transition: transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="line"][data-reveal-armed] {
+  opacity: 1;
+  transform: translate3d(0, 112%, 0);
+}
+
+[data-reveal="line"][data-reveal-armed].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
 /* Lenis drives the scroll; the browser's own smooth scrolling would fight it. */
 html.lenis,
 html.lenis body {

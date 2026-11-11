@@ -25,8 +25,10 @@ const projects = site.projects.map((project) => ({
   <div class="pt-10 sm:pt-14">
     <!-- Section head -->
     <div class="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
-      <h2 class="display text-[clamp(2.25rem,5vw,4rem)]" data-reveal="text">
-        Selected Work
+      <h2 class="display text-[clamp(2.25rem,5vw,4rem)]">
+        <span class="-mb-[0.14em] block overflow-hidden pb-[0.14em]">
+          <span data-reveal="line" class="block">Selected Work</span>
+        </span>
       </h2>
     </div>
 
@@ -50,18 +52,25 @@ const projects = site.projects.map((project) => ({
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label={`Open ${project.title} in a new tab`}
-                class="block aspect-4/3 sm:aspect-16/10"
+                class="relative block aspect-4/3 overflow-hidden sm:aspect-16/10"
               >
-                <img
-                  src={project.coverSrc}
-                  alt={`Screenshot of ${project.title}`}
-                  width={project.coverWidth}
-                  height={project.coverHeight}
-                  loading="lazy"
-                  fetchpriority="low"
-                  decoding="async"
-                  class="h-full w-full object-cover object-top transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
-                />
+                {/* The image sits in a span slightly taller than the frame,
+                    so the scroll parallax never bares an edge. */}
+                <span
+                  data-parallax
+                  class="absolute inset-x-0 -top-[5%] block h-[110%]"
+                >
+                  <img
+                    src={project.coverSrc}
+                    alt={`Screenshot of ${project.title}`}
+                    width={project.coverWidth}
+                    height={project.coverHeight}
+                    loading="lazy"
+                    fetchpriority="low"
+                    decoding="async"
+                    class="h-full w-full object-cover object-top transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+                  />
+                </span>
               </a>
             ) : (
               <div class="flex aspect-4/3 w-full items-center justify-center sm:aspect-16/10 lg:aspect-16/9">
@@ -78,12 +87,16 @@ const projects = site.projects.map((project) => ({
               <p class="meta text-muted-foreground" data-reveal="text">
                 {project.category} / {project.month} {project.year}
               </p>
-              <h3
-                class="display mt-4 text-[clamp(2rem,3.6vw,3.25rem)]"
-                data-reveal="text"
-                style="--reveal-delay: 90ms"
-              >
-                {project.title}
+              <h3 class="display mt-4 text-[clamp(2rem,3.6vw,3.25rem)]">
+                <span class="-mb-[0.14em] block overflow-hidden pb-[0.14em]">
+                  <span
+                    data-reveal="line"
+                    style="--reveal-delay: 90ms"
+                    class="block"
+                  >
+                    {project.title}
+                  </span>
+                </span>
               </h3>
             </div>
 

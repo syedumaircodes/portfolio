@@ -207,6 +207,7 @@ const jsonLd = {
 <script>
   import { initLenis } from "@/scripts/lenis"
   import { initReveals } from "@/scripts/reveal"
+  import { initCoverParallax } from "@/scripts/cover-parallax"
   import { ScrollTrigger } from "gsap/ScrollTrigger"
 
   const lenis = initLenis()
@@ -215,4 +216,5 @@ const jsonLd = {
   lenis?.on("scroll", ScrollTrigger.update)
 
   initReveals()
+  initCoverParallax()
 </script>
