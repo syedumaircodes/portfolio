@@ -1,8 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/",
+      "src": "/",
+      "methods": ["GET", "HEAD"],
       "has": [
         {
           "type": "header",
@@ -12,7 +13,11 @@
           }
         }
       ],
-      "destination": "/index.md"
+      "dest": "/index.md",
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8",
+        "Vary": "Accept"
+      }
     }
   ],
   "headers": [

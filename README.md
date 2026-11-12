@@ -48,10 +48,13 @@ read `vercel.json`.
 ### Markdown for agents
 
 `/` content-negotiates on `Accept`. Requests containing `text/markdown` are
-rewritten by `vercel.json` to the prebuilt `/index.md` and served as
-`text/markdown; charset=utf-8`; everything else keeps the HTML page. The markdown
-is generated at build time from `src/data/site.ts` by `src/pages/index.md.ts`, so
-it never drifts from the page copy. `Vary: Accept` is set on both responses.
+routed by a `vercel.json` `routes` rule to the prebuilt `/index.md` and served as
+`text/markdown; charset=utf-8`; everything else keeps the HTML page. The rule is
+in `routes` rather than `rewrites` because Vercel checks the filesystem before
+rewrites run, so a rewrite for `/` would never fire — `index.html` already
+answers that path. The markdown is generated at build time from
+`src/data/site.ts` by `src/pages/index.md.ts`, so it never drifts from the page
+copy. `Vary: Accept` is set on both responses.
 
 ### WebMCP tools
 
