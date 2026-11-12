@@ -52,6 +52,21 @@ rewritten by `vercel.json` to the prebuilt `/index.md` and served as
 is generated at build time from `src/data/site.ts` by `src/pages/index.md.ts`, so
 it never drifts from the page copy. `Vary: Accept` is set on both responses.
 
+### WebMCP tools
+
+`src/scripts/webmcp.ts` registers the page's real actions as
+[WebMCP](https://webmachinelearning.github.io/webmcp/) tools when the browser
+exposes `document.modelContext` (falling back to `navigator.modelContext`):
+
+- `get_profile`, `list_projects`, `get_project` — read the same data the page renders
+- `scroll_to_section` — bring `top`, `work` or `contact` into view
+- `open_project` — open a project's live site or source in a new tab
+- `download_resume` — download the PDF
+
+Tools are read-only where they only return data, marked consequential where they
+open or download something, and unregistered via an `AbortSignal` on `pagehide`.
+Browsers without WebMCP load the page unchanged.
+
 ## Design notes
 
 - **Tokens** live in `src/styles/global.css`. The dark palette is the shipped theme; the
