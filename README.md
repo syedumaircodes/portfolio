@@ -38,10 +38,19 @@ resources without parsing the HTML:
 
 - `/.well-known/api-catalog` — `rel="api-catalog"`, an [RFC 9727](https://www.rfc-editor.org/rfc/rfc9727#section-3) linkset
 - `/llms.txt` — `rel="describedby"`, the authoritative text profile
+- `/index.md` — markdown representation of the page, negotiated via `Accept`
 
 The catalog is served as `application/linkset+json` from `public/.well-known/`.
 Response headers only apply on Vercel; `astro dev` and `astro preview` do not
 read `vercel.json`.
+
+### Markdown for agents
+
+`/` content-negotiates on `Accept`. Requests containing `text/markdown` are
+rewritten by `vercel.json` to the prebuilt `/index.md` and served as
+`text/markdown; charset=utf-8`; everything else keeps the HTML page. The markdown
+is generated at build time from `src/data/site.ts` by `src/pages/index.md.ts`, so
+it never drifts from the page copy. `Vary: Accept` is set on both responses.
 
 ## Design notes
 
