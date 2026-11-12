@@ -1,0 +1,14 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://syedumaircodes.vercel.app/",
+      "describedby": [
+        {
+          "href": "https://syedumaircodes.vercel.app/llms.txt",
+          "type": "text/plain",
+          "title": "Machine-readable profile"
+        }
+      ]
+    }
+  ]
+}

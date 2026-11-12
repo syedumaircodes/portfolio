@@ -30,6 +30,19 @@ src/
   pages/index.astro       section composition
 ```
 
+## Agent discovery
+
+`vercel.json` adds an [RFC 8288](https://www.rfc-editor.org/rfc/rfc8288) `Link`
+response header on `/` so agents and crawlers can discover the machine-readable
+resources without parsing the HTML:
+
+- `/.well-known/api-catalog` — `rel="api-catalog"`, an [RFC 9727](https://www.rfc-editor.org/rfc/rfc9727#section-3) linkset
+- `/llms.txt` — `rel="describedby"`, the authoritative text profile
+
+The catalog is served as `application/linkset+json` from `public/.well-known/`.
+Response headers only apply on Vercel; `astro dev` and `astro preview` do not
+read `vercel.json`.
+
 ## Design notes
 
 - **Tokens** live in `src/styles/global.css`. The dark palette is the shipped theme; the
