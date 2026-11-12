@@ -21,7 +21,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\"; title=\"API catalog\", </llms.txt>; rel=\"describedby\"; type=\"text/plain\"; title=\"Machine-readable profile\""
+          "value": "</.well-known/ard.json>; rel=\"ard\"; type=\"application/json\"; title=\"Agent resource catalog\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\"; title=\"API catalog\", </llms.txt>; rel=\"describedby\"; type=\"text/plain\"; title=\"Machine-readable profile\""
         },
         {
           "key": "Vary",
@@ -48,6 +48,32 @@
         {
           "key": "Content-Type",
           "value": "application/linkset+json"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/.well-known/ard.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/.well-known/ai-catalog.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
         },
         {
           "key": "Access-Control-Allow-Origin",

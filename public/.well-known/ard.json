@@ -1,0 +1,76 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Syed Umair Ali",
+    "identifier": "did:web:syedumaircodes.vercel.app"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:syedumaircodes.vercel.app:page:portfolio",
+      "displayName": "Syed Umair Ali portfolio",
+      "type": "text/html",
+      "url": "https://syedumaircodes.vercel.app/",
+      "description": "Portfolio for Syed Umair Ali, a full-stack engineer in Karachi. In browsers that support WebMCP, the page also exposes tools to read the profile and projects, scroll to a section, open a project, and download the résumé.",
+      "capabilities": [
+        "get_profile",
+        "list_projects",
+        "get_project",
+        "scroll_to_section",
+        "open_project",
+        "download_resume"
+      ],
+      "representativeQueries": [
+        "open Syed Umair Ali's portfolio",
+        "what projects has Syed Umair Ali built",
+        "show me Syed Umair Ali's contact details"
+      ]
+    },
+    {
+      "identifier": "urn:air:syedumaircodes.vercel.app:profile:llms-txt",
+      "displayName": "Portfolio profile in llms.txt",
+      "type": "text/plain",
+      "url": "https://syedumaircodes.vercel.app/llms.txt",
+      "description": "Authoritative plain-text profile: role, summary, capabilities, projects, socials, and contact details.",
+      "representativeQueries": [
+        "who is Syed Umair Ali",
+        "what does Syed Umair Ali work on",
+        "which technologies does Syed Umair Ali use",
+        "where is Syed Umair Ali based"
+      ]
+    },
+    {
+      "identifier": "urn:air:syedumaircodes.vercel.app:page:index-md",
+      "displayName": "Portfolio page as Markdown",
+      "type": "text/markdown",
+      "url": "https://syedumaircodes.vercel.app/index.md",
+      "description": "Build-time Markdown representation of the portfolio page, generated from the same content that renders the HTML.",
+      "representativeQueries": [
+        "get this portfolio as Markdown",
+        "summarize this portfolio page",
+        "list the projects on this portfolio"
+      ]
+    },
+    {
+      "identifier": "urn:air:syedumaircodes.vercel.app:catalog:api-catalog",
+      "displayName": "Machine-readable resource catalog",
+      "type": "application/linkset+json",
+      "url": "https://syedumaircodes.vercel.app/.well-known/api-catalog",
+      "description": "RFC 9727 linkset pointing at the site's machine-readable representations.",
+      "representativeQueries": [
+        "what machine-readable resources does this site publish",
+        "find the API catalog for this site"
+      ]
+    },
+    {
+      "identifier": "urn:air:syedumaircodes.vercel.app:document:resume",
+      "displayName": "Syed Umair Ali résumé",
+      "type": "application/pdf",
+      "url": "https://syedumaircodes.vercel.app/resume.pdf",
+      "description": "Downloadable PDF résumé for Syed Umair Ali.",
+      "representativeQueries": [
+        "download Syed Umair Ali's résumé",
+        "get Syed Umair Ali's CV as a PDF"
+      ]
+    }
+  ]
+}

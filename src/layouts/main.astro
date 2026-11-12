@@ -143,6 +143,18 @@ const jsonLd = {
     <meta name="description" content={description} />
     <meta name="author" content={site.name} />
     <link rel="canonical" href={canonical} />
+    <link
+      rel="ard"
+      href="/.well-known/ard.json"
+      type="application/json"
+      title="Agent resource catalog"
+    />
+    <link
+      rel="ai-catalog"
+      href="/.well-known/ai-catalog.json"
+      type="application/json"
+      title="Agent resource catalog (predecessor path)"
+    />
     <meta name="generator" content={Astro.generator} />
     <meta
       name="robots"

@@ -37,6 +37,7 @@ response header on `/` so agents and crawlers can discover the machine-readable
 resources without parsing the HTML:
 
 - `/.well-known/api-catalog` — `rel="api-catalog"`, an [RFC 9727](https://www.rfc-editor.org/rfc/rfc9727#section-3) linkset
+- `/.well-known/ard.json` — `rel="ard"`, the [ARD](https://agenticresourcediscovery.org/) capability manifest
 - `/llms.txt` — `rel="describedby"`, the authoritative text profile
 - `/index.md` — markdown representation of the page, negotiated via `Accept`
 
@@ -66,6 +67,17 @@ exposes `document.modelContext` (falling back to `navigator.modelContext`):
 Tools are read-only where they only return data, marked consequential where they
 open or download something, and unregistered via an `AbortSignal` on `pagehide`.
 Browsers without WebMCP load the page unchanged.
+
+### Agentic Resource Discovery
+
+`public/.well-known/ard.json` is the [ARD](https://agenticresourcediscovery.org/)
+capability manifest, also served at the predecessor path
+`/.well-known/ai-catalog.json`. It lists the resources this site actually
+publishes — the page and its WebMCP tools, `llms.txt`, `index.md`, the API
+catalog, and the résumé PDF — with `urn:air:` identifiers and representative
+queries. Both paths are served as `application/json` with
+`Access-Control-Allow-Origin: *`, and `robots.txt` advertises the manifest with
+an `Agentmap` directive.
 
 ## Design notes
 
