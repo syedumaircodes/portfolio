@@ -4,7 +4,7 @@
  */
 import type { ImageMetadata } from "astro"
 import spiritLibraryCover from "@/assets/projects/spirit-library.png"
-
+import PaymentCover from "@/assets/projects/payment-processing-platform.png"
 export type IconName =
   | "arrow-up-right"
   | "arrow-down"
@@ -34,10 +34,10 @@ export type Project = {
   year: string
   description: string
   technologies: string[]
-  /** Source repository URL. */
-  github: string
-  /** Live/deployed URL. */
-  live: string
+  /** Source repository URL. Optional — omit when the repo is private or not yet public. */
+  github?: string
+  /** Live/deployed URL. Optional — omit when there is nothing to link to. */
+  live?: string
   /**
    * Optional cover image. Either an imported asset (e.g. `import cover from
    * "@/assets/projects/x.webp"`) or a plain URL (e.g. "/projects/x.webp").
@@ -124,7 +124,7 @@ export const site: Site = {
   capabilities: [
     {
       label: "Backend & APIs",
-      detail: "Python · FastAPI · Node.js · Nest.js · REST",
+      detail: "Python · FastAPI · Node.js · Nest.js · Go",
     },
     {
       label: "Interface systems",
@@ -132,7 +132,7 @@ export const site: Site = {
     },
     {
       label: "Infrastructure",
-      detail: "GCP · Docker · CI/CD · PostgreSQL · Redis",
+      detail: "Cloud · Docker · CI/CD · PostgreSQL · Redis",
     },
     {
       label: "Creative front-end",
@@ -188,6 +188,25 @@ export const site: Site = {
       live: "https://spiritlibrary.vercel.app",
       cover: spiritLibraryCover,
     },
+    {
+      id: "payment-processing-platform",
+      title: "Payment Processing Platform",
+      category: "Payments backend",
+      month: "Nov",
+      year: "2026",
+      description:
+        "Production-grade payments backend built using microservices with one guarantee: not a single cent is lost, a customer is never charged twice, and nothing crashes mid-transfer. Wallets, payments, events, metrics and observability are each their own service.",
+      technologies: [
+        "Go",
+        "Redis",
+        "NATS Jetstream",
+        "PostgreSQL",
+        "Grafana",
+        "Kubernetes",
+      ],
+      github: "https://github.com/syedumaircodes/payment-processing-platform",
+      cover: PaymentCover,
+    },
   ],
 
   seo: {
@@ -196,9 +215,9 @@ export const site: Site = {
     twitter: "@syedumaircodes",
     title: "Syed Umair Ali | Full-Stack Engineer & Product Builder in Karachi",
     description:
-      "Full-stack engineer and product builder in Karachi, Pakistan. Syed Umair Ali builds SaaS products end to end with Python, FastAPI, Next.js and GCP.",
+      "Full-stack engineer in Karachi, Pakistan. Syed Umair Ali builds SaaS products end to end with Python, FastAPI, Next.js, GCP and payments-grade microservices.",
     summary:
-      "Full-stack engineer and product builder based in Karachi, Pakistan. I specialise in end-to-end execution — from data to deployment — shipping real products, putting them in users' hands, and iterating rapidly. Pragmatic problem-solving over perfect code.",
+      "Full-stack engineer and product builder based in Karachi, Pakistan. I specialise in end-to-end execution — from data to deployment — shipping real products, including a production-grade payments backend of ~5 microservices, and iterating rapidly. Pragmatic problem-solving over perfect code.",
     location: {
       city: "Karachi",
       region: "Sindh",
@@ -219,10 +238,17 @@ export const site: Site = {
     },
     skills: [
       "Python",
+      "Go",
       "FastAPI",
       "Node.js",
       "Nest.js",
       "REST APIs",
+      "Microservices",
+      "Event-driven architecture",
+      "NATS Jetstream",
+      "Observability",
+      "Grafana",
+      "Kubernetes",
       "TypeScript",
       "JavaScript",
       "React",
@@ -244,6 +270,7 @@ export const site: Site = {
       "Netlify",
       "Edge computing",
       "Data pipelines",
+      "Payment systems",
       "LLM API integration",
       "Agile",
     ],

@@ -176,7 +176,9 @@ const tools: WebMcpTool[] = [
       const project = site.projects.find((item) => item.id === id)
       if (!project) throw new Error(`Unknown project id: ${id}`)
       const target = String(input.target ?? "live")
-      const url = target === "source" ? project.github : project.live
+      const url =
+        target === "source" ? project.github : (project.live ?? project.github)
+      if (!url) throw new Error(`No link available for project: ${id}`)
       window.open(url, "_blank", "noopener,noreferrer")
       return { opened: url }
     },

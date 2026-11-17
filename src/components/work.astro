@@ -27,7 +27,9 @@ const projects = site.projects.map((project) => ({
     <div class="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
       <h2 class="display text-[clamp(2.25rem,5vw,4rem)]">
         <span class="-mb-[0.14em] block overflow-hidden pb-[0.14em]">
-          <span data-reveal="line" class="block">Selected Work</span>
+          <span data-reveal="line" class="block">
+            Selected Work
+          </span>
         </span>
       </h2>
     </div>
@@ -36,10 +38,7 @@ const projects = site.projects.map((project) => ({
       {projects.map((project, index) => (
         <article class="group">
           {index > 0 && (
-            <span
-              data-reveal="rule"
-              class="mb-16 block h-px w-full bg-border sm:mb-24"
-            />
+            <span data-reveal="rule" class="mb-16 block h-px w-full sm:mb-24" />
           )}
 
           <div
@@ -47,31 +46,51 @@ const projects = site.projects.map((project) => ({
             data-reveal="media"
           >
             {project.coverSrc ? (
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label={`Open ${project.title} in a new tab`}
-                class="relative block aspect-4/3 overflow-hidden sm:aspect-16/10"
-              >
-                {/* The image sits in a span slightly taller than the frame,
-                    so the scroll parallax never bares an edge. */}
-                <span
-                  data-parallax
-                  class="absolute inset-x-0 -top-[5%] block h-[110%]"
+              project.live ? (
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={`Open ${project.title} in a new tab`}
+                  class="relative block aspect-4/3 overflow-hidden sm:aspect-16/10"
                 >
-                  <img
-                    src={project.coverSrc}
-                    alt={`Screenshot of ${project.title}`}
-                    width={project.coverWidth}
-                    height={project.coverHeight}
-                    loading="lazy"
-                    fetchpriority="low"
-                    decoding="async"
-                    class="h-full w-full object-cover object-top transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
-                  />
-                </span>
-              </a>
+                  {/* The image sits in a span slightly taller than the frame,
+                    so the scroll parallax never bares an edge. */}
+                  <span
+                    data-parallax
+                    class="absolute inset-x-0 -top-[5%] block h-[110%]"
+                  >
+                    <img
+                      src={project.coverSrc}
+                      alt={`Screenshot of ${project.title}`}
+                      width={project.coverWidth}
+                      height={project.coverHeight}
+                      loading="lazy"
+                      fetchpriority="low"
+                      decoding="async"
+                      class="h-full w-full object-cover object-top transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+                    />
+                  </span>
+                </a>
+              ) : (
+                <div class="relative block aspect-4/3 overflow-hidden sm:aspect-16/10">
+                  <span
+                    data-parallax
+                    class="absolute inset-x-0 -top-[5%] block h-[110%]"
+                  >
+                    <img
+                      src={project.coverSrc}
+                      alt={`Screenshot of ${project.title}`}
+                      width={project.coverWidth}
+                      height={project.coverHeight}
+                      loading="lazy"
+                      fetchpriority="low"
+                      decoding="async"
+                      class="h-full w-full object-cover object-top transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+                    />
+                  </span>
+                </div>
+              )
             ) : (
               <div class="flex aspect-4/3 w-full items-center justify-center sm:aspect-16/10 lg:aspect-16/9">
                 <span class="display text-2xl text-muted-foreground">
@@ -122,19 +141,23 @@ const projects = site.projects.map((project) => ({
                 data-reveal="text"
                 style="--reveal-delay: 340ms"
               >
-                <ActionLink
-                  href={project.live}
-                  label="Visit site"
-                  variant="primary"
-                  icon="arrow-up-right"
-                  external
-                />
-                <ActionLink
-                  href={project.github}
-                  label="View source"
-                  icon="github"
-                  external
-                />
+                {project.live && (
+                  <ActionLink
+                    href={project.live}
+                    label="Visit site"
+                    variant="primary"
+                    icon="arrow-up-right"
+                    external
+                  />
+                )}
+                {project.github && (
+                  <ActionLink
+                    href={project.github}
+                    label="View source"
+                    icon="github"
+                    external
+                  />
+                )}
               </div>
             </div>
           </div>

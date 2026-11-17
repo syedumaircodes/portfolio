@@ -44,9 +44,17 @@ _${project.category} / ${project.month} ${project.year}_
 
 ${project.description}
 
-- Technologies: ${project.technologies.join(", ")}
-- Live: ${link("Visit site", project.live)}
+- Technologies: ${project.technologies.join(", ")}${
+      project.live
+        ? `
+- Live: ${link("Visit site", project.live)}`
+        : ""
+    }${
+      project.github
+        ? `
 - Source: ${link("View source", project.github)}`
+        : ""
+    }`
   )
   .join("\n\n")}
 
